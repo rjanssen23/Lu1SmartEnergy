@@ -17,4 +17,10 @@ public class EilandManager : MonoBehaviour
     {
         SceneManager.LoadScene("Eiland3");
     }
+
+    public void toMainMenu()
+    {
+        SceneManager.LoadScene("EilandKaartMap2");
+    }
+
 }
