@@ -3,5 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class HomeSceneManager : MonoBehaviour
 {
-    SceneManager.LoadScene(EilandKaartMap 2);
+
+    public void PlayKnop()
+    {
+       
+        SceneManager.LoadScene("InformatieSchermScene");
+    }
 }
