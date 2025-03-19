@@ -38,6 +38,10 @@ public class InlogRegistreerManager : MonoBehaviour
     public GameObject MainMenuButtons;
     public GameObject NotLoggedInWarning;
 
+    // Warning components
+    public RawImage passwordWarningImage;
+    public TextMeshProUGUI passwordWarningText;
+
     public List<User> Users = new List<User>();
 
     private bool isLoggedIn = false;
@@ -60,12 +64,27 @@ public class InlogRegistreerManager : MonoBehaviour
         StartGame.onClick.AddListener(StartGameHandler);
         gaTerug.onClick.AddListener(HideNotLoggedInWarning);
         gaDoorZonderAccount.onClick.AddListener(ProceedWithoutAccount);
+
+        registerPasswordInputField.onValueChanged.AddListener(ValidateRegisterPassword);
+        ValidateRegisterPassword(registerPasswordInputField.text); // Initial validation
+
+        // Hide warning components initially
+        passwordWarningImage.gameObject.SetActive(false);
+        passwordWarningText.gameObject.SetActive(false);
     }
 
     private void Register()
     {
         string email = registerEmailInputField.text;
         string password = registerPasswordInputField.text;
+
+        if (password.Length < 1 || password.Length > 16)
+        {
+            Debug.Log("Password must be between 1 and 16 characters. Registration failed.");
+            passwordWarningImage.gameObject.SetActive(true);
+            passwordWarningText.gameObject.SetActive(true);
+            return;
+        }
 
         User user = new User
         {
@@ -172,6 +191,20 @@ public class InlogRegistreerManager : MonoBehaviour
         registerPasswordInputField.contentType = isVisible ? TMP_InputField.ContentType.Standard : TMP_InputField.ContentType.Password;
         registerPasswordInputField.ForceLabelUpdate(); // Forceer een update om de wijziging door te voeren
     }
+
+    private void ValidateRegisterPassword(string password)
+    {
+        if (password.Length < 1 || password.Length > 16)
+        {
+            passwordWarningImage.gameObject.SetActive(true);
+            passwordWarningText.gameObject.SetActive(true);
+        }
+        else
+        {
+            passwordWarningImage.gameObject.SetActive(false);
+            passwordWarningText.gameObject.SetActive(false);
+        }
+    }
 }
 
 [Serializable]
@@ -180,13 +213,6 @@ public class User
     public string email;
     public string password;
 }
-
-
-
-
-
-
-
 
 
 //public async void Register()
