@@ -23,7 +23,8 @@ public class InlogRegistreerManager : MonoBehaviour
 
     public Button gaTerug;
     public Button gaDoorZonderAccount;
-    //public Toggle showPasswordToggle; // Toggle om het wachtwoord te verbergen of weer te geven
+    public Toggle showPasswordToggleInlog; // Toggle om het wachtwoord te verbergen of weer te geven
+    public Toggle showPasswordToggleRegister;
     //public UserApiClient userApiClient;
 
     // Buttons to switch between login and register screens
@@ -39,12 +40,16 @@ public class InlogRegistreerManager : MonoBehaviour
 
     public List<User> Users = new List<User>();
 
+    private bool isLoggedIn = false;
+
     private void Start()
     {
         registerButton.onClick.AddListener(Register);
         loginButton.onClick.AddListener(Login);
-        //showPasswordToggle.onValueChanged.AddListener(TogglePasswordVisibility); // Voeg de listener toe voor de toggle
+        showPasswordToggleInlog.onValueChanged.AddListener(TogglePasswordVisibilityInlog);
+        showPasswordToggleRegister.onValueChanged.AddListener(TogglePasswordVisibilityRegister);
         loginPasswordInputField.contentType = TMP_InputField.ContentType.Password; // Standaard wachtwoord verbergen
+        registerPasswordInputField.contentType = TMP_InputField.ContentType.Password; // Standaard wachtwoord verbergen
 
         switchToLoginButton.onClick.AddListener(ShowLoginPanel);
         switchToRegisterButton.onClick.AddListener(ShowRegisterPanel);
@@ -52,7 +57,7 @@ public class InlogRegistreerManager : MonoBehaviour
         loginExit.onClick.AddListener(HideLoginPanel);
         registerExit.onClick.AddListener(HideRegisterPanel);
 
-        StartGame.onClick.AddListener(ShowNotLoggedInWarning);
+        StartGame.onClick.AddListener(StartGameHandler);
         gaTerug.onClick.AddListener(HideNotLoggedInWarning);
         gaDoorZonderAccount.onClick.AddListener(ProceedWithoutAccount);
     }
@@ -81,6 +86,7 @@ public class InlogRegistreerManager : MonoBehaviour
 
         if (user != null)
         {
+            isLoggedIn = true;
             Debug.Log("Login success!");
         }
         else
@@ -136,6 +142,36 @@ public class InlogRegistreerManager : MonoBehaviour
         Debug.Log("Proceeding without account");
         SceneManager.LoadScene("NextSceneName"); // Vervang "NextSceneName" door de naam van de volgende scene
     }
+
+    private void ProceedWithAccount()
+    {
+        Debug.Log("Proceeding with account");
+        SceneManager.LoadScene("NextSceneName"); // Vervang "NextSceneName" door de naam van de volgende scene
+    }
+
+    private void StartGameHandler()
+    {
+        if (isLoggedIn)
+        {
+            ProceedWithAccount();
+        }
+        else
+        {
+            ShowNotLoggedInWarning();
+        }
+    }
+
+    private void TogglePasswordVisibilityInlog(bool isVisible)
+    {
+        loginPasswordInputField.contentType = isVisible ? TMP_InputField.ContentType.Standard : TMP_InputField.ContentType.Password;
+        loginPasswordInputField.ForceLabelUpdate(); // Forceer een update om de wijziging door te voeren
+    }
+
+    private void TogglePasswordVisibilityRegister(bool isVisible)
+    {
+        registerPasswordInputField.contentType = isVisible ? TMP_InputField.ContentType.Standard : TMP_InputField.ContentType.Password;
+        registerPasswordInputField.ForceLabelUpdate(); // Forceer een update om de wijziging door te voeren
+    }
 }
 
 [Serializable]
@@ -144,6 +180,9 @@ public class User
     public string email;
     public string password;
 }
+
+
+
 
 
 
