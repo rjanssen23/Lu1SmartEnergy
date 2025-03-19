@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InlogRegistreerManager : MonoBehaviour
@@ -19,17 +20,22 @@ public class InlogRegistreerManager : MonoBehaviour
 
     public Button registerButton;
     public Button loginButton;
+
+    public Button gaTerug;
+    public Button gaDoorZonderAccount;
     //public Toggle showPasswordToggle; // Toggle om het wachtwoord te verbergen of weer te geven
     //public UserApiClient userApiClient;
 
     // Buttons to switch between login and register screens
     public Button switchToLoginButton;
     public Button switchToRegisterButton;
+    public Button StartGame;
 
     // Panels for login and registration
     public GameObject loginPanel;
     public GameObject registerPanel;
     public GameObject MainMenuButtons;
+    public GameObject NotLoggedInWarning;
 
     public List<User> Users = new List<User>();
 
@@ -45,6 +51,10 @@ public class InlogRegistreerManager : MonoBehaviour
 
         loginExit.onClick.AddListener(HideLoginPanel);
         registerExit.onClick.AddListener(HideRegisterPanel);
+
+        StartGame.onClick.AddListener(ShowNotLoggedInWarning);
+        gaTerug.onClick.AddListener(HideNotLoggedInWarning);
+        gaDoorZonderAccount.onClick.AddListener(ProceedWithoutAccount);
     }
 
     private void Register()
@@ -81,6 +91,7 @@ public class InlogRegistreerManager : MonoBehaviour
 
     private void ShowLoginPanel()
     {
+        Debug.Log("Showing login panel");
         loginPanel.SetActive(true);
         registerPanel.SetActive(false);
         MainMenuButtons.SetActive(false);
@@ -88,6 +99,7 @@ public class InlogRegistreerManager : MonoBehaviour
 
     private void ShowRegisterPanel()
     {
+        Debug.Log("Showing register panel");
         loginPanel.SetActive(false);
         registerPanel.SetActive(true);
         MainMenuButtons.SetActive(false);
@@ -95,14 +107,34 @@ public class InlogRegistreerManager : MonoBehaviour
 
     private void HideLoginPanel()
     {
+        Debug.Log("Hiding login panel");
         loginPanel.SetActive(false);
         MainMenuButtons.SetActive(true);
     }
 
     private void HideRegisterPanel()
     {
+        Debug.Log("Hiding register panel");
         registerPanel.SetActive(false);
         MainMenuButtons.SetActive(true);
+    }
+
+    private void ShowNotLoggedInWarning()
+    {
+        Debug.Log("Showing not logged in warning");
+        NotLoggedInWarning.SetActive(true);
+    }
+
+    private void HideNotLoggedInWarning()
+    {
+        Debug.Log("Hiding not logged in warning");
+        NotLoggedInWarning.SetActive(false);
+    }
+
+    private void ProceedWithoutAccount()
+    {
+        Debug.Log("Proceeding without account");
+        SceneManager.LoadScene("NextSceneName"); // Vervang "NextSceneName" door de naam van de volgende scene
     }
 }
 
@@ -112,6 +144,7 @@ public class User
     public string email;
     public string password;
 }
+
 
 
 
