@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -7,6 +8,11 @@ using UnityEngine.UI;
 
 public class InlogRegistreerManager : MonoBehaviour
 {
+    //scenes 
+    public GameObject Scene1;
+    public GameObject Scene2;
+    public GameObject Scene3;
+
     // Input fields for registration
     public TMP_InputField registerEmailInputField;
     public TMP_InputField registerPasswordInputField;
@@ -38,9 +44,11 @@ public class InlogRegistreerManager : MonoBehaviour
     public GameObject MainMenuButtons;
     public GameObject NotLoggedInWarning;
 
-    // Warning components
+    // Warning components/succes components
+    public RawImage SuccesvolleRegistratie;
     public RawImage passwordWarningImage;
     public TextMeshProUGUI passwordWarningText;
+    public TextMeshProUGUI registrationSuccessText;
 
     public List<User> Users = new List<User>();
 
@@ -65,12 +73,11 @@ public class InlogRegistreerManager : MonoBehaviour
         gaTerug.onClick.AddListener(HideNotLoggedInWarning);
         gaDoorZonderAccount.onClick.AddListener(ProceedWithoutAccount);
 
-        registerPasswordInputField.onValueChanged.AddListener(ValidateRegisterPassword);
-        ValidateRegisterPassword(registerPasswordInputField.text); // Initial validation
-
         // Hide warning components initially
         passwordWarningImage.gameObject.SetActive(false);
         passwordWarningText.gameObject.SetActive(false);
+        SuccesvolleRegistratie.gameObject.SetActive(false);
+        registrationSuccessText.gameObject.SetActive(false); // Hide success message initially
     }
 
     private void Register()
@@ -94,6 +101,21 @@ public class InlogRegistreerManager : MonoBehaviour
 
         Users.Add(user);
         Debug.Log("User registered: " + email);
+
+        SuccesvolleRegistratie.gameObject.SetActive(true);
+        registrationSuccessText.gameObject.SetActive(true);
+    }
+
+    public IEnumerator ShowRegistrationSuccessMessage()
+    {
+        registrationSuccessText.gameObject.SetActive(true);
+        registrationSuccessText.text = "Successfully registered!";
+        yield return new WaitForSeconds(3); // Show message for 3 seconds
+        registrationSuccessText.gameObject.SetActive(false);
+
+        // Hide the register panel and show the main menu buttons
+        registerPanel.SetActive(false);
+        MainMenuButtons.SetActive(true);
     }
 
     private void Login()
@@ -107,6 +129,7 @@ public class InlogRegistreerManager : MonoBehaviour
         {
             isLoggedIn = true;
             Debug.Log("Login success!");
+            ProceedWithAccount();
         }
         else
         {
@@ -128,6 +151,10 @@ public class InlogRegistreerManager : MonoBehaviour
         loginPanel.SetActive(false);
         registerPanel.SetActive(true);
         MainMenuButtons.SetActive(false);
+
+        // Hide warning components when the register panel is shown
+        passwordWarningImage.gameObject.SetActive(false);
+        passwordWarningText.gameObject.SetActive(false);
     }
 
     private void HideLoginPanel()
@@ -159,13 +186,16 @@ public class InlogRegistreerManager : MonoBehaviour
     private void ProceedWithoutAccount()
     {
         Debug.Log("Proceeding without account");
-        SceneManager.LoadScene("NextSceneName"); // Vervang "NextSceneName" door de naam van de volgende scene
+        Scene1.SetActive(false);
+        Scene2.SetActive(false);
+        Scene3.SetActive(true);
     }
 
     private void ProceedWithAccount()
     {
         Debug.Log("Proceeding with account");
-        SceneManager.LoadScene("NextSceneName"); // Vervang "NextSceneName" door de naam van de volgende scene
+        Scene1.SetActive(false);
+        Scene2.SetActive(true);
     }
 
     private void StartGameHandler()
@@ -192,7 +222,7 @@ public class InlogRegistreerManager : MonoBehaviour
         registerPasswordInputField.ForceLabelUpdate(); // Forceer een update om de wijziging door te voeren
     }
 
-    private void ValidateRegisterPassword(string password)
+    public void ValidateRegisterPassword(string password)
     {
         if (password.Length < 1 || password.Length > 16)
         {
@@ -213,6 +243,13 @@ public class User
     public string email;
     public string password;
 }
+
+
+
+
+
+
+
 
 
 //public async void Register()
