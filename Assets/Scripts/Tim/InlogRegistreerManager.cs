@@ -2,11 +2,14 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InlogRegistreerManager : MonoBehaviour
 {
+    // scenes
+    public GameObject Scene1;
+    public GameObject Scene2;
+
     // Input fields for registration
     public TMP_InputField registerEmailInputField;
     public TMP_InputField registerPasswordInputField;
@@ -159,13 +162,15 @@ public class InlogRegistreerManager : MonoBehaviour
     private void ProceedWithoutAccount()
     {
         Debug.Log("Proceeding without account");
-        SceneManager.LoadScene("NextSceneName"); // Vervang "NextSceneName" door de naam van de volgende scene
+        Scene1.SetActive(false);
+        Scene2.SetActive(true);
     }
 
     private void ProceedWithAccount()
     {
         Debug.Log("Proceeding with account");
-        SceneManager.LoadScene("NextSceneName"); // Vervang "NextSceneName" door de naam van de volgende scene
+        Scene1.SetActive(false);
+        Scene2.SetActive(true);
     }
 
     private void StartGameHandler()
@@ -213,6 +218,9 @@ public class User
     public string email;
     public string password;
 }
+
+
+
 
 
 //public async void Register()
