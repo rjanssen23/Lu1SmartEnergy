@@ -1,8 +1,12 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InformatieVakjesManager : MonoBehaviour
 {
+    // eilandnaam tekst
+    public TextMeshProUGUI EilandName;
+
     // alle vakjes
     public GameObject Vakje1;
 
@@ -18,6 +22,9 @@ public class InformatieVakjesManager : MonoBehaviour
     // de verschillende soorten informatie per vakje
     public RawImage TextInformatieVakje1;
     public RawImage VideoInformatieVakje1;
+
+    // Objectfaq GameObject
+    public GameObject Objectfaq;
 
     void Start()
     {
@@ -37,6 +44,7 @@ public class InformatieVakjesManager : MonoBehaviour
         Vakje1.SetActive(false);
         TextInformatieVakje1.gameObject.SetActive(false);
         VideoInformatieVakje1.gameObject.SetActive(false);
+        UpdateInfoTextVisibility();
     }
 
     void OpenVakje1()
@@ -44,6 +52,7 @@ public class InformatieVakjesManager : MonoBehaviour
         Vakje1.SetActive(true);
         TextInformatieVakje1.gameObject.SetActive(true);
         VideoInformatieVakje1.gameObject.SetActive(false);
+        UpdateInfoTextVisibility();
     }
 
     void CloseVakje1()
@@ -51,8 +60,8 @@ public class InformatieVakjesManager : MonoBehaviour
         Vakje1.SetActive(false);
         TextInformatieVakje1.gameObject.SetActive(false);
         VideoInformatieVakje1.gameObject.SetActive(false);
+        UpdateInfoTextVisibility();
     }
-
 
     void ShowVideoInformatieVakje1()
     {
@@ -65,6 +74,13 @@ public class InformatieVakjesManager : MonoBehaviour
         TextInformatieVakje1.gameObject.SetActive(true);
         VideoInformatieVakje1.gameObject.SetActive(false);
     }
-}
 
+    void UpdateInfoTextVisibility()
+    {
+        // Controleer of alle vakjes gesloten zijn
+        bool allVakjesClosed = !Vakje1.activeSelf;
+        EilandName.gameObject.SetActive(allVakjesClosed);
+        Objectfaq.SetActive(allVakjesClosed);
+    }
+}
 
