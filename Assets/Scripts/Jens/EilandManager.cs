@@ -1,42 +1,26 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class EilandKaart : MonoBehaviour
+public class EilandManager : MonoBehaviour
 {
-    public GameObject Eiland1;
-    public GameObject Eiland2;
-    public GameObject Eiland3;
-    public GameObject Home;
-    public GameObject Schatkaart;
-    public void ToEiland1()
+    public void toIsland1()
     {
-        Eiland1.SetActive(true);
-        Schatkaart.SetActive(false);
+        SceneManager.LoadScene("Eiland1");
     }
 
-    public void ToEiland2()
+    public void toIsland2()
     {
-        Eiland2.SetActive(true);
-        Schatkaart.SetActive(false);
+        SceneManager.LoadScene("Eiland2");
     }
 
-    public void ToEiland3()
+    public void toIsland3()
     {
-        Eiland3.SetActive(true);
-        Schatkaart.SetActive(false);
+        SceneManager.LoadScene("Eiland3");
     }
 
-    public void ToHome()
+    public void toMainMenu()
     {
-        Home.SetActive(true);
-        Schatkaart.SetActive(false);
+        SceneManager.LoadScene("EilandKaartMap2");
     }
 
-    public void ToSchatkaart()
-    {
-        Schatkaart.SetActive(true);
-        Eiland1.SetActive(false);
-        Eiland2.SetActive(false);
-        Eiland3.SetActive(false);
-        Home.SetActive(false);
-    }
 }
