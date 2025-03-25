@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      boyface test_0: 4356643065227734284
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
