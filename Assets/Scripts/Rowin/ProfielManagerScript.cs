@@ -85,10 +85,28 @@ public class ProfielManagerScript : MonoBehaviour
 
     public void MaakProfiel()
     {
+        string naam = ProfielNaam.text.Trim();
+        int leeftijd;
+
+        // Controleer of leeftijd een geldig getal is
+        if (!int.TryParse(ProfielLeeftijd.text, out leeftijd) || leeftijd < 4 || leeftijd > 12)
+        {
+            Debug.LogError("Leeftijd moet tussen de 4 en 12 jaar zijn!");
+            return;
+        }
+
+        // Controleer de lengte van de naam
+        if (naam.Length > 15)
+        {
+            Debug.LogError("Naam mag maximaal 15 karakters lang zijn!");
+            return;
+        }
+
         ProfielSelectieScherm.SetActive(true);
         ProfielAanmakenScherm.SetActive(false);
-        Debug.Log("Profiel Aangemaakt");
+        Debug.Log("Profiel Aangemaakt: " + naam + ", Leeftijd: " + leeftijd);
     }
+
 
     public void JongenGekozen()
     {
