@@ -7,9 +7,9 @@ public class ProfielManagerScript : MonoBehaviour
     public GameObject ProfielSelectieScherm;
     public GameObject ProfielAanmakenScherm;
     public GameObject VolgendeScene;
+    public GameObject textPrefab; // Assign a TMP_Text prefab in the Inspector
 
     public GameObject[] KindObjecten; // Array voor de 6 verschillende objecten
-    public TMP_Text[] KindTeksten; // Array voor de 6 tekstvelden
     public Transform[] SpawnPosities; // Array voor de 6 spawn posities
 
     public TMP_InputField ProfielNaam;
@@ -41,9 +41,6 @@ public class ProfielManagerScript : MonoBehaviour
         {
             knop.onClick.AddListener(ProfielGeselecteerd);
         }
-
-        // Update de tekst live als de naam wordt ingevoerd
-        ProfielNaam.onValueChanged.AddListener(UpdateTextLive);
     }
 
     public void Reset()
@@ -79,14 +76,6 @@ public class ProfielManagerScript : MonoBehaviour
         Debug.Log("Profiel Aangemaakt");
     }
 
-    public void UpdateTextLive(string nieuweNaam)
-    {
-        if (spawnIndex < KindTeksten.Length)
-        {
-            KindTeksten[spawnIndex].text = nieuweNaam;
-        }
-    }
-
     public void SpawnObject()
     {
         if (spawnIndex >= KindObjecten.Length || spawnIndex >= SpawnPosities.Length)
@@ -95,28 +84,52 @@ public class ProfielManagerScript : MonoBehaviour
             return;
         }
 
-        // Instantiate prefab
+        // Instantiate the profile object (profile picture)
         GameObject newObject = Instantiate(KindObjecten[spawnIndex], SpawnPosities[spawnIndex].position, Quaternion.identity);
 
-        // Make sure it spawns inside the KindProfielen container (if applicable)
-        
-
-        // Find and update the text inside the spawned object
-        TMP_Text textComponent = newObject.GetComponentInChildren<TMP_Text>();
-        if (textComponent != null)
+        Canvas canvas = FindObjectOfType<Canvas>(); // Find an existing canvas
+        if (canvas != null)
         {
-            textComponent.text = ProfielNaam.text; // Set the text to the entered name
+            newObject.transform.SetParent(canvas.transform, false);
         }
         else
         {
-            Debug.LogWarning("Geen TMP_Text gevonden in prefab " + KindObjecten[spawnIndex].name);
+            Debug.LogWarning("No Canvas found! The text might not be visible.");
         }
 
-        spawnIndex = (spawnIndex + 1) % KindObjecten.Length;
+        // Instantiate the text object (name text)
+        if (textPrefab != null)
+        {
+            GameObject newText = Instantiate(textPrefab, SpawnPosities[spawnIndex].position, Quaternion.identity);
+
+            // Set the text object as a child of the profile object
+            newText.transform.SetParent(newObject.transform, false); // This line makes the text a child of the profile object
+
+            TMP_Text textComponent = newText.GetComponent<TMP_Text>();
+            if (textComponent != null)
+            {
+                textComponent.text = ProfielNaam.text; // Set the name text
+
+                // Position the text below the profile image
+                newText.transform.localPosition = new Vector3(0, -73, 0); // Adjust the Y position to be below the image
+                textComponent.fontSize = 50; // Adjust this value as needed
+
+            }
+            else
+            {
+                Debug.LogWarning("Text prefab has no TMP_Text component!");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Text prefab is not assigned!");
+        }
+
+        spawnIndex = (spawnIndex + 1) % KindObjecten.Length; // Update the spawnIndex for the next profile
+
     }
-
-
 }
+
 
 
 
