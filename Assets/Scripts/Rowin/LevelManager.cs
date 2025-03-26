@@ -1,50 +1,32 @@
-using System;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    public GameObject Scene2;
-    public GameObject Scene3;
-    public GameObject Scene4;
+    public string SceneNameBack;
+    public string SceneNameStart;
 
-    public Button StartButton;
-    public Button BackButton;
-
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // Voeg event listeners toe aan de knoppen
-        StartButton.onClick.AddListener(ChangeSceneToStart);
-        BackButton.onClick.AddListener(ChangeSceneToBack);
 
-        // Initialiseer de scenes
-        ResetScenes();
     }
 
-    void ResetScenes()
+    // Update is called once per frame
+    void Update()
     {
-        Scene2.SetActive(true);
-        Scene3.SetActive(false);
-        Scene4.SetActive(false);
+
     }
 
-    public void ChangeSceneToBack()
+    public void changeSceneToBack()
     {
-        Scene2.SetActive(true);
-        Scene3.SetActive(false);
-        Scene4.SetActive(false);
+        SceneManager.LoadScene(SceneNameBack);
     }
-
-    public void ChangeSceneToStart()
+    public void changeSceneToStart()
     {
-        Scene2.SetActive(false);
-        Scene3.SetActive(false);
-        Scene4.SetActive(true);
+        SceneManager.LoadScene(SceneNameStart);
     }
 }
-
 
 
 
