@@ -722,6 +722,55 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortAtRoot: 0
+--- !u!1 &116736464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 116736466}
+  - component: {fileID: 116736465}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &116736465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116736464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6d9f98a36271f04bb36c6ff0d413949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Scene2: {fileID: 75767527}
+  Scene3: {fileID: 1672529927}
+  Scene4: {fileID: 1517095484}
+  StartButton: {fileID: 725324682}
+  BackButton: {fileID: 2013880424}
+--- !u!4 &116736466
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116736464}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 932.9529, y: 568.0351, z: -12.485707}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &125010447
 GameObject:
   m_ObjectHideFlags: 0
@@ -2392,8 +2441,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d9f98a36271f04bb36c6ff0d413949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneNameBack: 
-  SceneNameStart: EilandKaartMap2
+  Scene2: {fileID: 0}
+  Scene3: {fileID: 0}
+  Scene4: {fileID: 0}
+  StartButton: {fileID: 0}
+  BackButton: {fileID: 0}
 --- !u!4 &325669886
 Transform:
   m_ObjectHideFlags: 0
@@ -2979,8 +3031,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d9f98a36271f04bb36c6ff0d413949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneNameBack: HomeSchermScene1
-  SceneNameStart: EilandKaartMap2
+  Scene2: {fileID: 0}
+  Scene3: {fileID: 0}
+  Scene4: {fileID: 0}
+  StartButton: {fileID: 0}
+  BackButton: {fileID: 0}
 --- !u!1 &472738057
 GameObject:
   m_ObjectHideFlags: 0
@@ -4211,7 +4266,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &719528000
 Transform:
   m_ObjectHideFlags: 0
@@ -7493,8 +7548,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -28, y: -43.4}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -18, y: -70}
+  m_SizeDelta: {x: 95.0038, y: 88.0094}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!210 &1101415121
 SortingGroup:
@@ -9051,13 +9106,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lorem ipsum dolor dapibus et. Nulla lectus elit, dignissim eget dapibus
-    vitae, fermentum ac ipsum. Donec dapibus nibh non scelerisque tristique. efficitur
-    sem malesuada et. Nam a ex sit amet mi lacinia efficitur eu bibendum est. Morbi
-    in nisi arcu.Lorem ipsum dolor dapibus et. Nulla lectus elit, dignissim eget
-    dapibus vitae, fermentum ac ipsum. Donec dapibus nibh non scelerisque tristique.
-    efficitur sem malesuada et. Nam a ex sit amet mi lacinia efficitur eu bibendum
-    est. Morbi in nisi arcu.
+  m_text: 'Ahoy, maatje! Welkom aan boord van ons piratenschip. Jij staat aan het
+    begin van een spannend avontuur, waarbij je een echte gips-expert wordt. Misschien
+    krijg je binnenkort gips, heb je het al, of mag het er bijna af. Geen zorgen,
+    want wij nemen je mee op reis langs verschillende eilanden, waar je alles leert
+    over wat er gaat gebeuren. Op elk eiland vind je vakjes vol met informatie. Klik
+    erop om eerst een uitleg te krijgen, daarna een video te bekijken en als laatste
+    een quiz te doen om te testen wat je hebt geleerd. Pak je kompas en zet je piratenhoed
+    op, want jouw avontuur begint nu. Op naar de eerste schat! '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9090,7 +9146,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -11730,7 +11786,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1672529928
 Transform:
   m_ObjectHideFlags: 0
@@ -15427,3 +15483,4 @@ SceneRoots:
   - {fileID: 1884921981}
   - {fileID: 90165493}
   - {fileID: 325669886}
+  - {fileID: 116736466}
