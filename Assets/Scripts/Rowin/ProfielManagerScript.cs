@@ -8,43 +8,20 @@ public class ProfielManagerScript : MonoBehaviour
     public GameObject ProfielAanmakenScherm;
     public GameObject VolgendeScene;
 
-    public GameObject Kind1Object;
-    public GameObject Kind2Object;
-    public GameObject Kind3Object;
-    public GameObject Kind4Object;
-    public GameObject Kind5Object;
-    public GameObject Kind6Object;
+    public GameObject[] KindObjecten; // Array voor de 6 verschillende objecten
+    public TMP_Text[] KindTeksten; // Array voor de 6 tekstvelden
+    public Transform[] SpawnPosities; // Array voor de 6 spawn posities
 
-    public Transform SpawnPosition1;
-    public Transform SpawnPosition2;
-    public Transform SpawnPosition3;
-    public Transform SpawnPosition4;
-    public Transform SpawnPosition5;
-    public Transform SpawnPosition6;
-
-    public GameObject[] spawnObjects; // Hier wijs je 6 objecten toe in de Inspector
-    public Transform[] spawnPositions;    // De positie waar het object moet verschijnen
-
-    public TMPro.TMP_InputField ProfielNaam;
-    public TMPro.TMP_InputField ProfielLeeftijd;
+    public TMP_InputField ProfielNaam;
+    public TMP_InputField ProfielLeeftijd;
 
     public Button ProfielToevoegenButton;
-
     public Button NaarProfielSelectieButton;
-
     public Button MaakProfielButton;
 
-    public Button Kind1;
-    public Button Kind2;
-    public Button Kind3;
-    public Button Kind4;
-    public Button Kind5;
-    public Button Kind6;
+    public Button[] KindKnoppen; // Array voor de 6 profielknoppen
 
     private int spawnIndex = 0; // Houdt bij welk object als volgende moet spawnen
-
-
-
 
     void Start()
     {
@@ -53,23 +30,20 @@ public class ProfielManagerScript : MonoBehaviour
 
         // Voeg listeners toe aan de knoppen
         ProfielToevoegenButton.onClick.AddListener(ProfielToevoegenScene);
-
         NaarProfielSelectieButton.onClick.AddListener(NaarProfielSelectie);
+        MaakProfielButton.onClick.AddListener(MaakProfiel);
 
-        MaakProfielButton.onClick.AddListener(NaarProfielSelectie);
+        // Voeg de SpawnObject-functie toe aan de MaakProfielButton
+        MaakProfielButton.onClick.AddListener(SpawnObject);
 
-        MaakProfielButton.onClick.AddListener(SpawnObject); // Correcte manier om de klikfunctie toe te voegen!
+        // Voeg listeners toe aan de profielknoppen
+        foreach (Button knop in KindKnoppen)
+        {
+            knop.onClick.AddListener(ProfielGeselecteerd);
+        }
 
-
-        Kind1.onClick.AddListener(ProfielGeselecteerd);
-        Kind2.onClick.AddListener(ProfielGeselecteerd);
-        Kind3.onClick.AddListener(ProfielGeselecteerd);
-        Kind4.onClick.AddListener(ProfielGeselecteerd);
-        Kind5.onClick.AddListener(ProfielGeselecteerd);
-        Kind6.onClick.AddListener(ProfielGeselecteerd);
-
-
-
+        // Update de tekst live als de naam wordt ingevoerd
+        ProfielNaam.onValueChanged.AddListener(UpdateTextLive);
     }
 
     public void Reset()
@@ -77,15 +51,7 @@ public class ProfielManagerScript : MonoBehaviour
         ProfielSelectieScherm.SetActive(true);
         ProfielAanmakenScherm.SetActive(false);
         VolgendeScene.SetActive(false);
-
-        Kind1Object.SetActive(true);
-        Kind2Object.SetActive(true);
-        Kind3Object.SetActive(true);
-        Kind4Object.SetActive(true);
-        Kind5Object.SetActive(true);
-        Kind6Object.SetActive(true);
     }
-
 
     public void ProfielToevoegenScene()
     {
@@ -98,53 +64,60 @@ public class ProfielManagerScript : MonoBehaviour
         VolgendeScene.SetActive(true);
         ProfielSelectieScherm.SetActive(false);
         ProfielAanmakenScherm.SetActive(false);
-
     }
 
     public void NaarProfielSelectie()
     {
         ProfielSelectieScherm.SetActive(true);
         ProfielAanmakenScherm.SetActive(false);
-
     }
 
     public void MaakProfiel()
     {
         ProfielSelectieScherm.SetActive(true);
         ProfielAanmakenScherm.SetActive(false);
-
-        Kind1Object.SetActive(true);
-
         Debug.Log("Profiel Aangemaakt");
+    }
+
+    public void UpdateTextLive(string nieuweNaam)
+    {
+        if (spawnIndex < KindTeksten.Length)
+        {
+            KindTeksten[spawnIndex].text = nieuweNaam;
+        }
     }
 
     public void SpawnObject()
     {
-        switch (spawnIndex)
+        if (spawnIndex >= KindObjecten.Length || spawnIndex >= SpawnPosities.Length)
         {
-            case 0:
-                Instantiate(Kind1Object, SpawnPosition1.position, Quaternion.identity);
-                break;
-            case 1:
-                Instantiate(Kind2Object, SpawnPosition2.position, Quaternion.identity);
-                break;
-            case 2:
-                Instantiate(Kind3Object, SpawnPosition3.position, Quaternion.identity);
-                break;
-            case 3:
-                Instantiate(Kind4Object, SpawnPosition4.position, Quaternion.identity);
-                break;
-            case 4:
-                Instantiate(Kind5Object, SpawnPosition5.position, Quaternion.identity);
-                break;
-            case 5:
-                Instantiate(Kind6Object, SpawnPosition6.position, Quaternion.identity);
-                break;
+            Debug.LogWarning("Geen beschikbare objecten of spawnposities meer!");
+            return;
         }
-        Debug.Log("Object " + (spawnIndex + 1) + " gespawned voor Naam: " + ProfielNaam.text + ", Leeftijd: " + ProfielLeeftijd.text);
 
+        // Instantiate prefab
+        GameObject newObject = Instantiate(KindObjecten[spawnIndex], SpawnPosities[spawnIndex].position, Quaternion.identity);
 
-        spawnIndex = (spawnIndex + 1) % 6;
+        // Make sure it spawns inside the KindProfielen container (if applicable)
+        
+
+        // Find and update the text inside the spawned object
+        TMP_Text textComponent = newObject.GetComponentInChildren<TMP_Text>();
+        if (textComponent != null)
+        {
+            textComponent.text = ProfielNaam.text; // Set the text to the entered name
+        }
+        else
+        {
+            Debug.LogWarning("Geen TMP_Text gevonden in prefab " + KindObjecten[spawnIndex].name);
+        }
+
+        spawnIndex = (spawnIndex + 1) % KindObjecten.Length;
     }
 
+
 }
+
+
+
+

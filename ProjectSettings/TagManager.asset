@@ -47,5 +47,8 @@ TagManager:
   - name: voorvoorLayerHome
     uniqueID: 3634692635
     locked: 0
+  - name: Scene2
+    uniqueID: 1118783899
+    locked: 0
   m_RenderingLayers:
   - Default
