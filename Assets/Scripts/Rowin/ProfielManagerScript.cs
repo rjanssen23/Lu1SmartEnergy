@@ -141,6 +141,10 @@ public class ProfielManagerScript : MonoBehaviour
                 Instantiate(Kind6Object, SpawnPosition6.position, Quaternion.identity);
                 break;
         }
+        Debug.Log("Object " + (spawnIndex + 1) + " gespawned voor Naam: " + ProfielNaam.text + ", Leeftijd: " + ProfielLeeftijd.text);
+
+
         spawnIndex = (spawnIndex + 1) % 6;
     }
+
 }
