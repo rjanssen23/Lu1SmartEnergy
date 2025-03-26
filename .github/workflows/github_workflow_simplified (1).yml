@@ -36,11 +36,6 @@ jobs:
           if: ${{ env.super_secret == '' }}
           run: 'echo "echo the secret \"AZURE_WEBAPP_PUBLISH_USERNAME\" has not been made; echo please go to \"settings \> Actions secrets and variables \> actions\" to create it"; exit 1;'
     
-        - name: "Check if WEBAPI_PROJECT_NAME secret exists"
-          env: 
-            super_secret: ${{ secrets.WEBAPI_PROJECT_NAME }}
-          if: ${{ env.super_secret == '' }}
-          run: 'echo "echo the secret \"WEBAPI_PROJECT_NAME\" has not been made; echo please go to \"settings \> Actions secrets and variables \> actions\" to create it"; exit 1;'
         
   build:
 
