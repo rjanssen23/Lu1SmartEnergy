@@ -9,6 +9,7 @@ public class ProfielManagerScript : MonoBehaviour
     public GameObject VolgendeScene;
     public GameObject textPrefab;
     public GameObject ProfilePrison;
+    public GameObject HoofdMenu;
 
     public GameObject MeisjeButtonObject;
     public GameObject JongenButtonObject;
@@ -26,6 +27,9 @@ public class ProfielManagerScript : MonoBehaviour
     public Button JongenButton;
     public Button MeisjeButton;
     public Button VolgendeSceneButton;
+    public Button MeisjePrefab;
+    public Button JongenPrefab;
+    public Button TerugNaarMenu;
 
     public Button[] KindKnoppen;
 
@@ -42,6 +46,9 @@ public class ProfielManagerScript : MonoBehaviour
         MeisjeButton.onClick.AddListener(MeisjeGekozen);
         MaakProfielButton.onClick.AddListener(SpawnObject);
         VolgendeSceneButton.onClick.AddListener(VolgendeSceneSwitch);
+        MeisjePrefab.onClick.AddListener(VolgendeSceneSwitch);
+        JongenPrefab.onClick.AddListener(VolgendeSceneSwitch);
+        TerugNaarMenu.onClick.AddListener(HoofdmenuSwitch);
 
         foreach (Button knop in KindKnoppen)
         {
@@ -54,8 +61,16 @@ public class ProfielManagerScript : MonoBehaviour
         ProfielSelectieScherm.SetActive(true);
         ProfielAanmakenScherm.SetActive(false);
         VolgendeScene.SetActive(false);
+        
     }
 
+    public void HoofdmenuSwitch()
+    {
+        ProfielSelectieScherm.SetActive(false);
+        ProfielAanmakenScherm.SetActive(false);
+        VolgendeScene.SetActive(false);
+        HoofdMenu.SetActive(true);
+    }
     public void VolgendeSceneSwitch()
     {
         ProfielSelectieScherm.SetActive(false);
