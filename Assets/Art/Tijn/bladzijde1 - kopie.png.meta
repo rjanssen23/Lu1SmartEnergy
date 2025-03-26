@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b3d274d4f58dcc2479dddb5b445812a7
+guid: 75ae98e57ca80aa46ab8a39922b11498
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1011684089174540927
-    second: bladzijde2_0
+      213: -2370291644364736251
+    second: bladzijde1 - kopie_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bladzijde2_0
+      name: bladzijde1 - kopie_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 18d36d75ea6c5f1f0800000000000000
-      internalID: -1011684089174540927
+      spriteID: 509309bce480b1fd0800000000000000
+      internalID: -2370291644364736251
       vertices: []
       indices: 
       edges: []

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: faea603e6c792d746990aadb06367d8a
+guid: 09ab82a2bb6e4584a912a3d4c6c47697
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4628550909986495362
-    second: dagboek_0
+      213: 2987779722601537944
+    second: dagboek - kopie_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: dagboek_0
+      name: dagboek - kopie_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 28b5e8e878aeb3040800000000000000
-      internalID: 4628550909986495362
+      spriteID: 891a7c8e3d9b67920800000000000000
+      internalID: 2987779722601537944
       vertices: []
       indices: 
       edges: []
