@@ -7,10 +7,15 @@ public class ProfielManagerScript : MonoBehaviour
     public GameObject ProfielSelectieScherm;
     public GameObject ProfielAanmakenScherm;
     public GameObject VolgendeScene;
-    public GameObject textPrefab; // Assign a TMP_Text prefab in the Inspector
+    public GameObject textPrefab;
+    public GameObject ProfilePrison;
 
-    public GameObject[] KindObjecten; // Array voor de 6 verschillende objecten
-    public Transform[] SpawnPosities; // Array voor de 6 spawn posities
+    public GameObject MeisjeButtonObject;
+    public GameObject JongenButtonObject;
+
+    public GameObject[] JongenObjecten; // Array voor de jongen objecten
+    public GameObject[] MeisjeObjecten; // Array voor de meisje objecten
+    public Transform[] SpawnPosities;
 
     public TMP_InputField ProfielNaam;
     public TMP_InputField ProfielLeeftijd;
@@ -18,25 +23,26 @@ public class ProfielManagerScript : MonoBehaviour
     public Button ProfielToevoegenButton;
     public Button NaarProfielSelectieButton;
     public Button MaakProfielButton;
+    public Button JongenButton;
+    public Button MeisjeButton;
+    public Button VolgendeSceneButton;
 
-    public Button[] KindKnoppen; // Array voor de 6 profielknoppen
+    public Button[] KindKnoppen;
 
-    private int spawnIndex = 0; // Houdt bij welk object als volgende moet spawnen
+    private int spawnIndex = 0;
+    private bool isJongenGekozen = true; // Default to jongen
 
     void Start()
     {
-        // Zet de UI naar de startstaat
         Reset();
-
-        // Voeg listeners toe aan de knoppen
         ProfielToevoegenButton.onClick.AddListener(ProfielToevoegenScene);
         NaarProfielSelectieButton.onClick.AddListener(NaarProfielSelectie);
         MaakProfielButton.onClick.AddListener(MaakProfiel);
-
-        // Voeg de SpawnObject-functie toe aan de MaakProfielButton
+        JongenButton.onClick.AddListener(JongenGekozen);
+        MeisjeButton.onClick.AddListener(MeisjeGekozen);
         MaakProfielButton.onClick.AddListener(SpawnObject);
+        VolgendeSceneButton.onClick.AddListener(VolgendeSceneSwitch);
 
-        // Voeg listeners toe aan de profielknoppen
         foreach (Button knop in KindKnoppen)
         {
             knop.onClick.AddListener(ProfielGeselecteerd);
@@ -50,10 +56,18 @@ public class ProfielManagerScript : MonoBehaviour
         VolgendeScene.SetActive(false);
     }
 
+    public void VolgendeSceneSwitch()
+    {
+        ProfielSelectieScherm.SetActive(false);
+        ProfielAanmakenScherm.SetActive(false);
+        VolgendeScene.SetActive(true);
+    }
     public void ProfielToevoegenScene()
     {
         ProfielSelectieScherm.SetActive(false);
         ProfielAanmakenScherm.SetActive(true);
+        MeisjeButtonObject.SetActive(true);
+        JongenButtonObject.SetActive(true);
     }
 
     public void ProfielGeselecteerd()
@@ -76,44 +90,52 @@ public class ProfielManagerScript : MonoBehaviour
         Debug.Log("Profiel Aangemaakt");
     }
 
+    public void JongenGekozen()
+    {
+        isJongenGekozen = true;
+        MeisjeButtonObject.SetActive(false);
+        JongenButtonObject.SetActive(true);
+    }
+
+    public void MeisjeGekozen()
+    {
+        isJongenGekozen = false;
+        JongenButtonObject.SetActive(false);
+        MeisjeButtonObject.SetActive(true);
+    }
+
     public void SpawnObject()
     {
-        if (spawnIndex >= KindObjecten.Length || spawnIndex >= SpawnPosities.Length)
+        GameObject[] gekozenObjecten = isJongenGekozen ? JongenObjecten : MeisjeObjecten;
+
+        if (spawnIndex >= gekozenObjecten.Length || spawnIndex >= SpawnPosities.Length)
         {
             Debug.LogWarning("Geen beschikbare objecten of spawnposities meer!");
             return;
         }
 
-        // Instantiate the profile object (profile picture)
-        GameObject newObject = Instantiate(KindObjecten[spawnIndex], SpawnPosities[spawnIndex].position, Quaternion.identity);
+        GameObject newObject = Instantiate(gekozenObjecten[spawnIndex], SpawnPosities[spawnIndex].position, Quaternion.identity);
 
-        Canvas canvas = FindObjectOfType<Canvas>(); // Find an existing canvas
-        if (canvas != null)
+        if (ProfilePrison != null)
         {
-            newObject.transform.SetParent(canvas.transform, false);
+            newObject.transform.SetParent(ProfilePrison.transform, false);
         }
         else
         {
-            Debug.LogWarning("No Canvas found! The text might not be visible.");
+            Debug.LogWarning("ProfilePrison is not assigned in the Inspector!");
         }
 
-        // Instantiate the text object (name text)
         if (textPrefab != null)
         {
             GameObject newText = Instantiate(textPrefab, SpawnPosities[spawnIndex].position, Quaternion.identity);
-
-            // Set the text object as a child of the profile object
-            newText.transform.SetParent(newObject.transform, false); // This line makes the text a child of the profile object
+            newText.transform.SetParent(newObject.transform, false);
 
             TMP_Text textComponent = newText.GetComponent<TMP_Text>();
             if (textComponent != null)
             {
-                textComponent.text = ProfielNaam.text; // Set the name text
-
-                // Position the text below the profile image
-                newText.transform.localPosition = new Vector3(0, -73, 0); // Adjust the Y position to be below the image
-                textComponent.fontSize = 50; // Adjust this value as needed
-
+                textComponent.text = ProfielNaam.text;
+                newText.transform.localPosition = new Vector3(0, -73, 0);
+                textComponent.fontSize = 50;
             }
             else
             {
@@ -125,8 +147,7 @@ public class ProfielManagerScript : MonoBehaviour
             Debug.LogWarning("Text prefab is not assigned!");
         }
 
-        spawnIndex = (spawnIndex + 1) % KindObjecten.Length; // Update the spawnIndex for the next profile
-
+        spawnIndex = (spawnIndex + 1) % gekozenObjecten.Length;
     }
 }
 
