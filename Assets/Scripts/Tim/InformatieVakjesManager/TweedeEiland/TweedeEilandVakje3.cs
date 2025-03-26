@@ -20,8 +20,8 @@ public class TweedeEilandVakje3 : MonoBehaviour
     public Button AfrondenVakje3TweedeEiland;
 
     // de verschillende soorten informatie per vakje
-    public RawImage TextInformatieVakje3TweedeEiland;
-    public RawImage VideoInformatieVakje3TweedeEiland;
+    public RawImage ArmInformatieVakje3TweedeEiland;
+    public RawImage BeenInformatieVakje3TweedeEiland;
 
     // Objectfaq GameObject
     public GameObject ObjectfaqTweedeEiland;
@@ -30,8 +30,8 @@ public class TweedeEilandVakje3 : MonoBehaviour
     {
         // Voeg event listeners toe aan de knoppen
         ExitVakje3TweedeEiland.onClick.AddListener(CloseVakje3TweedeEiland);
-        VerderVakje3TweedeEiland.onClick.AddListener(ShowVideoInformatieVakje3TweedeEiland);
-        TerugVakje3TweedeEiland.onClick.AddListener(ShowTextInformatieVakje3TweedeEiland);
+        VerderVakje3TweedeEiland.onClick.AddListener(ShowBeenInformatieVakje3TweedeEiland);
+        TerugVakje3TweedeEiland.onClick.AddListener(ShowArmInformatieVakje3TweedeEiland);
         AfrondenVakje3TweedeEiland.onClick.AddListener(CloseVakje3TweedeEiland);
         ButtonVakje3TweedeEiland.onClick.AddListener(OpenVakje3TweedeEiland);
 
@@ -42,37 +42,37 @@ public class TweedeEilandVakje3 : MonoBehaviour
     void ResetVakjesTweedeEiland()
     {
         Vakje3TweedeEiland.SetActive(false);
-        TextInformatieVakje3TweedeEiland.gameObject.SetActive(false);
-        VideoInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        ArmInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        BeenInformatieVakje3TweedeEiland.gameObject.SetActive(false);
         UpdateInfoTextVisibilityTweedeEiland();
     }
 
     void OpenVakje3TweedeEiland()
     {
         Vakje3TweedeEiland.SetActive(true);
-        TextInformatieVakje3TweedeEiland.gameObject.SetActive(true);
-        VideoInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        ArmInformatieVakje3TweedeEiland.gameObject.SetActive(true);
+        BeenInformatieVakje3TweedeEiland.gameObject.SetActive(false);
         UpdateInfoTextVisibilityTweedeEiland();
     }
 
     void CloseVakje3TweedeEiland()
     {
         Vakje3TweedeEiland.SetActive(false);
-        TextInformatieVakje3TweedeEiland.gameObject.SetActive(false);
-        VideoInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        ArmInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        BeenInformatieVakje3TweedeEiland.gameObject.SetActive(false);
         UpdateInfoTextVisibilityTweedeEiland();
     }
 
-    void ShowVideoInformatieVakje3TweedeEiland()
+    void ShowBeenInformatieVakje3TweedeEiland()
     {
-        TextInformatieVakje3TweedeEiland.gameObject.SetActive(false);
-        VideoInformatieVakje3TweedeEiland.gameObject.SetActive(true);
+        ArmInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        BeenInformatieVakje3TweedeEiland.gameObject.SetActive(true);
     }
 
-    void ShowTextInformatieVakje3TweedeEiland()
+    void ShowArmInformatieVakje3TweedeEiland()
     {
-        TextInformatieVakje3TweedeEiland.gameObject.SetActive(true);
-        VideoInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        ArmInformatieVakje3TweedeEiland.gameObject.SetActive(true);
+        BeenInformatieVakje3TweedeEiland.gameObject.SetActive(false);
     }
 
     void UpdateInfoTextVisibilityTweedeEiland()
@@ -83,6 +83,7 @@ public class TweedeEilandVakje3 : MonoBehaviour
         ObjectfaqTweedeEiland.gameObject.SetActive(allVakjesClosed);
     }
 }
+
 
 
 

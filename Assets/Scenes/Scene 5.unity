@@ -284,16 +284,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3cc6ae854997c47887cd1b9159c0e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EilandName: {fileID: 0}
-  Vakje1: {fileID: 0}
-  ButtonVakje1: {fileID: 0}
-  ExitVakje1: {fileID: 0}
-  VerderVakje1: {fileID: 0}
-  TerugVakje1: {fileID: 0}
-  AfrondenVakje1: {fileID: 0}
-  TextInformatieVakje1: {fileID: 0}
-  VideoInformatieVakje1: {fileID: 0}
-  Objectfaq: {fileID: 0}
+  EilandName: {fileID: 1129882934}
+  Vakje1: {fileID: 1000133369}
+  ButtonVakje1: {fileID: 1380851439}
+  ExitVakje1: {fileID: 1894704660}
+  VerderVakje1: {fileID: 103693248}
+  TerugVakje1: {fileID: 1435020556}
+  AfrondenVakje1: {fileID: 1970432581}
+  TextInformatieVakje1: {fileID: 899316463}
+  VideoInformatieVakje1: {fileID: 1282194002}
+  Objectfaq: {fileID: 1894242910}
 --- !u!1 &33374793
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,19 +374,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c144bbf6c7a55b84b9ead5033cf79182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EilandName: {fileID: 0}
-  Vakje6: {fileID: 0}
-  ButtonVakje6: {fileID: 0}
-  ExitVakje6: {fileID: 0}
-  InformatieTekstVerder: {fileID: 0}
-  InformatieVideoTerug: {fileID: 0}
-  InformatieVideoVerder: {fileID: 0}
-  QuizTerug: {fileID: 0}
-  QuizAfronden: {fileID: 0}
-  TextInformatieVakje6: {fileID: 0}
-  VideoInformatieVakje6: {fileID: 0}
-  QuizInformatieVakje6: {fileID: 0}
-  Objectfaq: {fileID: 0}
+  EilandName: {fileID: 1129882934}
+  Vakje6: {fileID: 244407255}
+  ButtonVakje6: {fileID: 102803685}
+  ExitVakje6: {fileID: 1660390923}
+  InformatieTekstVerder: {fileID: 1209712946}
+  InformatieVideoTerug: {fileID: 968960258}
+  InformatieVideoVerder: {fileID: 565195375}
+  QuizTerug: {fileID: 2073662811}
+  QuizAfronden: {fileID: 1962682632}
+  TextInformatieVakje6: {fileID: 274081871}
+  VideoInformatieVakje6: {fileID: 758587683}
+  QuizInformatieVakje6: {fileID: 899070285}
+  Objectfaq: {fileID: 1894242910}
 --- !u!1 &38893211
 GameObject:
   m_ObjectHideFlags: 0
@@ -2633,7 +2633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.28235295, g: 0.8117647, b: 0.99215686, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3759,7 +3759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.28235295, g: 0.8117647, b: 0.99215686, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5668,19 +5668,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecc81f784d1ea547acafd9a3f6663b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EilandName: {fileID: 0}
-  Vakje4: {fileID: 0}
-  ButtonVakje4: {fileID: 0}
-  ExitVakje4: {fileID: 0}
-  InformatieTekstVerder: {fileID: 0}
-  InformatieVideoTerug: {fileID: 0}
-  InformatieVideoVerder: {fileID: 0}
-  QuizTerug: {fileID: 0}
-  QuizAfronden: {fileID: 0}
-  TextInformatieVakje4: {fileID: 0}
-  VideoInformatieVakje4: {fileID: 0}
-  QuizInformatieVakje4: {fileID: 0}
-  Objectfaq: {fileID: 0}
+  EilandName: {fileID: 1129882934}
+  Vakje4: {fileID: 188201390}
+  ButtonVakje4: {fileID: 1684723117}
+  ExitVakje4: {fileID: 660198565}
+  InformatieTekstVerder: {fileID: 532448196}
+  InformatieVideoTerug: {fileID: 1591940578}
+  InformatieVideoVerder: {fileID: 415969860}
+  QuizTerug: {fileID: 332387162}
+  QuizAfronden: {fileID: 1544994647}
+  TextInformatieVakje4: {fileID: 1914461300}
+  VideoInformatieVakje4: {fileID: 1907562303}
+  QuizInformatieVakje4: {fileID: 1478972557}
+  Objectfaq: {fileID: 1894242910}
 --- !u!1 &342342823
 GameObject:
   m_ObjectHideFlags: 0
@@ -6259,7 +6259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.28235295, g: 0.8117647, b: 0.99215686, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8890,7 +8890,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.28235295, g: 0.8117647, b: 0.99215686, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -12657,7 +12657,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &820437185
 Transform:
   m_ObjectHideFlags: 0
@@ -14307,7 +14307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.28235295, g: 0.8117647, b: 0.99215686, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -15289,19 +15289,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 218b51d3c42664444a1075ec72dbfa57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EilandName: {fileID: 0}
-  Vakje2: {fileID: 0}
-  ButtonVakje2: {fileID: 0}
-  ExitVakje2: {fileID: 0}
-  InformatieTekstVerder: {fileID: 0}
-  InformatieVideoTerug: {fileID: 0}
-  InformatieVideoVerder: {fileID: 0}
-  QuizTerug: {fileID: 0}
-  QuizAfronden: {fileID: 0}
-  TextInformatieVakje2: {fileID: 0}
-  VideoInformatieVakje2: {fileID: 0}
-  QuizInformatieVakje2: {fileID: 0}
-  Objectfaq: {fileID: 0}
+  EilandName: {fileID: 1129882934}
+  Vakje2: {fileID: 1818878907}
+  ButtonVakje2: {fileID: 943700223}
+  ExitVakje2: {fileID: 1942193010}
+  InformatieTekstVerder: {fileID: 1571740789}
+  InformatieVideoTerug: {fileID: 567072217}
+  InformatieVideoVerder: {fileID: 8509983}
+  QuizTerug: {fileID: 996963962}
+  QuizAfronden: {fileID: 1353672891}
+  TextInformatieVakje2: {fileID: 1822041736}
+  VideoInformatieVakje2: {fileID: 1119804337}
+  QuizInformatieVakje2: {fileID: 1445520649}
+  Objectfaq: {fileID: 1894242910}
 --- !u!1 &943700221
 GameObject:
   m_ObjectHideFlags: 0
@@ -17652,16 +17652,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b9e60e00c18f8438b8cc6969a5698a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EilandNameTweedeEiland: {fileID: 0}
-  Vakje3TweedeEiland: {fileID: 0}
-  ButtonVakje3TweedeEiland: {fileID: 0}
-  ExitVakje3TweedeEiland: {fileID: 0}
-  VerderVakje3TweedeEiland: {fileID: 0}
-  TerugVakje3TweedeEiland: {fileID: 0}
-  AfrondenVakje3TweedeEiland: {fileID: 0}
-  TextInformatieVakje3TweedeEiland: {fileID: 0}
-  VideoInformatieVakje3TweedeEiland: {fileID: 0}
-  ObjectfaqTweedeEiland: {fileID: 0}
+  EilandNameTweedeEiland: {fileID: 845847141}
+  Vakje3TweedeEiland: {fileID: 574290806}
+  ButtonVakje3TweedeEiland: {fileID: 667073704}
+  ExitVakje3TweedeEiland: {fileID: 906145428}
+  VerderVakje3TweedeEiland: {fileID: 713704307}
+  TerugVakje3TweedeEiland: {fileID: 1631230489}
+  AfrondenVakje3TweedeEiland: {fileID: 1600270762}
+  ArmInformatieVakje3TweedeEiland: {fileID: 2125807728}
+  BeenInformatieVakje3TweedeEiland: {fileID: 1113090172}
+  ObjectfaqTweedeEiland: {fileID: 719134243}
 --- !u!1 &1097897622
 GameObject:
   m_ObjectHideFlags: 0
@@ -19131,16 +19131,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dc10631f1b884d44b32f7a54938ba71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EilandNameTweedeEiland: {fileID: 0}
-  Vakje1TweedeEiland: {fileID: 0}
-  ButtonVakje1TweedeEiland: {fileID: 0}
-  ExitVakje1TweedeEiland: {fileID: 0}
-  VerderVakje1TweedeEiland: {fileID: 0}
-  TerugVakje1TweedeEiland: {fileID: 0}
-  AfrondenVakje1TweedeEiland: {fileID: 0}
-  TextInformatieVakje1TweedeEiland: {fileID: 0}
-  VideoInformatieVakje1TweedeEiland: {fileID: 0}
-  ObjectfaqTweedeEiland: {fileID: 0}
+  EilandNameTweedeEiland: {fileID: 845847141}
+  Vakje1TweedeEiland: {fileID: 268899951}
+  ButtonVakje1TweedeEiland: {fileID: 781352971}
+  ExitVakje1TweedeEiland: {fileID: 110866754}
+  VerderVakje1TweedeEiland: {fileID: 342342825}
+  TerugVakje1TweedeEiland: {fileID: 1428122493}
+  AfrondenVakje1TweedeEiland: {fileID: 354287310}
+  TextInformatieVakje1TweedeEiland: {fileID: 904835647}
+  VideoInformatieVakje1TweedeEiland: {fileID: 99257808}
+  ObjectfaqTweedeEiland: {fileID: 719134243}
 --- !u!1 &1217086429
 GameObject:
   m_ObjectHideFlags: 0
@@ -22857,7 +22857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.28235295, g: 0.8117647, b: 0.99215686, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -25303,6 +25303,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1591940576}
   m_CullTransparentMesh: 1
+--- !u!1 &1596459101
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1596459104}
+  - component: {fileID: 1596459103}
+  - component: {fileID: 1596459102}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1596459102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596459101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
+--- !u!114 &1596459103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596459101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &1596459104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596459101}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1597008491
 GameObject:
   m_ObjectHideFlags: 0
@@ -29456,19 +29535,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de9048feac69924092582b5b25b5f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EilandName: {fileID: 0}
-  Vakje5: {fileID: 0}
-  ButtonVakje5: {fileID: 0}
-  ExitVakje5: {fileID: 0}
-  InformatieTekstVerder: {fileID: 0}
-  InformatieVideoTerug: {fileID: 0}
-  InformatieVideoVerder: {fileID: 0}
-  QuizTerug: {fileID: 0}
-  QuizAfronden: {fileID: 0}
-  TextInformatieVakje5: {fileID: 0}
-  VideoInformatieVakje5: {fileID: 0}
-  QuizInformatieVakje5: {fileID: 0}
-  Objectfaq: {fileID: 0}
+  EilandName: {fileID: 1129882934}
+  Vakje5: {fileID: 1914824518}
+  ButtonVakje5: {fileID: 692574718}
+  ExitVakje5: {fileID: 1805638487}
+  InformatieTekstVerder: {fileID: 1221853563}
+  InformatieVideoTerug: {fileID: 283010419}
+  InformatieVideoVerder: {fileID: 2094250622}
+  QuizTerug: {fileID: 831481468}
+  QuizAfronden: {fileID: 983246640}
+  TextInformatieVakje5: {fileID: 404342171}
+  VideoInformatieVakje5: {fileID: 1790098503}
+  QuizInformatieVakje5: {fileID: 1749171745}
+  Objectfaq: {fileID: 1894242910}
 --- !u!1 &1907562300
 GameObject:
   m_ObjectHideFlags: 0
@@ -31884,19 +31963,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93bef56a9e109ff4ba11e2cfa5d5beb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EilandName: {fileID: 0}
-  Vakje3: {fileID: 0}
-  ButtonVakje3: {fileID: 0}
-  ExitVakje3: {fileID: 0}
-  InformatieTekstVerder: {fileID: 0}
-  InformatieVideoTerug: {fileID: 0}
-  InformatieVideoVerder: {fileID: 0}
-  QuizTerug: {fileID: 0}
-  QuizAfronden: {fileID: 0}
-  TextInformatieVakje3: {fileID: 0}
-  VideoInformatieVakje3: {fileID: 0}
-  QuizInformatieVakje3: {fileID: 0}
-  Objectfaq: {fileID: 0}
+  EilandName: {fileID: 1129882934}
+  Vakje3: {fileID: 1999508124}
+  ButtonVakje3: {fileID: 488884475}
+  ExitVakje3: {fileID: 1864744239}
+  InformatieTekstVerder: {fileID: 1337925948}
+  InformatieVideoTerug: {fileID: 2083151701}
+  InformatieVideoVerder: {fileID: 2006912176}
+  QuizTerug: {fileID: 305247091}
+  QuizAfronden: {fileID: 2073411342}
+  TextInformatieVakje3: {fileID: 81958330}
+  VideoInformatieVakje3: {fileID: 1330539517}
+  QuizInformatieVakje3: {fileID: 1165812572}
+  Objectfaq: {fileID: 1894242910}
 --- !u!1 &2037444827
 GameObject:
   m_ObjectHideFlags: 0
@@ -31915,7 +31994,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2037444828
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31931,10 +32010,10 @@ RectTransform:
   - {fileID: 1545013723}
   - {fileID: 2052413250}
   - {fileID: 1725394102}
-  - {fileID: 845847140}
   - {fileID: 1637733803}
   - {fileID: 603192306}
   - {fileID: 719134244}
+  - {fileID: 845847140}
   m_Father: {fileID: 820437185}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -34590,3 +34669,4 @@ SceneRoots:
   - {fileID: 352610737}
   - {fileID: 820437185}
   - {fileID: 854407972}
+  - {fileID: 1596459104}
