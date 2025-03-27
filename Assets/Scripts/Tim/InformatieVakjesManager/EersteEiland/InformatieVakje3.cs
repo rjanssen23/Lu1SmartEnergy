@@ -29,6 +29,9 @@ public class InformatieVakje3 : MonoBehaviour
     // Objectfaq GameObject
     public GameObject Objectfaq;
 
+    // ProgressieBalkManager 
+    public ProgressBarManager progressBarManager;
+
     void Start()
     {
         // Voeg event listeners toe aan de knoppen
@@ -38,6 +41,7 @@ public class InformatieVakje3 : MonoBehaviour
         InformatieVideoVerder.onClick.AddListener(ShowQuizInformatieVakje3);
         QuizTerug.onClick.AddListener(ShowVideoInformatieVakje3);
         QuizAfronden.onClick.AddListener(CloseVakje3);
+        QuizAfronden.onClick.AddListener(progressBarManager.VakjeAfronden);
         ButtonVakje3.onClick.AddListener(OpenVakje3);
 
         // Initialiseer de vakjes en informatie
@@ -100,6 +104,3 @@ public class InformatieVakje3 : MonoBehaviour
         Objectfaq.SetActive(allVakjesClosed);
     }
 }
-
-
-
