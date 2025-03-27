@@ -7,19 +7,38 @@ public class ProgressBarManager : MonoBehaviour
     public Image[] bolletjes;
     public int totalVakjes = 6;
     private int completedVakjes = 0;
+    private bool[] vakjesAfrondStatus;
+    private Color[] origineleKleuren;
 
     void Start()
     {
         // Initialiseer de slider
         progressBar.maxValue = totalVakjes;
         progressBar.value = completedVakjes;
+        vakjesAfrondStatus = new bool[totalVakjes];
+        origineleKleuren = new Color[bolletjes.Length];
+
+        // Sla de oorspronkelijke kleuren van de bolletjes op
+        for (int i = 0; i < bolletjes.Length; i++)
+        {
+            origineleKleuren[i] = bolletjes[i].color;
+        }
+
         UpdateBolletjes();
     }
 
-    public void VakjeAfronden()
+    public void VakjeAfronden(int vakjeIndex)
     {
-        if (completedVakjes < totalVakjes)
+        if (vakjeIndex < 0 || vakjeIndex >= totalVakjes)
         {
+            Debug.LogError("Ongeldige vakje index");
+            return;
+        }
+
+        if (!vakjesAfrondStatus[vakjeIndex])
+        {
+            // Markeer het vakje als afgerond
+            vakjesAfrondStatus[vakjeIndex] = true;
             // Verhoog het aantal voltooide vakjes
             completedVakjes++;
             // Update de slider waarde
@@ -32,14 +51,15 @@ public class ProgressBarManager : MonoBehaviour
     {
         for (int i = 0; i < bolletjes.Length; i++)
         {
-            if (i < completedVakjes)
+            if (vakjesAfrondStatus[i])
             {
-                bolletjes[i].color = Color.green; // Gekleurd bolletje
+                bolletjes[i].color = origineleKleuren[i]; // Zet terug naar oorspronkelijke kleur
             }
             else
             {
-                bolletjes[i].color = Color.gray; // Ongedaan bolletje
+                bolletjes[i].color = Color.gray; // Zet naar grijs
             }
         }
     }
 }
+

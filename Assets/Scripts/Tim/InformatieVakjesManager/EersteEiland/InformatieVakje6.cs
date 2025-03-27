@@ -29,8 +29,11 @@ public class InformatieVakje6 : MonoBehaviour
     // Objectfaq GameObject
     public GameObject Objectfaq;
 
-    // ProgressieBalkManager
+    // ProgressieBalk Manager
     public ProgressBarManager progressBarManager;
+
+    // Boolean om bij te houden of het vakje al is afgerond
+    private bool isVakjeAfgerond = false;
 
     void Start()
     {
@@ -41,7 +44,7 @@ public class InformatieVakje6 : MonoBehaviour
         InformatieVideoVerder.onClick.AddListener(ShowQuizInformatieVakje6);
         QuizTerug.onClick.AddListener(ShowVideoInformatieVakje6);
         QuizAfronden.onClick.AddListener(CloseVakje6);
-        QuizAfronden.onClick.AddListener(progressBarManager.VakjeAfronden);
+        QuizAfronden.onClick.AddListener(AfrondenVakje6);
         ButtonVakje6.onClick.AddListener(OpenVakje6);
 
         // Initialiseer de vakjes en informatie
@@ -94,6 +97,15 @@ public class InformatieVakje6 : MonoBehaviour
         TextInformatieVakje6.gameObject.SetActive(false);
         VideoInformatieVakje6.gameObject.SetActive(false);
         QuizInformatieVakje6.gameObject.SetActive(true);
+    }
+
+    void AfrondenVakje6()
+    {
+        if (!isVakjeAfgerond)
+        {
+            isVakjeAfgerond = true;
+            progressBarManager.VakjeAfronden(5); // 5 is de index voor Vakje6
+        }
     }
 
     void UpdateInfoTextVisibility()
