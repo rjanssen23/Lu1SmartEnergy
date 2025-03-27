@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
+
 public class DagboekScript : MonoBehaviour
 {
     public GameObject bladzijdes;
@@ -24,8 +26,10 @@ public class DagboekScript : MonoBehaviour
     public TMP_InputField inputField3;
     public TMP_InputField inputField4;
 
+
     void Start()
     {
+
         // Zet de UI naar de startstaat
         Reset();
 
