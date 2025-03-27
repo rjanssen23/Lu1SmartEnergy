@@ -14724,12 +14724,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ook met gips kun je nog steeds bewegen en leuke dingen doen! Als je been
-    in het gips zit, kun je misschien met krukken lopen of in een rolstoel zitten.
-    Je kunt ook oefeningen doen om je andere spieren sterk te houden! Als je arm
-    in het gips zit, kun je nog steeds spelletjes spelen, knutselen of zelfs schrijven
-    met je andere hand. Probeer niet te lang stil te zitten, want bewegen is belangrijk
-    om je lichaam sterk te houden!
+  m_text: Soms voelt je arm of been na het gips nog een beetje pijnlijk of stijf.
+    Dat is normaal, want je hebt het een tijdje niet kunnen gebruiken! Als het stijf
+    is, kun je proberen het voorzichtig te bewegen. Kleine stukjes lopen of je arm
+    draaien helpt om je spieren soepeler te maken. Als het pijn doet, kun je het
+    even laten rusten of een warm kussentje erop leggen. Maar als de pijn blijft,
+    vertel het dan aan een volwassene. Misschien moet de dokter er nog even naar
+    kijken. Geef je lichaam de tijd om te wennen. Het zal elke dag een beetje beter
+    gaan!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -24803,7 +24805,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Wat als er iets misgaat? (video)
+  m_text: Wanneer ben je weer beter? (video)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -25995,7 +25997,7 @@ GameObject:
   - component: {fileID: 728356239}
   - component: {fileID: 728356238}
   m_Layer: 5
-  m_Name: Oefeningen hele lichaam
+  m_Name: Oefeningen been/voet plezier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29120,7 +29122,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Oefeningen voor afleiding of plezier!
+  m_text: Speelse oefeningen voor arm/hand!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -37812,13 +37814,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Het kan gebeuren dat je gips een beetje jeukt. Dat is vervelend, maar
-    gelukkig zijn er manieren om het minder te laten voelen! Als het jeukt, kun je
-    voorzichtig met je hand op het gips tikken of je arm of been een beetje bewegen.
-    Wat ook helpt: afleiding! Kijk een filmpje, speel een spel of lees een boek.
-    Voor je het weet, is de jeuk weer weg! Voelt je gips t\xE9 strak of tintelt je
-    huid? Dat kan betekenen dat het gips te strak zit. Vertel dit meteen aan een
-    volwassene, zodat de dokter kan kijken of het gips goed zit!"
+  m_text: Nu je gips eraf is, is het tijd om weer sterker te worden! Je spieren zijn
+    een beetje lui geworden, maar met wat oefening worden ze weer sterk. Begin met
+    kleine bewegingen en probeer elke dag iets meer te doen. Misschien krijg je oefeningen
+    van een fysiotherapeut. Die helpen je om sneller beter te worden. Het kan even
+    duren voordat je weer net zo sterk bent als voorheen, maar als je goed oefent,
+    ben je er zo weer!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -38858,7 +38859,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hoe blijf je actief met gips? (video)
+  m_text: Wat als je nog pijn/stijfheid hebt? (video)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -40402,7 +40403,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hoe blijf je actief met gips?
+  m_text: Wat als je nog pijn/stijfheid hebt?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -40528,6 +40529,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1145749251}
+  - component: {fileID: 1145749252}
   m_Layer: 0
   m_Name: DerdeEilandVakje7
   m_TagString: Untagged
@@ -40550,6 +40552,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 588537812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1145749252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145749250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 795853cfbcfc9db44a0a9d18c14679fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EilandNameDerdeEiland: {fileID: 845847141}
+  Vakje7DerdeEiland: {fileID: 2083689568}
+  ButtonVakje7DerdeEiland: {fileID: 528796338}
+  ExitVakje7DerdeEiland: {fileID: 1799972602}
+  InformatieTekstVerderDerdeEiland: {fileID: 894110105}
+  InformatieVideoTerugDerdeEiland: {fileID: 1842962054}
+  InformatieVideoVerderDerdeEiland: {fileID: 946991703}
+  QuizTerugDerdeEiland: {fileID: 1461570006}
+  QuizAfrondenDerdeEiland: {fileID: 2124557344}
+  TextInformatieVakje7DerdeEiland: {fileID: 1653514192}
+  VideoInformatieVakje7DerdeEiland: {fileID: 582885699}
+  QuizInformatieVakje7DerdeEiland: {fileID: 539654117}
+  ObjectfaqDerdeEiland: {fileID: 1470186734}
 --- !u!1 &1165812569
 GameObject:
   m_ObjectHideFlags: 0
@@ -41610,11 +41637,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Teken een route op papier en beweeg met je hand erover \u2013 Goed voor
-    fijne motoriek. \r\n\r\nMini-bowling met plastic flesjes en een zachte bal \u2013
-    Zit en rol de bal naar de kegels \n\nSchuimrubberen ballen gooien en vangen \u2013
-    Goed voor motoriek en plezier. \r\n\r\nDigitaal meebewegen \u2013 Gebruik een
-    bewegingsspel op een tablet of VR-bril (als mogelijk). "
+  m_text: "Kapitein Doe-Mij-Na \u2013 Doe de bewegingen na van de \u2018kapitein\u2019
+    (iemand anders).\n\nPiraat met sterke armen \u2013 Maak grote en kleine cirkels
+    in de lucht alsof je een piratenschip bestuurt.\n\nGouden munt doorgeven \u2013
+    Geef een balletje door van de ene hand naar de andere zonder te laten vallen!\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -43961,7 +43987,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Quiz: Hoe blijf je actief met gips?'
+  m_text: 'Quiz: Wat als je nog pijn/stijfheid hebt?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -49791,10 +49817,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Diepe ademhalingsoefeningen \u2013 Helpt ontspanning en zuurstof naar
-    spieren. \r\n\r\nLichte rek- en strekoefeningen \u2013 Voorkomt stijfheid in
-    niet-ingegipste delen. \n\nBellenblazen \u2013 Goed voor ademhaling en ontspanning.
-    \r\n\r\nKleuren en schilderen \u2013 Voor fijne motoriek en afleiding. "
+  m_text: "Schattenspel met bal \u2013 Rol een bal met je voet naar een schatkist
+    of ander doelwit.\n\nKapitein Voetcirkels \u2013 Draai je voet in de lucht alsof
+    je een schatkaart tekent.\n\nOp piraten-tenen lopen \u2013 Loop op je tenen alsof
+    je door ondiep water sluipt.\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -52437,6 +52463,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1512120521}
+  - component: {fileID: 1512120522}
   m_Layer: 0
   m_Name: DerdeEilandVakje5
   m_TagString: Untagged
@@ -52459,6 +52486,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 588537812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1512120522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512120520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 677a8c4f96c4e39428eb5bedc4a7fb05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EilandNameDerdeEiland: {fileID: 845847141}
+  Vakje5DerdeEiland: {fileID: 107329387}
+  ButtonVakje5DerdeEiland: {fileID: 680459981}
+  ExitVakje5DerdeEiland: {fileID: 905105047}
+  InformatieTekstVerderDerdeEiland: {fileID: 526268745}
+  InformatieVideoTerugDerdeEiland: {fileID: 1905352858}
+  InformatieVideoVerderDerdeEiland: {fileID: 405794699}
+  QuizTerugDerdeEiland: {fileID: 207163139}
+  QuizAfrondenDerdeEiland: {fileID: 1783530744}
+  TextInformatieVakje5DerdeEiland: {fileID: 1021124633}
+  VideoInformatieVakje5DerdeEiland: {fileID: 90685726}
+  QuizInformatieVakje5DerdeEiland: {fileID: 1306665422}
+  ObjectfaqDerdeEiland: {fileID: 1470186734}
 --- !u!1 &1515133000
 GameObject:
   m_ObjectHideFlags: 0
@@ -54097,7 +54149,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Wat als er iets misgaat?
+  m_text: Wanneer ben je weer beter?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -56459,7 +56511,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Quiz: Wat als er iets misgaat?'
+  m_text: 'Quiz: Wanneer ben je weer beter?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -60527,7 +60579,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Oefeningen voor het hele lichaam!
+  m_text: Speelse oefeningen voor been/voet!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -61500,7 +61552,7 @@ GameObject:
   - component: {fileID: 1793766606}
   - component: {fileID: 1793766605}
   m_Layer: 5
-  m_Name: Oefeningen afleiding/plezier
+  m_Name: Oefeningen arm/hand plezier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69111,6 +69163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2038306910}
+  - component: {fileID: 2038306911}
   m_Layer: 0
   m_Name: DerdeEilandVakje6
   m_TagString: Untagged
@@ -69133,6 +69186,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 588537812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2038306911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038306909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fe45325238ed641aa2c7e331a01848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EilandNameDerdeEiland: {fileID: 845847141}
+  Vakje6DerdeEiland: {fileID: 1856805584}
+  ButtonVakje6DerdeEiland: {fileID: 1134168913}
+  ExitVakje6DerdeEiland: {fileID: 1991683122}
+  VerderVakje6DerdeEiland: {fileID: 973892870}
+  TerugVakje6DerdeEiland: {fileID: 305477828}
+  AfrondenVakje6DerdeEiland: {fileID: 807964746}
+  ArmInformatieVakje6DerdeEiland: {fileID: 728356239}
+  BeenInformatieVakje6DerdeEiland: {fileID: 1793766606}
+  ObjectfaqDerdeEiland: {fileID: 1470186734}
 --- !u!1 &2038766498
 GameObject:
   m_ObjectHideFlags: 0
@@ -69148,7 +69223,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2038766499
 RectTransform:
   m_ObjectHideFlags: 0
@@ -70845,6 +70920,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2092321370}
+  - component: {fileID: 2092321371}
   m_Layer: 0
   m_Name: DerdeEilandVakje8
   m_TagString: Untagged
@@ -70867,6 +70943,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 588537812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2092321371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092321369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e07c492a50406d04e85e75910c2c5259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EilandNameDerdeEiland: {fileID: 845847141}
+  Vakje8DerdeEiland: {fileID: 2038766498}
+  ButtonVakje8DerdeEiland: {fileID: 698711593}
+  ExitVakje8DerdeEiland: {fileID: 1446700241}
+  InformatieTekstVerderDerdeEiland: {fileID: 1076365555}
+  InformatieVideoTerugDerdeEiland: {fileID: 914190001}
+  InformatieVideoVerderDerdeEiland: {fileID: 1709482577}
+  QuizTerugDerdeEiland: {fileID: 97431093}
+  QuizAfrondenDerdeEiland: {fileID: 655238140}
+  TextInformatieVakje8DerdeEiland: {fileID: 188088815}
+  VideoInformatieVakje8DerdeEiland: {fileID: 1378765872}
+  QuizInformatieVakje8DerdeEiland: {fileID: 2093350159}
+  ObjectfaqDerdeEiland: {fileID: 1470186734}
 --- !u!1 &2093350156
 GameObject:
   m_ObjectHideFlags: 0
@@ -72103,13 +72204,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Het is belangrijk om op te letten of je gips nog goed zit. Hier zijn een
-    paar dingen om op te letten: Voelt je gips heel strak of doet het veel pijn?
-    Dan moet de dokter er misschien even naar kijken. Is je gips nat geworden? Dan
-    kan het zacht worden en moet het misschien vervangen worden. Voel je je vingers
-    of tenen niet goed meer? Dan moet je dat meteen zeggen! Als er iets mis is met
-    je gips, vertel het dan aan een volwassene. Ze kunnen je helpen om het probleem
-    op te lossen!'
+  m_text: Hoelang duurt het voordat je weer helemaal beter bent? Dat hangt af van
+    hoe lang je gips hebt gehad en hoe sterk je spieren waren. Sommige kinderen kunnen
+    na een paar dagen alweer alles doen, terwijl anderen een paar weken nodig hebben
+    om weer te rennen en springen. Dat is helemaal normaal! Blijf goed luisteren
+    naar je lichaam en doe rustig aan. En voordat je het weet, kun je weer alles
+    doen wat je leuk vindt!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
