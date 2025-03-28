@@ -26,6 +26,12 @@ public class TweedeEilandVakje1 : MonoBehaviour
     // Objectfaq GameObject
     public GameObject ObjectfaqTweedeEiland;
 
+    // ProgressieBalk Manager
+    public ProgressieBalkEiland2 progressBarManager;
+
+    // Boolean om bij te houden of het vakje al is afgerond
+    private bool isVakjeAfgerond = false;
+
     void Start()
     {
         // Voeg event listeners toe aan de knoppen
@@ -33,6 +39,7 @@ public class TweedeEilandVakje1 : MonoBehaviour
         VerderVakje1TweedeEiland.onClick.AddListener(ShowVideoInformatieVakje1TweedeEiland);
         TerugVakje1TweedeEiland.onClick.AddListener(ShowTextInformatieVakje1TweedeEiland);
         AfrondenVakje1TweedeEiland.onClick.AddListener(CloseVakje1TweedeEiland);
+        AfrondenVakje1TweedeEiland.onClick.AddListener(AfrondenVakje1);
         ButtonVakje1TweedeEiland.onClick.AddListener(OpenVakje1TweedeEiland);
 
         // Initialiseer de vakjes en informatie
@@ -74,7 +81,14 @@ public class TweedeEilandVakje1 : MonoBehaviour
         TextInformatieVakje1TweedeEiland.gameObject.SetActive(true);
         VideoInformatieVakje1TweedeEiland.gameObject.SetActive(false);
     }
-
+    void AfrondenVakje1()
+    {
+        if (!isVakjeAfgerond)
+        {
+            isVakjeAfgerond = true;
+            progressBarManager.VakjeAfronden(0); // 0 is de index voor Vakje1
+        }
+    }
     void UpdateInfoTextVisibilityTweedeEiland()
     {
         // Controleer of alle vakjes gesloten zijn

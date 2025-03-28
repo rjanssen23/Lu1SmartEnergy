@@ -2,87 +2,122 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TweedeEilandVakje6 : MonoBehaviour
+public class InformatieVakje6Eiland2 : MonoBehaviour
 {
     // eilandnaam tekst
-    public TextMeshProUGUI EilandNameTweedeEiland;
+    public TextMeshProUGUI EilandName;
 
     // alle vakjes
-    public GameObject Vakje6TweedeEiland;
+    public GameObject Vakje6;
 
     // alle vakjes die je hebt in dit eiland
-    public Button ButtonVakje6TweedeEiland;
+    public Button ButtonVakje6;
 
     // de buttons die in de vakjes zitten
-    public Button ExitVakje6TweedeEiland;
-    public Button VerderVakje6TweedeEiland;
-    public Button TerugVakje6TweedeEiland;
-    public Button AfrondenVakje6TweedeEiland;
+    public Button ExitVakje6;
+    public Button InformatieTekstVerder;
+    public Button InformatieVideoTerug;
+    public Button InformatieVideoVerder;
+    public Button QuizTerug;
+    public Button QuizAfronden;
 
     // de verschillende soorten informatie per vakje
-    public RawImage ArmInformatieVakje6TweedeEiland;
-    public RawImage BeenInformatieVakje6TweedeEiland;
+    public RawImage TextInformatieVakje6;
+    public RawImage VideoInformatieVakje6;
+    public RawImage QuizInformatieVakje6;
 
     // Objectfaq GameObject
-    public GameObject ObjectfaqTweedeEiland;
+    public GameObject Objectfaq;
+
+    // ProgressieBalk Manager
+    public ProgressieBalkEiland2 progressBarManager;
+
+    // Boolean om bij te houden of het vakje al is afgerond
+    private bool isVakjeAfgerond = false;
 
     void Start()
     {
         // Voeg event listeners toe aan de knoppen
-        ExitVakje6TweedeEiland.onClick.AddListener(CloseVakje6TweedeEiland);
-        VerderVakje6TweedeEiland.onClick.AddListener(ShowBeenInformatieVakje6TweedeEiland);
-        TerugVakje6TweedeEiland.onClick.AddListener(ShowArmInformatieVakje6TweedeEiland);
-        AfrondenVakje6TweedeEiland.onClick.AddListener(CloseVakje6TweedeEiland);
-        ButtonVakje6TweedeEiland.onClick.AddListener(OpenVakje6TweedeEiland);
+        ExitVakje6.onClick.AddListener(CloseVakje6);
+        InformatieTekstVerder.onClick.AddListener(ShowVideoInformatieVakje6);
+        InformatieVideoTerug.onClick.AddListener(ShowTextInformatieVakje6);
+        InformatieVideoVerder.onClick.AddListener(ShowQuizInformatieVakje6);
+        QuizTerug.onClick.AddListener(ShowVideoInformatieVakje6);
+        QuizAfronden.onClick.AddListener(CloseVakje6);
+        QuizAfronden.onClick.AddListener(AfrondenVakje6);
+        ButtonVakje6.onClick.AddListener(OpenVakje6);
 
         // Initialiseer de vakjes en informatie
-        ResetVakjesTweedeEiland();
+        ResetVakjes();
     }
 
-    void ResetVakjesTweedeEiland()
+    void ResetVakjes()
     {
-        Vakje6TweedeEiland.SetActive(false);
-        ArmInformatieVakje6TweedeEiland.gameObject.SetActive(false);
-        BeenInformatieVakje6TweedeEiland.gameObject.SetActive(false);
-        UpdateInfoTextVisibilityTweedeEiland();
+        Vakje6.SetActive(false);
+        TextInformatieVakje6.gameObject.SetActive(false);
+        VideoInformatieVakje6.gameObject.SetActive(false);
+        QuizInformatieVakje6.gameObject.SetActive(false);
+        UpdateInfoTextVisibility();
     }
 
-    void OpenVakje6TweedeEiland()
+    void OpenVakje6()
     {
-        Vakje6TweedeEiland.SetActive(true);
-        ArmInformatieVakje6TweedeEiland.gameObject.SetActive(true);
-        BeenInformatieVakje6TweedeEiland.gameObject.SetActive(false);
-        UpdateInfoTextVisibilityTweedeEiland();
+        Vakje6.SetActive(true);
+        TextInformatieVakje6.gameObject.SetActive(true);
+        VideoInformatieVakje6.gameObject.SetActive(false);
+        QuizInformatieVakje6.gameObject.SetActive(false);
+        UpdateInfoTextVisibility();
     }
 
-    void CloseVakje6TweedeEiland()
+    void CloseVakje6()
     {
-        Vakje6TweedeEiland.SetActive(false);
-        ArmInformatieVakje6TweedeEiland.gameObject.SetActive(false);
-        BeenInformatieVakje6TweedeEiland.gameObject.SetActive(false);
-        UpdateInfoTextVisibilityTweedeEiland();
+        Vakje6.SetActive(false);
+        TextInformatieVakje6.gameObject.SetActive(false);
+        VideoInformatieVakje6.gameObject.SetActive(false);
+        QuizInformatieVakje6.gameObject.SetActive(false);
+        UpdateInfoTextVisibility();
     }
 
-    void ShowBeenInformatieVakje6TweedeEiland()
+    void ShowVideoInformatieVakje6()
     {
-        ArmInformatieVakje6TweedeEiland.gameObject.SetActive(false);
-        BeenInformatieVakje6TweedeEiland.gameObject.SetActive(true);
+        TextInformatieVakje6.gameObject.SetActive(false);
+        VideoInformatieVakje6.gameObject.SetActive(true);
+        QuizInformatieVakje6.gameObject.SetActive(false);
     }
 
-    void ShowArmInformatieVakje6TweedeEiland()
+    void ShowTextInformatieVakje6()
     {
-        ArmInformatieVakje6TweedeEiland.gameObject.SetActive(true);
-        BeenInformatieVakje6TweedeEiland.gameObject.SetActive(false);
+        TextInformatieVakje6.gameObject.SetActive(true);
+        VideoInformatieVakje6.gameObject.SetActive(false);
+        QuizInformatieVakje6.gameObject.SetActive(false);
     }
 
-    void UpdateInfoTextVisibilityTweedeEiland()
+    void ShowQuizInformatieVakje6()
+    {
+        TextInformatieVakje6.gameObject.SetActive(false);
+        VideoInformatieVakje6.gameObject.SetActive(false);
+        QuizInformatieVakje6.gameObject.SetActive(true);
+    }
+
+    void AfrondenVakje6()
+    {
+        if (!isVakjeAfgerond)
+        {
+            isVakjeAfgerond = true;
+            progressBarManager.VakjeAfronden(5); // 5 is de index voor Vakje6
+        }
+    }
+
+    void UpdateInfoTextVisibility()
     {
         // Controleer of alle vakjes gesloten zijn
-        bool allVakjesClosed = !Vakje6TweedeEiland.activeSelf;
-        EilandNameTweedeEiland.gameObject.SetActive(allVakjesClosed);
-        ObjectfaqTweedeEiland.gameObject.SetActive(allVakjesClosed);
+        bool allVakjesClosed = !Vakje6.activeSelf;
+        EilandName.gameObject.SetActive(allVakjesClosed);
+        Objectfaq.SetActive(allVakjesClosed);
     }
 }
+
+
 
 
 
