@@ -46,6 +46,9 @@ public class ProgressBarManager : MonoBehaviour
             progressBar.value = completedVakjes;
             UpdateBolletjes();
 
+            // Verander de kleur van de slider naar groen
+            progressBar.fillRect.GetComponent<Image>().color = Color.green;
+
             // Start de schatkist animatie als het laatste vakje is afgerond
             if (completedVakjes == totalVakjes)
             {
