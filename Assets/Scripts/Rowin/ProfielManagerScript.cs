@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class ProfielManagerScript : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class ProfielManagerScript : MonoBehaviour
 
     public Button[] KindKnoppen;
 
+    public Dropdown DokterSelectie;
+
     private int spawnIndex = 0;
     private bool isJongenGekozen = true; // Default to jongen
 
@@ -50,6 +53,8 @@ public class ProfielManagerScript : MonoBehaviour
         JongenPrefab.onClick.AddListener(VolgendeSceneSwitch);
         TerugNaarMenu.onClick.AddListener(HoofdmenuSwitch);
 
+        DokterSelectie.onValueChanged.AddListener(OnDropdownValueChanged);
+
         foreach (Button knop in KindKnoppen)
         {
             knop.onClick.AddListener(ProfielGeselecteerd);
@@ -62,6 +67,37 @@ public class ProfielManagerScript : MonoBehaviour
         ProfielAanmakenScherm.SetActive(false);
         VolgendeScene.SetActive(false);
         
+    }
+
+    void OnDropdownValueChanged(int index)
+    {
+        string selectedOption = DokterSelectie.options[index].text;
+
+        switch (selectedOption)
+        {
+            case "Optie 1":
+                // Voeg hier de logica toe voor optie 1
+                Debug.Log("dr. Doofenschmirtz");
+                break;
+
+            case "Optie 2":
+                // Voeg hier de logica toe voor optie 2
+                Debug.Log("dr. Ooststad geselecteerd");
+                break;
+
+            case "Optie 3":
+                // Voeg hier de logica toe voor optie 3
+                Debug.Log("dr. Castalot geselecteerd");
+                break;
+
+            case "optie 4":
+                Debug.Log("Geen dokter Geselecteerd!");
+                break;
+
+            default:
+                Debug.Log("Onbekende optie geselecteerd");
+                break;
+        }
     }
 
     public void HoofdmenuSwitch()
