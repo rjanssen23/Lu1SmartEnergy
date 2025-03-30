@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PiratenBootAnimatie_0: -443892946082499652
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
