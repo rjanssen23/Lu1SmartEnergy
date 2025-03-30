@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7115c5f859212a14d8b124e35dcc0fc6
+guid: 6d302ac6d9e35d548990b75258262371
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3508105288163361634
-    second: agenda_0
+      213: -443892946082499652
+    second: PiratenBootAnimatie_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: agenda_0
+      name: PiratenBootAnimatie_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 160
-        height: 200
+        x: 27
+        y: 43
+        width: 307
+        height: 283
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 26385af3c2b4fa030800000000000000
-      internalID: 3508105288163361634
+      spriteID: cb37376a7b9f6d9f0800000000000000
+      internalID: -443892946082499652
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      agenda_0: 3508105288163361634
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
