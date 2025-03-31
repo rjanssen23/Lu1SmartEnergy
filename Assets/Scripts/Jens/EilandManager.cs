@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
+using UnityEngine.UI;
 
 public class EilandKaart : MonoBehaviour
 {
@@ -13,8 +15,20 @@ public class EilandKaart : MonoBehaviour
     public GameObject[] piratenbotenEiland2; // Array voor piratenboot1 t/m piratenboot6 voor Eiland2
     public GameObject[] piratenbotenEiland3; // Array voor piratenboot1 t/m piratenboot6 voor Eiland3
 
+    public Button buttonEiland1;
+    public Button buttonEiland2;
+    public Button buttonEiland3;
+
+    void Start()
+    {
+        buttonEiland1.onClick.AddListener(ToEiland1);
+        buttonEiland2.onClick.AddListener(ToEiland2);
+        buttonEiland3.onClick.AddListener(ToEiland3);
+    }
+
     public void ToEiland1()
     {
+        DisableButtons();
         StartCoroutine(AnimateToEiland1());
     }
 
@@ -34,10 +48,12 @@ public class EilandKaart : MonoBehaviour
 
         Eiland1.SetActive(true);
         Schatkaart.SetActive(false);
+        EnableButtons();
     }
 
     public void ToEiland2()
     {
+        DisableButtons();
         StartCoroutine(AnimateToEiland2());
     }
 
@@ -57,10 +73,12 @@ public class EilandKaart : MonoBehaviour
 
         Eiland2.SetActive(true);
         Schatkaart.SetActive(false);
+        EnableButtons();
     }
 
     public void ToEiland3()
     {
+        DisableButtons();
         StartCoroutine(AnimateToEiland3());
     }
 
@@ -80,6 +98,21 @@ public class EilandKaart : MonoBehaviour
 
         Eiland3.SetActive(true);
         Schatkaart.SetActive(false);
+        EnableButtons();
+    }
+
+    private void DisableButtons()
+    {
+        buttonEiland1.interactable = false;
+        buttonEiland2.interactable = false;
+        buttonEiland3.interactable = false;
+    }
+
+    private void EnableButtons()
+    {
+        buttonEiland1.interactable = true;
+        buttonEiland2.interactable = true;
+        buttonEiland3.interactable = true;
     }
 
     public void ToHome()

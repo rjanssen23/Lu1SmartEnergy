@@ -521,9 +521,9 @@ RectTransform:
   - {fileID: 1986618354}
   - {fileID: 2086301297}
   - {fileID: 2120623982}
+  - {fileID: 1764663145}
   - {fileID: 1544509112}
   - {fileID: 152025079}
-  - {fileID: 1764663145}
   m_Father: {fileID: 630416533}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -14466,6 +14466,9 @@ MonoBehaviour:
   - {fileID: 1245814221}
   - {fileID: 1560306387}
   - {fileID: 781957982}
+  buttonEiland1: {fileID: 239039444}
+  buttonEiland2: {fileID: 1597743291}
+  buttonEiland3: {fileID: 541371358}
 --- !u!4 &1917797327
 Transform:
   m_ObjectHideFlags: 0
