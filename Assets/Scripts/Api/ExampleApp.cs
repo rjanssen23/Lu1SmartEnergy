@@ -7,12 +7,10 @@ public class ExampleApp : MonoBehaviour
     [Header("Test data")]
     public User user;
     public Environment2D environment2D;
-    public Object2D object2D;
 
     [Header("Dependencies")]
     public UserApiClient userApiClient;
     public Environment2DApiClient enviroment2DApiClient;
-    public Object2DApiClient object2DApiClient;
 
     #region Login
 
