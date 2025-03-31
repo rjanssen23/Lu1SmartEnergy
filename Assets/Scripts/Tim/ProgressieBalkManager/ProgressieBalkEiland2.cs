@@ -46,6 +46,9 @@ public class ProgressieBalkEiland2 : MonoBehaviour
             progressBar.value = completedVakjes;
             UpdateBolletjes();
 
+            // Verander de kleur van de slider naar groen
+            progressBar.fillRect.GetComponent<Image>().color = Color.green;
+
             // Start de schatkist animatie als het laatste vakje is afgerond
             if (completedVakjes == totalVakjes)
             {
@@ -58,7 +61,7 @@ public class ProgressieBalkEiland2 : MonoBehaviour
     {
         for (int i = 0; i < bolletjes.Length; i++)
         {
-            if (vakjesAfrondStatus[i])
+            if (i < completedVakjes)
             {
                 bolletjes[i].color = origineleKleuren[i]; // Zet terug naar oorspronkelijke kleur
             }
@@ -69,4 +72,5 @@ public class ProgressieBalkEiland2 : MonoBehaviour
         }
     }
 }
+
 

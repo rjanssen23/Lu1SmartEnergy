@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ProgressBarManager : MonoBehaviour
+public class ProgressieBalkEiland3 : MonoBehaviour
 {
     public Slider progressBar;
     public Image[] bolletjes;
-    public int totalVakjes = 6;
+    public int totalVakjes = 8;
     private int completedVakjes = 0;
     private bool[] vakjesAfrondStatus;
     private Color[] origineleKleuren;
@@ -72,3 +72,4 @@ public class ProgressBarManager : MonoBehaviour
         }
     }
 }
+

@@ -17,14 +17,23 @@ public class DerdeEilandVakje3 : MonoBehaviour
     public Button ExitVakje3DerdeEiland;
     public Button VerderVakje3DerdeEiland;
     public Button TerugVakje3DerdeEiland;
+    public Button VerderNaarTipsDerdeEiland;
+    public Button TerugNaarOefeningenDerdeEiland;
     public Button AfrondenVakje3DerdeEiland;
 
     // de verschillende soorten informatie per vakje
     public RawImage ArmInformatieVakje3DerdeEiland;
     public RawImage BeenInformatieVakje3DerdeEiland;
+    public RawImage Tips3;
 
     // Objectfaq GameObject
     public GameObject ObjectfaqDerdeEiland;
+
+    // ProgressieBalk Manager
+    public ProgressieBalkEiland3 progressBarManager;
+
+    // Boolean om bij te houden of het vakje al is afgerond
+    private bool isVakjeAfgerond = false;
 
     void Start()
     {
@@ -32,7 +41,10 @@ public class DerdeEilandVakje3 : MonoBehaviour
         ExitVakje3DerdeEiland.onClick.AddListener(CloseVakje3DerdeEiland);
         VerderVakje3DerdeEiland.onClick.AddListener(ShowBeenInformatieVakje3DerdeEiland);
         TerugVakje3DerdeEiland.onClick.AddListener(ShowArmInformatieVakje3DerdeEiland);
+        VerderNaarTipsDerdeEiland.onClick.AddListener(ShowTips3);
+        TerugNaarOefeningenDerdeEiland.onClick.AddListener(ShowBeenInformatieVakje3DerdeEiland);
         AfrondenVakje3DerdeEiland.onClick.AddListener(CloseVakje3DerdeEiland);
+        AfrondenVakje3DerdeEiland.onClick.AddListener(AfrondenVakje3);
         ButtonVakje3DerdeEiland.onClick.AddListener(OpenVakje3DerdeEiland);
 
         // Initialiseer de vakjes en informatie
@@ -44,6 +56,7 @@ public class DerdeEilandVakje3 : MonoBehaviour
         Vakje3DerdeEiland.SetActive(false);
         ArmInformatieVakje3DerdeEiland.gameObject.SetActive(false);
         BeenInformatieVakje3DerdeEiland.gameObject.SetActive(false);
+        Tips3.gameObject.SetActive(false);
         UpdateInfoTextVisibilityDerdeEiland();
     }
 
@@ -52,6 +65,7 @@ public class DerdeEilandVakje3 : MonoBehaviour
         Vakje3DerdeEiland.SetActive(true);
         ArmInformatieVakje3DerdeEiland.gameObject.SetActive(true);
         BeenInformatieVakje3DerdeEiland.gameObject.SetActive(false);
+        Tips3.gameObject.SetActive(false);
         UpdateInfoTextVisibilityDerdeEiland();
     }
 
@@ -60,6 +74,7 @@ public class DerdeEilandVakje3 : MonoBehaviour
         Vakje3DerdeEiland.SetActive(false);
         ArmInformatieVakje3DerdeEiland.gameObject.SetActive(false);
         BeenInformatieVakje3DerdeEiland.gameObject.SetActive(false);
+        Tips3.gameObject.SetActive(false);
         UpdateInfoTextVisibilityDerdeEiland();
     }
 
@@ -67,12 +82,30 @@ public class DerdeEilandVakje3 : MonoBehaviour
     {
         ArmInformatieVakje3DerdeEiland.gameObject.SetActive(false);
         BeenInformatieVakje3DerdeEiland.gameObject.SetActive(true);
+        Tips3.gameObject.SetActive(false);
     }
 
     void ShowArmInformatieVakje3DerdeEiland()
     {
         ArmInformatieVakje3DerdeEiland.gameObject.SetActive(true);
         BeenInformatieVakje3DerdeEiland.gameObject.SetActive(false);
+        Tips3.gameObject.SetActive(false);
+    }
+
+    void ShowTips3()
+    {
+        ArmInformatieVakje3DerdeEiland.gameObject.SetActive(false);
+        BeenInformatieVakje3DerdeEiland.gameObject.SetActive(false);
+        Tips3.gameObject.SetActive(true);
+    }
+
+    void AfrondenVakje3()
+    {
+        if (!isVakjeAfgerond)
+        {
+            isVakjeAfgerond = true;
+            progressBarManager.VakjeAfronden(2); // 2 is de index voor Vakje3
+        }
     }
 
     void UpdateInfoTextVisibilityDerdeEiland()
@@ -83,8 +116,3 @@ public class DerdeEilandVakje3 : MonoBehaviour
         ObjectfaqDerdeEiland.gameObject.SetActive(allVakjesClosed);
     }
 }
-
-
-
-
-

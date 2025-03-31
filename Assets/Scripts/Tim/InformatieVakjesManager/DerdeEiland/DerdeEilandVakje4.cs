@@ -29,6 +29,12 @@ public class DerdeEilandVakje4 : MonoBehaviour
     // Objectfaq GameObject
     public GameObject ObjectfaqDerdeEiland;
 
+    // ProgressieBalk Manager
+    public ProgressieBalkEiland3 progressBarManager;
+
+    // Boolean om bij te houden of het vakje al is afgerond
+    private bool isVakjeAfgerond = false;
+
     void Start()
     {
         // Voeg event listeners toe aan de knoppen
@@ -38,6 +44,7 @@ public class DerdeEilandVakje4 : MonoBehaviour
         InformatieVideoVerderDerdeEiland.onClick.AddListener(ShowQuizInformatieVakje4DerdeEiland);
         QuizTerugDerdeEiland.onClick.AddListener(ShowVideoInformatieVakje4DerdeEiland);
         QuizAfrondenDerdeEiland.onClick.AddListener(CloseVakje4DerdeEiland);
+        QuizAfrondenDerdeEiland.onClick.AddListener(AfrondenVakje4);
         ButtonVakje4DerdeEiland.onClick.AddListener(OpenVakje4DerdeEiland);
 
         // Initialiseer de vakjes en informatie
@@ -90,6 +97,15 @@ public class DerdeEilandVakje4 : MonoBehaviour
         TextInformatieVakje4DerdeEiland.gameObject.SetActive(false);
         VideoInformatieVakje4DerdeEiland.gameObject.SetActive(false);
         QuizInformatieVakje4DerdeEiland.gameObject.SetActive(true);
+    }
+
+    void AfrondenVakje4()
+    {
+        if (!isVakjeAfgerond)
+        {
+            isVakjeAfgerond = true;
+            progressBarManager.VakjeAfronden(3); // 3 is de index voor Vakje4
+        }
     }
 
     void UpdateInfoTextVisibilityDerdeEiland()

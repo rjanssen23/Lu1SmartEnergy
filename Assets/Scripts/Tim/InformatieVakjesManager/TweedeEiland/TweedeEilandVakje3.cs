@@ -15,16 +15,16 @@ public class TweedeEilandVakje3 : MonoBehaviour
 
     // de buttons die in de vakjes zitten
     public Button ExitVakje3TweedeEiland;
-    public Button InformatieTekstVerderTweedeEiland;
-    public Button InformatieVideoTerugTweedeEiland;
-    public Button InformatieVideoVerderTweedeEiland;
-    public Button QuizTerugTweedeEiland;
-    public Button QuizAfrondenTweedeEiland;
+    public Button HandEnArmVolgendeTweedeEiland;
+    public Button VoetEnBeenTerugTweedeEiland;
+    public Button VoetEnBeenVerderTweedeEiland;
+    public Button TerugNaarOefeningenTweedeEiland;
+    public Button Vakje3AfrondenTweedeEiland;
 
     // de verschillende soorten informatie per vakje
-    public RawImage TextInformatieVakje3TweedeEiland;
-    public RawImage VideoInformatieVakje3TweedeEiland;
-    public RawImage QuizInformatieVakje3TweedeEiland;
+    public RawImage HandEnArmInformatieVakje3TweedeEiland;
+    public RawImage VoetEnBeenInformatieVakje3TweedeEiland;
+    public RawImage Tips3;
 
     // Objectfaq GameObject
     public GameObject ObjectfaqTweedeEiland;
@@ -39,12 +39,12 @@ public class TweedeEilandVakje3 : MonoBehaviour
     {
         // Voeg event listeners toe aan de knoppen
         ExitVakje3TweedeEiland.onClick.AddListener(CloseVakje3TweedeEiland);
-        InformatieTekstVerderTweedeEiland.onClick.AddListener(ShowVideoInformatieVakje3TweedeEiland);
-        InformatieVideoTerugTweedeEiland.onClick.AddListener(ShowTextInformatieVakje3TweedeEiland);
-        InformatieVideoVerderTweedeEiland.onClick.AddListener(ShowQuizInformatieVakje3TweedeEiland);
-        QuizTerugTweedeEiland.onClick.AddListener(ShowVideoInformatieVakje3TweedeEiland);
-        QuizAfrondenTweedeEiland.onClick.AddListener(CloseVakje3TweedeEiland);
-        QuizAfrondenTweedeEiland.onClick.AddListener(AfrondenVakje3);
+        HandEnArmVolgendeTweedeEiland.onClick.AddListener(ShowVoetEnBeenInformatieVakje3TweedeEiland);
+        VoetEnBeenTerugTweedeEiland.onClick.AddListener(ShowHandEnArmInformatieVakje3TweedeEiland);
+        VoetEnBeenVerderTweedeEiland.onClick.AddListener(ShowTips3);
+        TerugNaarOefeningenTweedeEiland.onClick.AddListener(ShowVoetEnBeenInformatieVakje3TweedeEiland);
+        Vakje3AfrondenTweedeEiland.onClick.AddListener(CloseVakje3TweedeEiland);
+        Vakje3AfrondenTweedeEiland.onClick.AddListener(AfrondenVakje3);
         ButtonVakje3TweedeEiland.onClick.AddListener(OpenVakje3TweedeEiland);
 
         // Initialiseer de vakjes en informatie
@@ -54,49 +54,49 @@ public class TweedeEilandVakje3 : MonoBehaviour
     void ResetVakjesTweedeEiland()
     {
         Vakje3TweedeEiland.SetActive(false);
-        TextInformatieVakje3TweedeEiland.gameObject.SetActive(false);
-        VideoInformatieVakje3TweedeEiland.gameObject.SetActive(false);
-        QuizInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        HandEnArmInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        VoetEnBeenInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        Tips3.gameObject.SetActive(false);
         UpdateInfoTextVisibilityTweedeEiland();
     }
 
     void OpenVakje3TweedeEiland()
     {
         Vakje3TweedeEiland.SetActive(true);
-        TextInformatieVakje3TweedeEiland.gameObject.SetActive(true);
-        VideoInformatieVakje3TweedeEiland.gameObject.SetActive(false);
-        QuizInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        HandEnArmInformatieVakje3TweedeEiland.gameObject.SetActive(true);
+        VoetEnBeenInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        Tips3.gameObject.SetActive(false);
         UpdateInfoTextVisibilityTweedeEiland();
     }
 
     void CloseVakje3TweedeEiland()
     {
         Vakje3TweedeEiland.SetActive(false);
-        TextInformatieVakje3TweedeEiland.gameObject.SetActive(false);
-        VideoInformatieVakje3TweedeEiland.gameObject.SetActive(false);
-        QuizInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        HandEnArmInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        VoetEnBeenInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        Tips3.gameObject.SetActive(false);
         UpdateInfoTextVisibilityTweedeEiland();
     }
 
-    void ShowVideoInformatieVakje3TweedeEiland()
+    void ShowHandEnArmInformatieVakje3TweedeEiland()
     {
-        TextInformatieVakje3TweedeEiland.gameObject.SetActive(false);
-        VideoInformatieVakje3TweedeEiland.gameObject.SetActive(true);
-        QuizInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        HandEnArmInformatieVakje3TweedeEiland.gameObject.SetActive(true);
+        VoetEnBeenInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        Tips3.gameObject.SetActive(false);
     }
 
-    void ShowTextInformatieVakje3TweedeEiland()
+    void ShowVoetEnBeenInformatieVakje3TweedeEiland()
     {
-        TextInformatieVakje3TweedeEiland.gameObject.SetActive(true);
-        VideoInformatieVakje3TweedeEiland.gameObject.SetActive(false);
-        QuizInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        HandEnArmInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        VoetEnBeenInformatieVakje3TweedeEiland.gameObject.SetActive(true);
+        Tips3.gameObject.SetActive(false);
     }
 
-    void ShowQuizInformatieVakje3TweedeEiland()
+    void ShowTips3()
     {
-        TextInformatieVakje3TweedeEiland.gameObject.SetActive(false);
-        VideoInformatieVakje3TweedeEiland.gameObject.SetActive(false);
-        QuizInformatieVakje3TweedeEiland.gameObject.SetActive(true);
+        HandEnArmInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        VoetEnBeenInformatieVakje3TweedeEiland.gameObject.SetActive(false);
+        Tips3.gameObject.SetActive(true);
     }
 
     void AfrondenVakje3()
@@ -116,5 +116,4 @@ public class TweedeEilandVakje3 : MonoBehaviour
         ObjectfaqTweedeEiland.gameObject.SetActive(allVakjesClosed);
     }
 }
-
 
