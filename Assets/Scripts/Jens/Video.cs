@@ -1,49 +1,109 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class ButtonDisabler : MonoBehaviour
 {
-    [SerializeField] private GameObject button1;
-    [SerializeField] private GameObject button2;
-    [SerializeField] private GameObject button3;
-    [SerializeField] private GameObject button4;
-    [SerializeField] private GameObject button5;
-    [SerializeField] private GameObject button6;
-    [SerializeField] private GameObject button7;
-    [SerializeField] private GameObject button8;
-    [SerializeField] private GameObject button9;
-    [SerializeField] private GameObject button10;
-    [SerializeField] private GameObject button11;
-    [SerializeField] private GameObject button12;
-    [SerializeField] private GameObject button13;
-    [SerializeField] private GameObject button14;
-    [SerializeField] private GameObject button15;
-    [SerializeField] private GameObject button16;
-    [SerializeField] private GameObject button17;
-    [SerializeField] private GameObject button18;
-    [SerializeField] private GameObject button19;
+    [SerializeField] private VideoPlayer videoPlayer1;
+    [SerializeField] private VideoPlayer videoPlayer2;
+    [SerializeField] private VideoPlayer videoPlayer3;
+    [SerializeField] private VideoPlayer videoPlayer4;
+    [SerializeField] private VideoPlayer videoPlayer5;
+    [SerializeField] private VideoPlayer videoPlayer6;
+    [SerializeField] private VideoPlayer videoPlayer7;
+    [SerializeField] private VideoPlayer videoPlayer8;
+    [SerializeField] private VideoPlayer videoPlayer9;
+    [SerializeField] private VideoPlayer videoPlayer10;
+    [SerializeField] private VideoPlayer videoPlayer11;
+    [SerializeField] private VideoPlayer videoPlayer12;
+    [SerializeField] private VideoPlayer videoPlayer13;
+    [SerializeField] private VideoPlayer videoPlayer14;
+    [SerializeField] private VideoPlayer videoPlayer15;
+    [SerializeField] private VideoPlayer videoPlayer16;
+    [SerializeField] private VideoPlayer videoPlayer17;
+    [SerializeField] private VideoPlayer videoPlayer18;
+    [SerializeField] private VideoPlayer videoPlayer19;
+
+    [SerializeField] private GameObject playButton1;
+    [SerializeField] private GameObject playButton2;
+    [SerializeField] private GameObject playButton3;
+    [SerializeField] private GameObject playButton4;
+    [SerializeField] private GameObject playButton5;
+    [SerializeField] private GameObject playButton6;
+    [SerializeField] private GameObject playButton7;
+    [SerializeField] private GameObject playButton8;
+    [SerializeField] private GameObject playButton9;
+    [SerializeField] private GameObject playButton10;
+    [SerializeField] private GameObject playButton11;
+    [SerializeField] private GameObject playButton12;
+    [SerializeField] private GameObject playButton13;
+    [SerializeField] private GameObject playButton14;
+    [SerializeField] private GameObject playButton15;
+    [SerializeField] private GameObject playButton16;
+    [SerializeField] private GameObject playButton17;
+    [SerializeField] private GameObject playButton18;
+    [SerializeField] private GameObject playButton19;
+
+    [SerializeField] private GameObject pauseButton1;
+    [SerializeField] private GameObject pauseButton2;
+    [SerializeField] private GameObject pauseButton3;
+    [SerializeField] private GameObject pauseButton4;
+    [SerializeField] private GameObject pauseButton5;
+    [SerializeField] private GameObject pauseButton6;
+    [SerializeField] private GameObject pauseButton7;
+    [SerializeField] private GameObject pauseButton8;
+    [SerializeField] private GameObject pauseButton9;
+    [SerializeField] private GameObject pauseButton10;
+    [SerializeField] private GameObject pauseButton11;
+    [SerializeField] private GameObject pauseButton12;
+    [SerializeField] private GameObject pauseButton13;
+    [SerializeField] private GameObject pauseButton14;
+    [SerializeField] private GameObject pauseButton15;
+    [SerializeField] private GameObject pauseButton16;
+    [SerializeField] private GameObject pauseButton17;
+    [SerializeField] private GameObject pauseButton18;
+    [SerializeField] private GameObject pauseButton19;
 
     private void Start()
     {
-        AddListener(button1, DisableButton1);
-        AddListener(button2, DisableButton2);
-        AddListener(button3, DisableButton3);
-        AddListener(button4, DisableButton4);
-        AddListener(button5, DisableButton5);
-        AddListener(button6, DisableButton6);
-        AddListener(button7, DisableButton7);
-        AddListener(button8, DisableButton8);
-        AddListener(button9, DisableButton9);
-        AddListener(button10, DisableButton10);
-        AddListener(button11, DisableButton11);
-        AddListener(button12, DisableButton12);
-        AddListener(button13, DisableButton13);
-        AddListener(button14, DisableButton14);
-        AddListener(button15, DisableButton15);
-        AddListener(button16, DisableButton16);
-        AddListener(button17, DisableButton17);
-        AddListener(button18, DisableButton18);
-        AddListener(button19, DisableButton19);
+        SetupButton(videoPlayer1, playButton1, pauseButton1);
+        SetupButton(videoPlayer2, playButton2, pauseButton2);
+        SetupButton(videoPlayer3, playButton3, pauseButton3);
+        SetupButton(videoPlayer4, playButton4, pauseButton4);
+        SetupButton(videoPlayer5, playButton5, pauseButton5);
+        SetupButton(videoPlayer6, playButton6, pauseButton6);
+        SetupButton(videoPlayer7, playButton7, pauseButton7);
+        SetupButton(videoPlayer8, playButton8, pauseButton8);
+        SetupButton(videoPlayer9, playButton9, pauseButton9);
+        SetupButton(videoPlayer10, playButton10, pauseButton10);
+        SetupButton(videoPlayer11, playButton11, pauseButton11);
+        SetupButton(videoPlayer12, playButton12, pauseButton12);
+        SetupButton(videoPlayer13, playButton13, pauseButton13);
+        SetupButton(videoPlayer14, playButton14, pauseButton14);
+        SetupButton(videoPlayer15, playButton15, pauseButton15);
+        SetupButton(videoPlayer16, playButton16, pauseButton16);
+        SetupButton(videoPlayer17, playButton17, pauseButton17);
+        SetupButton(videoPlayer18, playButton18, pauseButton18);
+        SetupButton(videoPlayer19, playButton19, pauseButton19);
+    }
+
+    private void SetupButton(VideoPlayer videoPlayer, GameObject playButton, GameObject pauseButton)
+    {
+        pauseButton.SetActive(false);
+
+        AddListener(playButton, () =>
+        {
+            videoPlayer.Play();
+            playButton.SetActive(false);
+            pauseButton.SetActive(true);
+        });
+
+        AddListener(pauseButton, () =>
+        {
+            videoPlayer.Pause();
+            pauseButton.SetActive(false);
+            playButton.SetActive(true);
+        });
     }
 
     private void AddListener(GameObject buttonObj, UnityEngine.Events.UnityAction action)
@@ -54,24 +114,4 @@ public class ButtonDisabler : MonoBehaviour
             btn.onClick.AddListener(action);
         }
     }
-
-    public void DisableButton1() => button1.SetActive(false);
-    public void DisableButton2() => button2.SetActive(false);
-    public void DisableButton3() => button3.SetActive(false);
-    public void DisableButton4() => button4.SetActive(false);
-    public void DisableButton5() => button5.SetActive(false);
-    public void DisableButton6() => button6.SetActive(false);
-    public void DisableButton7() => button7.SetActive(false);
-    public void DisableButton8() => button8.SetActive(false);
-    public void DisableButton9() => button9.SetActive(false);
-    public void DisableButton10() => button10.SetActive(false);
-    public void DisableButton11() => button11.SetActive(false);
-    public void DisableButton12() => button12.SetActive(false);
-    public void DisableButton13() => button13.SetActive(false);
-    public void DisableButton14() => button14.SetActive(false);
-    public void DisableButton15() => button15.SetActive(false);
-    public void DisableButton16() => button16.SetActive(false);
-    public void DisableButton17() => button17.SetActive(false);
-    public void DisableButton18() => button18.SetActive(false);
-    public void DisableButton19() => button19.SetActive(false);
 }
