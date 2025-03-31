@@ -534,7 +534,24 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      VliegendeVogels_0: -7050986524702694483
+      VliegendeVogels_1: 1069637020568549318
+      VliegendeVogels_10: 3288190049301987693
+      VliegendeVogels_11: -7811694713988655655
+      VliegendeVogels_12: -2030440542581652029
+      VliegendeVogels_13: -1907950742182827586
+      VliegendeVogels_14: -167402861385971479
+      VliegendeVogels_15: -4798772129678486428
+      VliegendeVogels_16: 3819650244135384225
+      VliegendeVogels_2: 1066913510861814630
+      VliegendeVogels_3: 1728379528891861701
+      VliegendeVogels_4: -5258074494138192693
+      VliegendeVogels_5: 7804385606644483034
+      VliegendeVogels_6: 3279366332126272088
+      VliegendeVogels_7: -6363135261519858138
+      VliegendeVogels_8: 5730538526038606533
+      VliegendeVogels_9: 3442389177657097100
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -334,7 +334,16 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PalmBoomEiland_0: 5890159030144404163
+      PalmBoomEiland_1: -6208611765341731429
+      PalmBoomEiland_2: -5897761203657703635
+      PalmBoomEiland_3: 8896308491722838662
+      PalmBoomEiland_4: -3614181618545288666
+      PalmBoomEiland_5: -3513922413229270280
+      PalmBoomEiland_6: 2738014141957639524
+      PalmBoomEiland_7: 439726575552509568
+      PalmBoomEiland_8: -2578793929395569677
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
