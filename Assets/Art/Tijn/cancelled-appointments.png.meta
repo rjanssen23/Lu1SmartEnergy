@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cancelled-appointments_0: -7859169518251595422
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
