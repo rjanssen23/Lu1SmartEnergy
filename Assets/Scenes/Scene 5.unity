@@ -11252,7 +11252,7 @@ MonoBehaviour:
   VideoInformatieVakje2TweedeEiland: {fileID: 1036646330}
   QuizInformatieVakje2TweedeEiland: {fileID: 360543157}
   ObjectfaqTweedeEiland: {fileID: 719134243}
-  progressBarManager: {fileID: 0}
+  progressBarManager: {fileID: 816050135}
 --- !u!1 &210402193
 GameObject:
   m_ObjectHideFlags: 0
