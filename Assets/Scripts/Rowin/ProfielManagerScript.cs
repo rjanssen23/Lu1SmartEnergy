@@ -36,7 +36,7 @@ public class ProfielManagerScript : MonoBehaviour
 
     public Button[] KindKnoppen;
 
-    public TMPro.TMP_Dropdown DokterSelectie;
+    public TMP_Dropdown dropdown;
 
     private int spawnIndex = 0;
     private bool isJongenGekozen = true; // Default to jongen
@@ -55,11 +55,18 @@ public class ProfielManagerScript : MonoBehaviour
         JongenPrefab.onClick.AddListener(VolgendeSceneSwitch);
         TerugNaarMenu.onClick.AddListener(HoofdmenuSwitch);
 
-        DokterSelectie.onValueChanged.AddListener(OnDropdownValueChanged);
-
         foreach (Button knop in KindKnoppen)
         {
             knop.onClick.AddListener(ProfielGeselecteerd);
+        }
+
+        if (dropdown != null)
+        {
+            dropdown.onValueChanged.AddListener(delegate { DropdownItemSelected(dropdown); });
+        }
+        else
+        {
+            Debug.LogError("Dropdown component is not yet assigned!");
         }
     }
 
@@ -71,36 +78,11 @@ public class ProfielManagerScript : MonoBehaviour
         
     }
 
-    void OnDropdownValueChanged(int index)
+    void DropdownItemSelected(TMP_Dropdown dropdown)
     {
-        string selectedOption = DokterSelectie.options[index].text;
-
-        switch (selectedOption)
-        {
-            case "Optie 1":
-                // Voeg hier de logica toe voor optie 1
-                Debug.Log("dr. Doofenschmirtz");
-                break;
-
-            case "Optie 2":
-                // Voeg hier de logica toe voor optie 2
-                Debug.Log("dr. Ooststad geselecteerd");
-                break;
-
-            case "Optie 3":
-                // Voeg hier de logica toe voor optie 3
-                Debug.Log("dr. Castalot geselecteerd");
-                break;
-
-            case "optie 4":
-                Debug.Log("Geen dokter Geselecteerd!");
-                break;
-
-            default:
-                Debug.Log("Onbekende optie geselecteerd");
-                break;
-        }
+        Debug.Log("Selected: " + dropdown.options[dropdown.value].text);
     }
+
 
     public void HoofdmenuSwitch()
     {
@@ -148,6 +130,7 @@ public class ProfielManagerScript : MonoBehaviour
         isJongenGekozen = true;
         MeisjeButtonObject.SetActive(false);
         JongenButtonObject.SetActive(true);
+        Debug.Log("Jongen is gekozen");
     }
 
     public void MeisjeGekozen()
@@ -155,6 +138,7 @@ public class ProfielManagerScript : MonoBehaviour
         isJongenGekozen = false;
         JongenButtonObject.SetActive(false);
         MeisjeButtonObject.SetActive(true);
+        Debug.Log("Meisje is gekozen");
     }
 
     public void SpawnObject()
