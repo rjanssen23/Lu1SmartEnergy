@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
+using System;
 
 public class ProfielManagerScript : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class ProfielManagerScript : MonoBehaviour
     public Transform[] SpawnPosities;
 
     public TMP_InputField ProfielNaam;
-    public TMP_InputField ProfielLeeftijd;
+
 
     public Button ProfielToevoegenButton;
     public Button NaarProfielSelectieButton;
@@ -120,10 +121,13 @@ public class ProfielManagerScript : MonoBehaviour
 
     public void MaakProfiel()
     {
+        // If we reach this point, the age is valid, so create the profile
         ProfielSelectieScherm.SetActive(true);
         ProfielAanmakenScherm.SetActive(false);
         Debug.Log("Profiel Aangemaakt");
     }
+
+
 
     public void JongenGekozen()
     {
