@@ -1,15 +1,19 @@
+//Als de scenes gemerged worden de weggecomenteerde dingen weer terug toevoegen en aan de andere scenes koppelen.
+
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
+using System;
 
 public class ProfielManagerScript : MonoBehaviour
 {
     public GameObject ProfielSelectieScherm;
     public GameObject ProfielAanmakenScherm;
-    public GameObject VolgendeScene;
+    //public GameObject VolgendeScene;
     public GameObject textPrefab;
     public GameObject ProfilePrison;
-    public GameObject HoofdMenu;
+    //public GameObject HoofdMenu;
 
     public GameObject MeisjeButtonObject;
     public GameObject JongenButtonObject;
@@ -19,7 +23,7 @@ public class ProfielManagerScript : MonoBehaviour
     public Transform[] SpawnPosities;
 
     public TMP_InputField ProfielNaam;
-    public TMP_InputField ProfielLeeftijd;
+
 
     public Button ProfielToevoegenButton;
     public Button NaarProfielSelectieButton;
@@ -32,6 +36,8 @@ public class ProfielManagerScript : MonoBehaviour
     public Button TerugNaarMenu;
 
     public Button[] KindKnoppen;
+
+    public TMP_Dropdown dropdown;
 
     private int spawnIndex = 0;
     private bool isJongenGekozen = true; // Default to jongen
@@ -54,28 +60,43 @@ public class ProfielManagerScript : MonoBehaviour
         {
             knop.onClick.AddListener(ProfielGeselecteerd);
         }
+
+        if (dropdown != null)
+        {
+            dropdown.onValueChanged.AddListener(delegate { DropdownItemSelected(dropdown); });
+        }
+        else
+        {
+            Debug.LogError("Dropdown component is not yet assigned!");
+        }
     }
 
     public void Reset()
     {
         ProfielSelectieScherm.SetActive(true);
         ProfielAanmakenScherm.SetActive(false);
-        VolgendeScene.SetActive(false);
+       // VolgendeScene.SetActive(false);
         
     }
+
+    void DropdownItemSelected(TMP_Dropdown dropdown)
+    {
+        Debug.Log("Selected: " + dropdown.options[dropdown.value].text);
+    }
+
 
     public void HoofdmenuSwitch()
     {
         ProfielSelectieScherm.SetActive(false);
         ProfielAanmakenScherm.SetActive(false);
-        VolgendeScene.SetActive(false);
-        HoofdMenu.SetActive(true);
+       // VolgendeScene.SetActive(false);
+       // HoofdMenu.SetActive(true);
     }
     public void VolgendeSceneSwitch()
     {
         ProfielSelectieScherm.SetActive(false);
         ProfielAanmakenScherm.SetActive(false);
-        VolgendeScene.SetActive(true);
+        //VolgendeScene.SetActive(true);
     }
     public void ProfielToevoegenScene()
     {
@@ -87,7 +108,7 @@ public class ProfielManagerScript : MonoBehaviour
 
     public void ProfielGeselecteerd()
     {
-        VolgendeScene.SetActive(true);
+        //VolgendeScene.SetActive(true);
         ProfielSelectieScherm.SetActive(false);
         ProfielAanmakenScherm.SetActive(false);
     }
@@ -100,27 +121,12 @@ public class ProfielManagerScript : MonoBehaviour
 
     public void MaakProfiel()
     {
-        string naam = ProfielNaam.text.Trim();
-        int leeftijd;
-
-        // Controleer of leeftijd een geldig getal is
-        if (!int.TryParse(ProfielLeeftijd.text, out leeftijd) || leeftijd < 4 || leeftijd > 12)
-        {
-            Debug.LogError("Leeftijd moet tussen de 4 en 12 jaar zijn!");
-            return;
-        }
-
-        // Controleer de lengte van de naam
-        if (naam.Length > 15)
-        {
-            Debug.LogError("Naam mag maximaal 15 karakters lang zijn!");
-            return;
-        }
-
+        // If we reach this point, the age is valid, so create the profile
         ProfielSelectieScherm.SetActive(true);
         ProfielAanmakenScherm.SetActive(false);
-        Debug.Log("Profiel Aangemaakt: " + naam + ", Leeftijd: " + leeftijd);
+        Debug.Log("Profiel Aangemaakt");
     }
+
 
 
     public void JongenGekozen()
@@ -128,6 +134,7 @@ public class ProfielManagerScript : MonoBehaviour
         isJongenGekozen = true;
         MeisjeButtonObject.SetActive(false);
         JongenButtonObject.SetActive(true);
+        Debug.Log("Jongen is gekozen");
     }
 
     public void MeisjeGekozen()
@@ -135,6 +142,7 @@ public class ProfielManagerScript : MonoBehaviour
         isJongenGekozen = false;
         JongenButtonObject.SetActive(false);
         MeisjeButtonObject.SetActive(true);
+        Debug.Log("Meisje is gekozen");
     }
 
     public void SpawnObject()
