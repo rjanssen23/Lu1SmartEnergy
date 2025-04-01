@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PapegaaiMetHoed_0: -2722218458408316995
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
