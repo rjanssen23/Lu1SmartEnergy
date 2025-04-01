@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InformatieVakjesManager : MonoBehaviour
+public class InformatieVakje1 : MonoBehaviour
 {
     // eilandnaam tekst
     public TextMeshProUGUI EilandName;
@@ -26,6 +26,12 @@ public class InformatieVakjesManager : MonoBehaviour
     // Objectfaq GameObject
     public GameObject Objectfaq;
 
+    // ProgressieBalk Manager
+    public ProgressBarManager progressBarManager;
+
+    // Boolean om bij te houden of het vakje al is afgerond
+    private bool isVakjeAfgerond = false;
+
     void Start()
     {
         // Voeg event listeners toe aan de knoppen
@@ -33,6 +39,7 @@ public class InformatieVakjesManager : MonoBehaviour
         VerderVakje1.onClick.AddListener(ShowVideoInformatieVakje1);
         TerugVakje1.onClick.AddListener(ShowTextInformatieVakje1);
         AfrondenVakje1.onClick.AddListener(CloseVakje1);
+        AfrondenVakje1.onClick.AddListener(AfrondenVakje1Handler);
         ButtonVakje1.onClick.AddListener(OpenVakje1);
 
         // Initialiseer de vakjes en informatie
@@ -75,6 +82,15 @@ public class InformatieVakjesManager : MonoBehaviour
         VideoInformatieVakje1.gameObject.SetActive(false);
     }
 
+    void AfrondenVakje1Handler()
+    {
+        if (!isVakjeAfgerond)
+        {
+            isVakjeAfgerond = true;
+            progressBarManager.VakjeAfronden(0); // 0 is de index voor Vakje1
+        }
+    }
+
     void UpdateInfoTextVisibility()
     {
         // Controleer of alle vakjes gesloten zijn
@@ -83,4 +99,3 @@ public class InformatieVakjesManager : MonoBehaviour
         Objectfaq.SetActive(allVakjesClosed);
     }
 }
-

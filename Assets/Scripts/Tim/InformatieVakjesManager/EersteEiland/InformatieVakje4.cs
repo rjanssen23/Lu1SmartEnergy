@@ -29,6 +29,12 @@ public class InformatieVakje4 : MonoBehaviour
     // Objectfaq GameObject
     public GameObject Objectfaq;
 
+    // ProgressieBalk Manager
+    public ProgressBarManager progressBarManager;
+
+    // Boolean om bij te houden of het vakje al is afgerond
+    private bool isVakjeAfgerond = false;
+
     void Start()
     {
         // Voeg event listeners toe aan de knoppen
@@ -38,6 +44,7 @@ public class InformatieVakje4 : MonoBehaviour
         InformatieVideoVerder.onClick.AddListener(ShowQuizInformatieVakje4);
         QuizTerug.onClick.AddListener(ShowVideoInformatieVakje4);
         QuizAfronden.onClick.AddListener(CloseVakje4);
+        QuizAfronden.onClick.AddListener(AfrondenVakje4);
         ButtonVakje4.onClick.AddListener(OpenVakje4);
 
         // Initialiseer de vakjes en informatie
@@ -92,6 +99,15 @@ public class InformatieVakje4 : MonoBehaviour
         QuizInformatieVakje4.gameObject.SetActive(true);
     }
 
+    void AfrondenVakje4()
+    {
+        if (!isVakjeAfgerond)
+        {
+            isVakjeAfgerond = true;
+            progressBarManager.VakjeAfronden(3); // 3 is de index voor Vakje4
+        }
+    }
+
     void UpdateInfoTextVisibility()
     {
         // Controleer of alle vakjes gesloten zijn
@@ -100,6 +116,4 @@ public class InformatieVakje4 : MonoBehaviour
         Objectfaq.SetActive(allVakjesClosed);
     }
 }
-
-
 
