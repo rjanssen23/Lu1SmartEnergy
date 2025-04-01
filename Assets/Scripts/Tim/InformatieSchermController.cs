@@ -8,10 +8,14 @@ public class InformatieSchermController : MonoBehaviour
     public GameObject scene3; 
     public GameObject scene4;
 
+    public GameObject ProfielSelectieScherm;
+    public GameObject ProfielAanmakenScherm;
+
     public GameObject TextScreen;
     public GameObject VideoScreen;
 
-    public Button ToProfiles;
+    public Button BackToProfiles;
+    public Button NextToProfiles;
     public Button ToText;
     public Button ToVideo;
     public Button ToScene4;
@@ -20,7 +24,8 @@ public class InformatieSchermController : MonoBehaviour
     void Start()
     {
         // Voeg event listeners toe aan de knoppen
-        ToProfiles.onClick.AddListener(ToProfileManager);
+        BackToProfiles.onClick.AddListener(ToProfileManager);
+        NextToProfiles.onClick.AddListener(ToProfileManager);
         ToText.onClick.AddListener(ToInfoScreen);
         ToVideo.onClick.AddListener(ShowVideo);
         ToText.onClick.AddListener(ShowText);
@@ -29,9 +34,11 @@ public class InformatieSchermController : MonoBehaviour
 
     void ToProfileManager()
     {
-        scene2.SetActive(true);
         scene3.SetActive(false);
         scene4.SetActive(false);
+
+        ProfielSelectieScherm.SetActive(true);
+        ProfielAanmakenScherm.SetActive(false);
     }
 
     void ToInfoScreen()
