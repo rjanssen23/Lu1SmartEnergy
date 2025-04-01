@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-public class ButtonDisabler : MonoBehaviour
+public class ButtonDisableer : MonoBehaviour
 {
     [SerializeField] private VideoPlayer videoPlayer1;
     [SerializeField] private VideoPlayer videoPlayer2;
