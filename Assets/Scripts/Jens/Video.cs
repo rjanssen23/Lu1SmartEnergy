@@ -24,6 +24,7 @@ public class ButtonDisabler : MonoBehaviour
     [SerializeField] private VideoPlayer videoPlayer18;
     [SerializeField] private VideoPlayer videoPlayer19;
 
+
     [SerializeField] private GameObject playButton1;
     [SerializeField] private GameObject playButton2;
     [SerializeField] private GameObject playButton3;
@@ -44,6 +45,7 @@ public class ButtonDisabler : MonoBehaviour
     [SerializeField] private GameObject playButton18;
     [SerializeField] private GameObject playButton19;
 
+
     [SerializeField] private GameObject pauseButton1;
     [SerializeField] private GameObject pauseButton2;
     [SerializeField] private GameObject pauseButton3;
@@ -63,6 +65,9 @@ public class ButtonDisabler : MonoBehaviour
     [SerializeField] private GameObject pauseButton17;
     [SerializeField] private GameObject pauseButton18;
     [SerializeField] private GameObject pauseButton19;
+
+
+
 
     private void Start()
     {
@@ -112,6 +117,24 @@ public class ButtonDisabler : MonoBehaviour
         if (btn != null)
         {
             btn.onClick.AddListener(action);
+        }
+    }
+
+    public void StopAllVideos()
+    {
+        VideoPlayer[] videoPlayers = {
+            videoPlayer1, videoPlayer2, videoPlayer3, videoPlayer4, videoPlayer5,
+            videoPlayer6, videoPlayer7, videoPlayer8, videoPlayer9, videoPlayer10,
+            videoPlayer11, videoPlayer12, videoPlayer13, videoPlayer14, videoPlayer15,
+            videoPlayer16, videoPlayer17, videoPlayer18, videoPlayer19
+        };
+
+        foreach (var videoPlayer in videoPlayers)
+        {
+            if (videoPlayer.isPlaying)
+            {
+                videoPlayer.Stop();
+            }
         }
     }
 }
