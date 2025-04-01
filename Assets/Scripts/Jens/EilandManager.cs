@@ -49,6 +49,10 @@ public class EilandKaart : MonoBehaviour
         Eiland1.SetActive(true);
         Schatkaart.SetActive(false);
         EnableButtons();
+
+        // Reset de animatie
+        piratenbotenEiland1[piratenbotenEiland1.Length - 1].SetActive(false);
+        piratenbotenEiland1[0].SetActive(true);
     }
 
     public void ToEiland2()
@@ -74,6 +78,10 @@ public class EilandKaart : MonoBehaviour
         Eiland2.SetActive(true);
         Schatkaart.SetActive(false);
         EnableButtons();
+
+        // Reset de animatie
+        piratenbotenEiland2[piratenbotenEiland2.Length - 1].SetActive(false);
+        piratenbotenEiland2[0].SetActive(true);
     }
 
     public void ToEiland3()
@@ -99,6 +107,10 @@ public class EilandKaart : MonoBehaviour
         Eiland3.SetActive(true);
         Schatkaart.SetActive(false);
         EnableButtons();
+
+        // Reset de animatie
+        piratenbotenEiland3[piratenbotenEiland3.Length - 1].SetActive(false);
+        piratenbotenEiland3[0].SetActive(true);
     }
 
     private void DisableButtons()
