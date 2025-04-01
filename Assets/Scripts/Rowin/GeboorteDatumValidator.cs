@@ -29,8 +29,8 @@ public class GeboorteDatumValidator : MonoBehaviour
         }
         else
         {
-            foutmelding.text = "Ongeldige datum! Gebruik formaat: dd-mm-yyyy";
-            Debug.LogError("Ongeldige datum! Gebruik formaat: dd-mm-yyyy");
+            foutmelding.text = "Ongeldige datum! Gebruik formaat: dd-MM-yyyy";
+            Debug.LogError("Ongeldige datum! Gebruik formaat: dd-MM-yyyy");
         }
     }
 }
