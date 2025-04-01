@@ -10,10 +10,10 @@ public class ProfielManagerScript : MonoBehaviour
 {
     public GameObject ProfielSelectieScherm;
     public GameObject ProfielAanmakenScherm;
-    //public GameObject VolgendeScene;
+    public GameObject VolgendeScene;
     public GameObject textPrefab;
     public GameObject ProfilePrison;
-    //public GameObject HoofdMenu;
+    public GameObject HoofdMenu;
 
     public GameObject MeisjeButtonObject;
     public GameObject JongenButtonObject;
@@ -37,7 +37,6 @@ public class ProfielManagerScript : MonoBehaviour
 
     public Button[] KindKnoppen;
 
-    public TMP_Dropdown dropdown;
 
     private int spawnIndex = 0;
     private bool isJongenGekozen = true; // Default to jongen
@@ -60,22 +59,13 @@ public class ProfielManagerScript : MonoBehaviour
         {
             knop.onClick.AddListener(ProfielGeselecteerd);
         }
-
-        if (dropdown != null)
-        {
-            dropdown.onValueChanged.AddListener(delegate { DropdownItemSelected(dropdown); });
-        }
-        else
-        {
-            Debug.LogError("Dropdown component is not yet assigned!");
-        }
     }
 
     public void Reset()
     {
         ProfielSelectieScherm.SetActive(true);
         ProfielAanmakenScherm.SetActive(false);
-       // VolgendeScene.SetActive(false);
+        VolgendeScene.SetActive(false);
         
     }
 
@@ -89,14 +79,14 @@ public class ProfielManagerScript : MonoBehaviour
     {
         ProfielSelectieScherm.SetActive(false);
         ProfielAanmakenScherm.SetActive(false);
-       // VolgendeScene.SetActive(false);
-       // HoofdMenu.SetActive(true);
+        VolgendeScene.SetActive(false);
+        HoofdMenu.SetActive(true);
     }
     public void VolgendeSceneSwitch()
     {
         ProfielSelectieScherm.SetActive(false);
         ProfielAanmakenScherm.SetActive(false);
-        //VolgendeScene.SetActive(true);
+        VolgendeScene.SetActive(true);
     }
     public void ProfielToevoegenScene()
     {
@@ -108,7 +98,7 @@ public class ProfielManagerScript : MonoBehaviour
 
     public void ProfielGeselecteerd()
     {
-        //VolgendeScene.SetActive(true);
+        VolgendeScene.SetActive(true);
         ProfielSelectieScherm.SetActive(false);
         ProfielAanmakenScherm.SetActive(false);
     }
