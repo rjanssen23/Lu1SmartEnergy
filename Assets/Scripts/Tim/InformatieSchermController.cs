@@ -8,41 +8,55 @@ public class InformatieSchermController : MonoBehaviour
     public GameObject scene3; 
     public GameObject scene4;
 
-    public Button TerugNaarScene1;
-    public Button NaarVideo;
-    public Button TerugNaarTekst;
-    public Button NaarScene4;
+    public GameObject TextScreen;
+    public GameObject VideoScreen;
+
+    public Button ToProfiles;
+    public Button ToText;
+    public Button ToVideo;
+    public Button ToScene4;
+  
 
     void Start()
     {
         // Voeg event listeners toe aan de knoppen
-        TerugNaarScene1.onClick.AddListener(ShowScene2);
-        NaarVideo.onClick.AddListener(ShowScene3);
-        TerugNaarTekst.onClick.AddListener(ShowScene2);
-        NaarScene4.onClick.AddListener(ShowScene4);
-
-        // Initialiseer de scenes
-        ShowScene2();
+        ToProfiles.onClick.AddListener(ToProfileManager);
+        ToText.onClick.AddListener(ToInfoScreen);
+        ToVideo.onClick.AddListener(ShowVideo);
+        ToText.onClick.AddListener(ShowText);
+        ToScene4.onClick.AddListener(ToWorldMap);
     }
 
-    void ShowScene2()
+    void ToProfileManager()
     {
         scene2.SetActive(true);
         scene3.SetActive(false);
         scene4.SetActive(false);
     }
 
-    void ShowScene3()
+    void ToInfoScreen()
     {
         scene2.SetActive(false);
         scene3.SetActive(true);
         scene4.SetActive(false);
     }
 
-    void ShowScene4()
+    void ToWorldMap()
     {
         scene2.SetActive(false);
         scene3.SetActive(false);
         scene4.SetActive(true);
+    }
+
+    void ShowText()
+    {
+        TextScreen.SetActive(true);
+        VideoScreen.SetActive(false);
+    }
+
+    void ShowVideo()
+    {
+        TextScreen.SetActive(false);
+        VideoScreen.SetActive(true);
     }
 }
