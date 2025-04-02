@@ -30,6 +30,7 @@ public class EilandKaart : MonoBehaviour
     {
         DisableButtons();
         StartCoroutine(AnimateToEiland1());
+
     }
 
     private IEnumerator AnimateToEiland1()
