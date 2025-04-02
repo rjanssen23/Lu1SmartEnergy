@@ -14,6 +14,7 @@ public class ProfielManagerScript : MonoBehaviour
     public GameObject textPrefab;
     public GameObject ProfilePrison;
     public GameObject HoofdMenu;
+    public GameObject GeselecteerdeDokter;
 
     public GameObject MeisjeButtonObject;
     public GameObject JongenButtonObject;
@@ -23,6 +24,10 @@ public class ProfielManagerScript : MonoBehaviour
     public Transform[] SpawnPosities;
 
     public TMP_InputField ProfielNaam;
+
+    public TMP_Text Dokter1Text;
+    public TMP_Text Dokter2Text;
+    public TMP_Text Dokter3Text;
 
 
     public Button ProfielToevoegenButton;
@@ -36,6 +41,8 @@ public class ProfielManagerScript : MonoBehaviour
     public Button TerugNaarMenu;
 
     public Button[] KindKnoppen;
+
+    public TMP_Dropdown dokterDropdown; // Assign this in Unity Inspector
 
 
     private int spawnIndex = 0;
@@ -55,6 +62,8 @@ public class ProfielManagerScript : MonoBehaviour
         JongenPrefab.onClick.AddListener(VolgendeSceneSwitch);
         TerugNaarMenu.onClick.AddListener(HoofdmenuSwitch);
 
+        dokterDropdown.onValueChanged.AddListener(delegate { DropdownItemSelected(dokterDropdown); });
+
         foreach (Button knop in KindKnoppen)
         {
             knop.onClick.AddListener(ProfielGeselecteerd);
@@ -71,7 +80,16 @@ public class ProfielManagerScript : MonoBehaviour
 
     void DropdownItemSelected(TMP_Dropdown dropdown)
     {
-        Debug.Log("Selected: " + dropdown.options[dropdown.value].text);
+        int selectedIndex = dropdown.value; // Get the selected index
+        string selectedText = dropdown.options[selectedIndex].text; // Get the selected text
+
+        Debug.Log("Selected: " + selectedText);
+
+        // Update the corresponding text field with the selected name
+        if (Dokter1Text != null)
+            Dokter1Text.text = selectedText;
+            Dokter2Text.text = selectedText;
+            Dokter3Text.text = selectedText;
     }
 
 
