@@ -9,6 +9,8 @@ public class InlogRegistreerManager : MonoBehaviour
     // scenes
     public GameObject Scene1;
     public GameObject Scene2;
+    public GameObject ProfielSelectieScherm;
+    public GameObject ProfielToevoegenScherm;
 
     // Input fields for registration
     public TMP_InputField registerEmailInputField;
@@ -162,8 +164,11 @@ public class InlogRegistreerManager : MonoBehaviour
     private void ProceedWithoutAccount()
     {
         Debug.Log("Proceeding without account");
+
         Scene1.SetActive(false);
         Scene2.SetActive(true);
+        ProfielSelectieScherm.SetActive(true);
+        ProfielToevoegenScherm.SetActive(false);
     }
 
     private void ProceedWithAccount()
