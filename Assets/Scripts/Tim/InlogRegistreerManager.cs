@@ -97,12 +97,9 @@ public class InlogRegistreerManager : MonoBehaviour
             switch (webRequestResponse)
             {
                 case WebRequestData<string> dataResponse:
-                    Debug.Log("Register success! Response: " + dataResponse.Data);
-                    string userId = dataResponse.Data; // Ensure this actually contains the user ID
-                    PlayerPrefs.SetString("currentUserId", userId);
-                    PlayerPrefs.Save();
+                    Debug.Log("Register success!");
+                    currentUserId = dataResponse.Data; // Sla de userId op
                     break;
-
                 case WebRequestError errorResponse:
                     string errorMessage = errorResponse.ErrorMessage;
                     Debug.Log("Register error: " + errorMessage);
@@ -137,6 +134,7 @@ public class InlogRegistreerManager : MonoBehaviour
                 case WebRequestData<string> dataResponse:
                     Debug.Log("Login success!");
                     isLoggedIn = true; // Update isLoggedIn to true on successful login
+                    currentUserId = dataResponse.Data; // Sla de userId op
                     ProceedWithAccount(); // Proceed to the next screen
                     break;
                 case WebRequestError errorResponse:
