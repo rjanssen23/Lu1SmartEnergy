@@ -9,8 +9,6 @@ public class InlogRegistreerManager : MonoBehaviour
     // scenes
     public GameObject Scene1;
     public GameObject Scene2;
-    public GameObject ProfielSelectieScherm;
-    public GameObject ProfielToevoegenScherm;
 
     // Input fields for registration
     public TMP_InputField registerEmailInputField;
@@ -47,7 +45,8 @@ public class InlogRegistreerManager : MonoBehaviour
     public RawImage passwordWarningImage;
     public TextMeshProUGUI passwordWarningText;
 
-    public List<User> Users = new List<User>();
+    // Api voor users
+    public UserApiClient userApiClient;
 
     private bool isLoggedIn = false;
 
@@ -78,18 +77,10 @@ public class InlogRegistreerManager : MonoBehaviour
         passwordWarningText.gameObject.SetActive(false);
     }
 
-    private void Register()
+    public async void Register()
     {
         string email = registerEmailInputField.text;
         string password = registerPasswordInputField.text;
-
-        if (password.Length < 1 || password.Length > 16)
-        {
-            Debug.Log("Password must be between 1 and 16 characters. Registration failed.");
-            passwordWarningImage.gameObject.SetActive(true);
-            passwordWarningText.gameObject.SetActive(true);
-            return;
-        }
 
         User user = new User
         {
@@ -97,25 +88,62 @@ public class InlogRegistreerManager : MonoBehaviour
             password = password
         };
 
-        Users.Add(user);
-        Debug.Log("User registered: " + email);
+        try
+        {
+            IWebRequestReponse webRequestResponse = await userApiClient.Register(user);
+
+            switch (webRequestResponse)
+            {
+                case WebRequestData<string> dataResponse:
+                    Debug.Log("Register success!");
+                    break;
+                case WebRequestError errorResponse:
+                    string errorMessage = errorResponse.ErrorMessage;
+                    Debug.Log("Register error: " + errorMessage);
+                    break;
+                default:
+                    throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Register exception: " + ex.Message);
+        }
     }
 
-    private void Login()
+    public async void Login()
     {
         string email = loginEmailInputField.text;
         string password = loginPasswordInputField.text;
 
-        User user = Users.Find(u => u.email == email && u.password == password);
+        User user = new User
+        {
+            email = email,
+            password = password
+        };
 
-        if (user != null)
+        try
         {
-            isLoggedIn = true;
-            Debug.Log("Login success!");
+            IWebRequestReponse webRequestResponse = await userApiClient.Login(user);
+
+            switch (webRequestResponse)
+            {
+                case WebRequestData<string> dataResponse:
+                    Debug.Log("Login success!");
+                    isLoggedIn = true; // Update isLoggedIn to true on successful login
+                    ProceedWithAccount(); // Proceed to the next screen
+                    break;
+                case WebRequestError errorResponse:
+                    string errorMessage = errorResponse.ErrorMessage;
+                    Debug.Log("Login error: " + errorMessage);
+                    break;
+                default:
+                    throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
+            }
         }
-        else
+        catch (Exception ex)
         {
-            Debug.Log("Login failed: Invalid email or password");
+            Debug.LogError("Login exception: " + ex.Message);
         }
     }
 
@@ -164,11 +192,8 @@ public class InlogRegistreerManager : MonoBehaviour
     private void ProceedWithoutAccount()
     {
         Debug.Log("Proceeding without account");
-
         Scene1.SetActive(false);
         Scene2.SetActive(true);
-        ProfielSelectieScherm.SetActive(true);
-        ProfielToevoegenScherm.SetActive(false);
     }
 
     private void ProceedWithAccount()
@@ -219,75 +244,3 @@ public class InlogRegistreerManager : MonoBehaviour
 
 
 
-
-
-
-////public async void Register()
-////{
-////    string email = emailInputField.text;
-////    string password = passwordInputField.text;
-
-////    User user = new User
-////    {
-////        email = email,
-////        password = password
-////    };
-
-////    try
-////    {
-////        IWebRequestReponse webRequestResponse = await userApiClient.Register(user);
-
-////        switch (webRequestResponse)
-////        {
-////            case WebRequestData<string> dataResponse:
-////                Debug.Log("Register success!");
-////                break;
-////            case WebRequestError errorResponse:
-////                string errorMessage = errorResponse.ErrorMessage;
-////                Debug.Log("Register error: " + errorMessage);
-////                break;
-////            default:
-////                throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
-////        }
-////    }
-////    catch (Exception ex)
-////    {
-////        Debug.LogError("Register exception: " + ex.Message);
-////    }
-////}
-
-////public async void Login()
-////{
-////    string email = emailInputField.text;
-////    string password = passwordInputField.text;
-
-////    User user = new User
-////    {
-////        email = email,
-////        password = password
-////    };
-
-////    try
-////    {
-////        IWebRequestReponse webRequestResponse = await userApiClient.Login(user);
-
-////        switch (webRequestResponse)
-////        {
-////            case WebRequestData<string> dataResponse:
-////                Debug.Log("Login success!");
-////                SceneLoginRegister.SetActive(false); // Verberg het login/register paneel
-////                ChooseEnvironment.SetActive(true);  // Toon het choose environment paneel
-////                break;
-////            case WebRequestError errorResponse:
-////                string errorMessage = errorResponse.ErrorMessage;
-////                Debug.Log("Login error: " + errorMessage);
-////                break;
-////            default:
-////                throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
-////        }
-////    }
-////    catch (Exception ex)
-////    {
-////        Debug.LogError("Login exception: " + ex.Message);
-////    }
-////}

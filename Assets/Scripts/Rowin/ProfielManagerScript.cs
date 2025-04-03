@@ -15,6 +15,7 @@ public class ProfielManagerScript : MonoBehaviour
     public GameObject ProfilePrison;
     public GameObject HoofdMenu;
     public GameObject GeselecteerdeDokter;
+    public int aantalProfielenAangemaakt = 0;
 
     public GameObject MeisjeButtonObject;
     public GameObject JongenButtonObject;
@@ -75,7 +76,6 @@ public class ProfielManagerScript : MonoBehaviour
         ProfielSelectieScherm.SetActive(true);
         ProfielAanmakenScherm.SetActive(false);
         VolgendeScene.SetActive(false);
-        
     }
 
     void DropdownItemSelected(TMP_Dropdown dropdown)
@@ -88,8 +88,8 @@ public class ProfielManagerScript : MonoBehaviour
         // Update the corresponding text field with the selected name
         if (Dokter1Text != null)
             Dokter1Text.text = selectedText;
-            Dokter2Text.text = selectedText;
-            Dokter3Text.text = selectedText;
+        Dokter2Text.text = selectedText;
+        Dokter3Text.text = selectedText;
     }
 
 
@@ -136,7 +136,6 @@ public class ProfielManagerScript : MonoBehaviour
     }
 
 
-
     public void JongenGekozen()
     {
         isJongenGekozen = true;
@@ -157,7 +156,7 @@ public class ProfielManagerScript : MonoBehaviour
     {
         GameObject[] gekozenObjecten = isJongenGekozen ? JongenObjecten : MeisjeObjecten;
 
-        if (spawnIndex >= gekozenObjecten.Length || spawnIndex >= SpawnPosities.Length)
+        if (aantalProfielenAangemaakt == 6)
         {
             Debug.LogWarning("Geen beschikbare objecten of spawnposities meer!");
             return;
@@ -197,9 +196,9 @@ public class ProfielManagerScript : MonoBehaviour
         }
 
         spawnIndex = (spawnIndex + 1) % gekozenObjecten.Length;
+        aantalProfielenAangemaakt++;
     }
 }
-
 
 
 
