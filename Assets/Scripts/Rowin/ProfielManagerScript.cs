@@ -15,6 +15,7 @@ public class ProfielManagerScript : MonoBehaviour
     public GameObject ProfilePrison;
     public GameObject HoofdMenu;
     public GameObject GeselecteerdeDokter;
+    public int aantalProfielenAangemaakt = 0;
 
     public GameObject MeisjeButtonObject;
     public GameObject JongenButtonObject;
@@ -157,7 +158,7 @@ public class ProfielManagerScript : MonoBehaviour
     {
         GameObject[] gekozenObjecten = isJongenGekozen ? JongenObjecten : MeisjeObjecten;
 
-        if (spawnIndex >= gekozenObjecten.Length || spawnIndex >= SpawnPosities.Length)
+        if (aantalProfielenAangemaakt == 6)
         {
             Debug.LogWarning("Geen beschikbare objecten of spawnposities meer!");
             return;
@@ -197,6 +198,7 @@ public class ProfielManagerScript : MonoBehaviour
         }
 
         spawnIndex = (spawnIndex + 1) % gekozenObjecten.Length;
+        aantalProfielenAangemaakt++;
     }
 }
 
