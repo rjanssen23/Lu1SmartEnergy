@@ -13,7 +13,7 @@ public class ProfielManagerScript : MonoBehaviour
     public GameObject textPrefab;
     public GameObject ProfilePrison;
     public GameObject HoofdMenu;
-    public GameObject GeselecteerdeDokter;
+    //public GameObject GeselecteerdeDokter;
     public int aantalProfielenAangemaakt = 0;
 
     public GameObject MeisjeButtonObject;
@@ -65,6 +65,11 @@ public class ProfielManagerScript : MonoBehaviour
 
         dokterDropdown.onValueChanged.AddListener(delegate { DropdownItemSelected(dokterDropdown); });
 
+        if (GeboorteDatumInput == null)
+        {
+            Debug.LogError("GeboorteDatumInput is NULL at Start! Make sure it's assigned in the Inspector.");
+        }
+
         foreach (Button knop in KindKnoppen)
         {
             knop.onClick.AddListener(ProfielGeselecteerd);
@@ -90,6 +95,8 @@ public class ProfielManagerScript : MonoBehaviour
             Dokter1Text.text = selectedText;
         Dokter2Text.text = selectedText;
         Dokter3Text.text = selectedText;
+
+
     }
 
     public void HoofdmenuSwitch()
@@ -130,7 +137,19 @@ public class ProfielManagerScript : MonoBehaviour
 
     public async void MaakProfiel()
     {
-        // Create a new ProfielKeuze object and populate it with the input data
+        Debug.Log("MaakProfiel() function started!");
+
+        // Check if important objects are null before proceeding
+        if (ProfielNaam == null) { Debug.LogError("ProfielNaam is NULL!"); return; }
+        if (GeboorteDatumInput == null) { Debug.LogError("GeboorteDatumInput is NULL!"); return; }
+        if (dokterDropdown == null) { Debug.LogError("dokterDropdown is NULL!"); return; }
+        if (dokterDropdown.options == null || dokterDropdown.options.Count == 0)
+        {
+            Debug.LogError("dokterDropdown.options is NULL or empty!");
+            return;
+        }
+        if (profielkeuzeApiClient == null) { Debug.LogError("profielkeuzeApiClient is NULL!"); return; }
+
         ProfielKeuze newProfielKeuze = new ProfielKeuze
         {
             id = Guid.NewGuid().ToString(),
@@ -138,10 +157,10 @@ public class ProfielManagerScript : MonoBehaviour
             geboorteDatum = GeboorteDatumInput.text,
             arts = dokterDropdown.options[dokterDropdown.value].text,
             avatar = isJongenGekozen ? "Jongen" : "Meisje",
-            userId = "currentUserId" // Replace with actual user ID
+            userId = PlayerPrefs.GetString("currentUserId", "") // Retrieve stored user ID
         };
 
-        // Save the newProfielKeuze object using the API client
+
         IWebRequestReponse webRequestResponse = await profielkeuzeApiClient.CreateProfielKeuze(newProfielKeuze);
 
         switch (webRequestResponse)
@@ -156,10 +175,13 @@ public class ProfielManagerScript : MonoBehaviour
                 throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
         }
 
-        // If we reach this point, the profile is created, so switch to the profile selection screen
+        Debug.Log($"ProfielNaam: {ProfielNaam}, GeboorteDatumInput: {GeboorteDatumInput}, dokterDropdown: {dokterDropdown}");
+
         ProfielSelectieScherm.SetActive(true);
         ProfielAanmakenScherm.SetActive(false);
     }
+
+
 
     public void JongenGekozen()
     {
