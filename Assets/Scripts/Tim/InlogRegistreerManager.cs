@@ -9,6 +9,8 @@ public class InlogRegistreerManager : MonoBehaviour
     // scenes
     public GameObject Scene1;
     public GameObject Scene2;
+    public GameObject Scene2ProfielSelecteren;
+    public GameObject scene2ProfielToevoegen;
 
     // Input fields for registration
     public TMP_InputField registerEmailInputField;
@@ -194,6 +196,9 @@ public class InlogRegistreerManager : MonoBehaviour
         Debug.Log("Proceeding without account");
         Scene1.SetActive(false);
         Scene2.SetActive(true);
+
+        Scene2ProfielSelecteren.SetActive(true);
+        scene2ProfielToevoegen.SetActive(false);
     }
 
     private void ProceedWithAccount()
@@ -201,7 +206,11 @@ public class InlogRegistreerManager : MonoBehaviour
         Debug.Log("Proceeding with account");
         Scene1.SetActive(false);
         Scene2.SetActive(true);
-    }
+
+    Scene2ProfielSelecteren.SetActive(true);
+    scene2ProfielToevoegen.SetActive(false);
+
+}
 
     private void StartGameHandler()
     {
