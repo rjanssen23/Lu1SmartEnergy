@@ -6,11 +6,11 @@ public class ExampleApp : MonoBehaviour
 {
     [Header("Test data")]
     public User user;
-    public Environment2D environment2D;
+    public ProfielKeuze profielKeuze;
 
     [Header("Dependencies")]
     public UserApiClient userApiClient;
-    public Environment2DApiClient enviroment2DApiClient;
+    public ProfielkeuzeApiClient profielkeuzeApiClient;
 
     #region Login
 
@@ -58,24 +58,24 @@ public class ExampleApp : MonoBehaviour
 
     #endregion
 
-    #region Environment
+    #region ProfielKeuze
 
-    [ContextMenu("Environment2D/Read all")]
-    public async void ReadEnvironment2Ds()
+    [ContextMenu("ProfielKeuze/Read all")]
+    public async void ReadProfielKeuzes()
     {
-        IWebRequestReponse webRequestResponse = await enviroment2DApiClient.ReadEnvironment2Ds();
+        IWebRequestReponse webRequestResponse = await profielkeuzeApiClient.ReadProfielKeuzes();
 
         switch (webRequestResponse)
         {
-            case WebRequestData<List<Environment2D>> dataResponse:
-                List<Environment2D> environment2Ds = dataResponse.Data;
-                Debug.Log("List of environment2Ds: ");
-                environment2Ds.ForEach(environment2D => Debug.Log(environment2D.id));
+            case WebRequestData<List<ProfielKeuze>> dataResponse:
+                List<ProfielKeuze> profielKeuzes = dataResponse.Data;
+                Debug.Log("List of profielKeuzes: ");
+                profielKeuzes.ForEach(profielKeuze => Debug.Log(profielKeuze.id));
                 // TODO: Handle succes scenario.
                 break;
             case WebRequestError errorResponse:
                 string errorMessage = errorResponse.ErrorMessage;
-                Debug.Log("Read environment2Ds error: " + errorMessage);
+                Debug.Log("Read profielKeuzes error: " + errorMessage);
                 // TODO: Handle error scenario. Show the errormessage to the user.
                 break;
             default:
@@ -83,20 +83,20 @@ public class ExampleApp : MonoBehaviour
         }
     }
 
-    [ContextMenu("Environment2D/Create")]
-    public async void CreateEnvironment2D()
+    [ContextMenu("ProfielKeuze/Create")]
+    public async void CreateProfielKeuze()
     {
-        IWebRequestReponse webRequestResponse = await enviroment2DApiClient.CreateEnvironment(environment2D);
+        IWebRequestReponse webRequestResponse = await profielkeuzeApiClient.CreateProfielKeuze(profielKeuze);
 
         switch (webRequestResponse)
         {
-            case WebRequestData<Environment2D> dataResponse:
-                environment2D.id = dataResponse.Data.id;
+            case WebRequestData<ProfielKeuze> dataResponse:
+                profielKeuze.id = dataResponse.Data.id;
                 // TODO: Handle succes scenario.
                 break;
             case WebRequestError errorResponse:
                 string errorMessage = errorResponse.ErrorMessage;
-                Debug.Log("Create environment2D error: " + errorMessage);
+                Debug.Log("Create profielKeuze error: " + errorMessage);
                 // TODO: Handle error scenario. Show the errormessage to the user.
                 break;
             default:
@@ -104,10 +104,10 @@ public class ExampleApp : MonoBehaviour
         }
     }
 
-    [ContextMenu("Environment2D/Delete")]
-    public async void DeleteEnvironment2D()
+    [ContextMenu("ProfielKeuze/Delete")]
+    public async void DeleteProfielKeuze()
     {
-        IWebRequestReponse webRequestResponse = await enviroment2DApiClient.DeleteEnvironment(environment2D.id);
+        IWebRequestReponse webRequestResponse = await profielkeuzeApiClient.DeleteProfielKeuze(profielKeuze.id);
 
         switch (webRequestResponse)
         {
@@ -117,7 +117,7 @@ public class ExampleApp : MonoBehaviour
                 break;
             case WebRequestError errorResponse:
                 string errorMessage = errorResponse.ErrorMessage;
-                Debug.Log("Delete environment error: " + errorMessage);
+                Debug.Log("Delete profielKeuze error: " + errorMessage);
                 // TODO: Handle error scenario. Show the errormessage to the user.
                 break;
             default:
@@ -125,7 +125,8 @@ public class ExampleApp : MonoBehaviour
         }
     }
 
-    #endregion Environment
+    #endregion ProfielKeuze
+}
 
     #region Object2D
 
@@ -195,5 +196,3 @@ public class ExampleApp : MonoBehaviour
     //}
 
     #endregion
-
-}

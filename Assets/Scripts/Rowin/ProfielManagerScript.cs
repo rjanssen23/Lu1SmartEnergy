@@ -1,10 +1,9 @@
-//Als de scenes gemerged worden de weggecomenteerde dingen weer terug toevoegen en aan de andere scenes koppelen.
-
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public class ProfielManagerScript : MonoBehaviour
 {
@@ -25,11 +24,11 @@ public class ProfielManagerScript : MonoBehaviour
     public Transform[] SpawnPosities;
 
     public TMP_InputField ProfielNaam;
+    public TMP_InputField GeboorteDatumInput;
 
     public TMP_Text Dokter1Text;
     public TMP_Text Dokter2Text;
     public TMP_Text Dokter3Text;
-
 
     public Button ProfielToevoegenButton;
     public Button NaarProfielSelectieButton;
@@ -45,6 +44,7 @@ public class ProfielManagerScript : MonoBehaviour
 
     public TMP_Dropdown dokterDropdown; // Assign this in Unity Inspector
 
+    public ProfielkeuzeApiClient profielkeuzeApiClient; // Inject the API client
 
     private int spawnIndex = 0;
     private bool isJongenGekozen = true; // Default to jongen
@@ -92,7 +92,6 @@ public class ProfielManagerScript : MonoBehaviour
         Dokter3Text.text = selectedText;
     }
 
-
     public void HoofdmenuSwitch()
     {
         ProfielSelectieScherm.SetActive(false);
@@ -100,12 +99,14 @@ public class ProfielManagerScript : MonoBehaviour
         VolgendeScene.SetActive(false);
         HoofdMenu.SetActive(true);
     }
+
     public void VolgendeSceneSwitch()
     {
         ProfielSelectieScherm.SetActive(false);
         ProfielAanmakenScherm.SetActive(false);
         VolgendeScene.SetActive(true);
     }
+
     public void ProfielToevoegenScene()
     {
         ProfielSelectieScherm.SetActive(false);
@@ -127,14 +128,38 @@ public class ProfielManagerScript : MonoBehaviour
         ProfielAanmakenScherm.SetActive(false);
     }
 
-    public void MaakProfiel()
+    public async void MaakProfiel()
     {
-        // If we reach this point, the age is valid, so create the profile
+        // Create a new ProfielKeuze object and populate it with the input data
+        ProfielKeuze newProfielKeuze = new ProfielKeuze
+        {
+            id = Guid.NewGuid().ToString(),
+            name = ProfielNaam.text,
+            geboorteDatum = GeboorteDatumInput.text,
+            arts = dokterDropdown.options[dokterDropdown.value].text,
+            avatar = isJongenGekozen ? "Jongen" : "Meisje",
+            userId = "currentUserId" // Replace with actual user ID
+        };
+
+        // Save the newProfielKeuze object using the API client
+        IWebRequestReponse webRequestResponse = await profielkeuzeApiClient.CreateProfielKeuze(newProfielKeuze);
+
+        switch (webRequestResponse)
+        {
+            case WebRequestData<ProfielKeuze> dataResponse:
+                Debug.Log("Profiel Aangemaakt: " + dataResponse.Data.id);
+                break;
+            case WebRequestError errorResponse:
+                Debug.LogError("Create profielKeuze error: " + errorResponse.ErrorMessage);
+                break;
+            default:
+                throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
+        }
+
+        // If we reach this point, the profile is created, so switch to the profile selection screen
         ProfielSelectieScherm.SetActive(true);
         ProfielAanmakenScherm.SetActive(false);
-        Debug.Log("Profiel Aangemaakt");
     }
-
 
     public void JongenGekozen()
     {
@@ -199,7 +224,4 @@ public class ProfielManagerScript : MonoBehaviour
         aantalProfielenAangemaakt++;
     }
 }
-
-
-
 
