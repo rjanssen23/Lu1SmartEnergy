@@ -150,6 +150,13 @@ public class ProfielManagerScript : MonoBehaviour
         }
         if (profielkeuzeApiClient == null) { Debug.LogError("profielkeuzeApiClient is NULL!"); return; }
 
+        string userId = PlayerPrefs.GetString("currentUserId", "");
+        if (string.IsNullOrEmpty(userId))
+        {
+            Debug.LogError("UserId is not set!");
+            return;
+        }
+
         ProfielKeuze newProfielKeuze = new ProfielKeuze
         {
             id = Guid.NewGuid().ToString(),
@@ -157,9 +164,8 @@ public class ProfielManagerScript : MonoBehaviour
             geboorteDatum = GeboorteDatumInput.text,
             arts = dokterDropdown.options[dokterDropdown.value].text,
             avatar = isJongenGekozen ? "Jongen" : "Meisje",
-            userId = PlayerPrefs.GetString("currentUserId", "") // Retrieve stored user ID
+            userId = userId // Retrieve stored user ID
         };
-
 
         IWebRequestReponse webRequestResponse = await profielkeuzeApiClient.CreateProfielKeuze(newProfielKeuze);
 
