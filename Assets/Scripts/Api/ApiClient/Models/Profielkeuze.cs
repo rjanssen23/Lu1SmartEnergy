@@ -18,6 +18,4 @@ public class ProfielKeuze
     public string geboorteDatum; // JSON veld, string in plaats van DateTime
 
     public string avatar; // JSON veld, kleine letters
-
-    public string userId; // JSON veld, string in plaats van Guid
 }

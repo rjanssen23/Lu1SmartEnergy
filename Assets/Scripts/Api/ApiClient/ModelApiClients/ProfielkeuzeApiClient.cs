@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Net;
 using UnityEngine;
 
 public class ProfielkeuzeApiClient : MonoBehaviour
@@ -9,24 +7,22 @@ public class ProfielkeuzeApiClient : MonoBehaviour
 
     public async Awaitable<IWebRequestReponse> ReadProfielKeuzes()
     {
-        string route = "/profielkeuzes";
-
+        string route = "/ProfielKeuze"; // Correcte route
         IWebRequestReponse webRequestResponse = await webClient.SendGetRequest(route);
         return ParseProfielKeuzeListResponse(webRequestResponse);
     }
 
     public async Awaitable<IWebRequestReponse> CreateProfielKeuze(ProfielKeuze profielKeuze)
     {
-        string route = "/profielkeuzes";
+        string route = "/ProfielKeuze"; // Correcte route
         string data = JsonUtility.ToJson(profielKeuze);
-
         IWebRequestReponse webRequestResponse = await webClient.SendPostRequest(route, data);
         return ParseProfielKeuzeResponse(webRequestResponse);
     }
 
     public async Awaitable<IWebRequestReponse> DeleteProfielKeuze(string profielKeuzeId)
     {
-        string route = "/profielkeuzes/" + profielKeuzeId;
+        string route = "/ProfielKeuze/" + profielKeuzeId; // Correcte route
         return await webClient.SendDeleteRequest(route);
     }
 
@@ -58,5 +54,6 @@ public class ProfielkeuzeApiClient : MonoBehaviour
         }
     }
 }
+
 
 

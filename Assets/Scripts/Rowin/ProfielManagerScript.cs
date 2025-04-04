@@ -13,7 +13,6 @@ public class ProfielManagerScript : MonoBehaviour
     public GameObject textPrefab;
     public GameObject ProfilePrison;
     public GameObject HoofdMenu;
-    //public GameObject GeselecteerdeDokter;
     public int aantalProfielenAangemaakt = 0;
 
     public GameObject MeisjeButtonObject;
@@ -74,6 +73,7 @@ public class ProfielManagerScript : MonoBehaviour
         {
             knop.onClick.AddListener(ProfielGeselecteerd);
         }
+
     }
 
     public void Reset()
@@ -95,8 +95,6 @@ public class ProfielManagerScript : MonoBehaviour
             Dokter1Text.text = selectedText;
         Dokter2Text.text = selectedText;
         Dokter3Text.text = selectedText;
-
-
     }
 
     public void HoofdmenuSwitch()
@@ -150,21 +148,12 @@ public class ProfielManagerScript : MonoBehaviour
         }
         if (profielkeuzeApiClient == null) { Debug.LogError("profielkeuzeApiClient is NULL!"); return; }
 
-        string userId = PlayerPrefs.GetString("currentUserId", "");
-        if (string.IsNullOrEmpty(userId))
-        {
-            Debug.LogError("UserId is not set!");
-            return;
-        }
-
         ProfielKeuze newProfielKeuze = new ProfielKeuze
         {
-            id = Guid.NewGuid().ToString(),
             name = ProfielNaam.text,
             geboorteDatum = GeboorteDatumInput.text,
             arts = dokterDropdown.options[dokterDropdown.value].text,
             avatar = isJongenGekozen ? "Jongen" : "Meisje",
-            userId = userId // Retrieve stored user ID
         };
 
         IWebRequestReponse webRequestResponse = await profielkeuzeApiClient.CreateProfielKeuze(newProfielKeuze);
@@ -186,8 +175,6 @@ public class ProfielManagerScript : MonoBehaviour
         ProfielSelectieScherm.SetActive(true);
         ProfielAanmakenScherm.SetActive(false);
     }
-
-
 
     public void JongenGekozen()
     {
@@ -252,4 +239,7 @@ public class ProfielManagerScript : MonoBehaviour
         aantalProfielenAangemaakt++;
     }
 }
+
+
+
 

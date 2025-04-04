@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
 using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 public class InlogRegistreerManager : MonoBehaviour
 {
@@ -30,7 +29,6 @@ public class InlogRegistreerManager : MonoBehaviour
     public Button gaDoorZonderAccount;
     public Toggle showPasswordToggleInlog; // Toggle om het wachtwoord te verbergen of weer te geven
     public Toggle showPasswordToggleRegister;
-    //public UserApiClient userApiClient;
 
     // Buttons to switch between login and register screens
     public Button switchToLoginButton;
@@ -77,79 +75,70 @@ public class InlogRegistreerManager : MonoBehaviour
         // Hide warning components initially
         passwordWarningImage.gameObject.SetActive(false);
         passwordWarningText.gameObject.SetActive(false);
+
+        // Check if the user is already logged in
+        string token = PlayerPrefs.GetString("authToken", "");
+        if (!string.IsNullOrEmpty(token))
+        {
+            isLoggedIn = true;
+        }
     }
 
     public async void Register()
     {
-        string email = registerEmailInputField.text;
-        string password = registerPasswordInputField.text;
-
         User user = new User
         {
-            email = email,
-            password = password
+            email = registerEmailInputField.text,
+            password = registerPasswordInputField.text
         };
 
-        try
-        {
-            IWebRequestReponse webRequestResponse = await userApiClient.Register(user);
+        IWebRequestReponse webRequestResponse = await userApiClient.Register(user);
 
-            switch (webRequestResponse)
-            {
-                case WebRequestData<string> dataResponse:
-                    Debug.Log("Register success! Response: " + dataResponse.Data);
-                    string userId = dataResponse.Data; // Ensure this actually contains the user ID
-                    PlayerPrefs.SetString("currentUserId", userId);
-                    PlayerPrefs.Save();
-                    break;
-
-                case WebRequestError errorResponse:
-                    string errorMessage = errorResponse.ErrorMessage;
-                    Debug.Log("Register error: " + errorMessage);
-                    break;
-                default:
-                    throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
-            }
-        }
-        catch (Exception ex)
+        switch (webRequestResponse)
         {
-            Debug.LogError("Register exception: " + ex.Message);
+            case WebRequestData<string> dataResponse:
+                Debug.Log("Register success! Response: " + dataResponse.Data);
+                string token = dataResponse.Data;
+                PlayerPrefs.SetString("authToken", token); // Save the token
+                PlayerPrefs.Save();
+                isLoggedIn = true;
+                ProceedWithAccount();
+                break;
+            case WebRequestError errorResponse:
+                string errorMessage = errorResponse.ErrorMessage;
+                Debug.Log("Register error: " + errorMessage);
+                break;
+            default:
+                throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
         }
     }
 
     public async void Login()
     {
-        string email = loginEmailInputField.text;
-        string password = loginPasswordInputField.text;
-
         User user = new User
         {
-            email = email,
-            password = password
+            email = loginEmailInputField.text,
+            password = loginPasswordInputField.text
         };
 
-        try
-        {
-            IWebRequestReponse webRequestResponse = await userApiClient.Login(user);
+        IWebRequestReponse webRequestResponse = await userApiClient.Login(user);
 
-            switch (webRequestResponse)
-            {
-                case WebRequestData<string> dataResponse:
-                    Debug.Log("Login success!");
-                    isLoggedIn = true; // Update isLoggedIn to true on successful login
-                    ProceedWithAccount(); // Proceed to the next screen
-                    break;
-                case WebRequestError errorResponse:
-                    string errorMessage = errorResponse.ErrorMessage;
-                    Debug.Log("Login error: " + errorMessage);
-                    break;
-                default:
-                    throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
-            }
-        }
-        catch (Exception ex)
+        switch (webRequestResponse)
         {
-            Debug.LogError("Login exception: " + ex.Message);
+            case WebRequestData<string> dataResponse:
+                Debug.Log("Login success! Response: " + dataResponse.Data);
+                string token = dataResponse.Data;
+                PlayerPrefs.SetString("authToken", token); // Save the token
+                PlayerPrefs.Save();
+                isLoggedIn = true;
+                ProceedWithAccount();
+                break;
+            case WebRequestError errorResponse:
+                string errorMessage = errorResponse.ErrorMessage;
+                Debug.Log("Login error: " + errorMessage);
+                break;
+            default:
+                throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
         }
     }
 
@@ -211,10 +200,9 @@ public class InlogRegistreerManager : MonoBehaviour
         Scene1.SetActive(false);
         Scene2.SetActive(true);
 
-    Scene2ProfielSelecteren.SetActive(true);
-    scene2ProfielToevoegen.SetActive(false);
-
-}
+        Scene2ProfielSelecteren.SetActive(true);
+        scene2ProfielToevoegen.SetActive(false);
+    }
 
     private void StartGameHandler()
     {
@@ -254,6 +242,11 @@ public class InlogRegistreerManager : MonoBehaviour
         }
     }
 }
+
+
+
+
+
 
 
 

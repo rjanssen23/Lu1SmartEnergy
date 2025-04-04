@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class UserApiClient : MonoBehaviour
@@ -37,6 +38,4 @@ public class UserApiClient : MonoBehaviour
                 return webRequestResponse;
         }
     }
-
 }
-

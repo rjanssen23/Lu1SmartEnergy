@@ -1,8 +1,7 @@
-using System;
-using System.Collections;
-using System.Text;
-using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine;
+using System;
+using System.Text;
 
 public class WebClient : MonoBehaviour
 {
@@ -16,31 +15,27 @@ public class WebClient : MonoBehaviour
 
     public async Awaitable<IWebRequestReponse> SendGetRequest(string route)
     {
-        UnityWebRequest webRequest = CreateWebRequest("GET", route, "");
+        string url = baseUrl + route;
+        UnityWebRequest webRequest = CreateWebRequest("GET", url, null);
         return await SendWebRequest(webRequest);
     }
 
     public async Awaitable<IWebRequestReponse> SendPostRequest(string route, string data)
     {
-        UnityWebRequest webRequest = CreateWebRequest("POST", route, data);
-        return await SendWebRequest(webRequest);
-    }
-
-    public async Awaitable<IWebRequestReponse> SendPutRequest(string route, string data)
-    {
-        UnityWebRequest webRequest = CreateWebRequest("PUT", route, data);
+        string url = baseUrl + route;
+        UnityWebRequest webRequest = CreateWebRequest("POST", url, data);
         return await SendWebRequest(webRequest);
     }
 
     public async Awaitable<IWebRequestReponse> SendDeleteRequest(string route)
     {
-        UnityWebRequest webRequest = CreateWebRequest("DELETE", route, "");
+        string url = baseUrl + route;
+        UnityWebRequest webRequest = CreateWebRequest("DELETE", url, null);
         return await SendWebRequest(webRequest);
     }
 
-    private UnityWebRequest CreateWebRequest(string type, string route, string data)
+    private UnityWebRequest CreateWebRequest(string type, string url, string data)
     {
-        string url = baseUrl + route;
         Debug.Log("Creating " + type + " request to " + url + " with data: " + data);
 
         data = RemoveIdFromJson(data); // Backend throws error if it receiving empty strings as a GUID value.
@@ -52,31 +47,44 @@ public class WebClient : MonoBehaviour
         AddToken(webRequest);
         return webRequest;
     }
-
-    private async Awaitable<IWebRequestReponse> SendWebRequest(UnityWebRequest webRequest)
-    {
-        await webRequest.SendWebRequest();
-
-        switch (webRequest.result)
-        {
-            case UnityWebRequest.Result.Success:
-                string responseData = webRequest.downloadHandler.text;
-                return new WebRequestData<string>(responseData);
-            default:
-                return new WebRequestError(webRequest.error);
-        }
-    }
- 
-    private void AddToken(UnityWebRequest webRequest)
-    {
-        webRequest.SetRequestHeader("Authorization", "Bearer " + token);
-    }
-
     private string RemoveIdFromJson(string json)
     {
         return json.Replace("\"id\":\"\",", "");
     }
+    //private UnityWebRequest CreateWebRequest(string type, string url, string data)
+    //{
+    //    UnityWebRequest webRequest = new UnityWebRequest(url, type);
+    //    if (!string.IsNullOrEmpty(data))
+    //    {
+    //        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(data);
+    //        webRequest.uploadHandler = new UploadHandlerRaw(bodyRaw);
+    //        webRequest.downloadHandler = new DownloadHandlerBuffer();
+    //        webRequest.SetRequestHeader("Content-Type", "application/json");
+    //    }
+    //    AddToken(webRequest);
+    //    return webRequest;
+    //}
 
+    private async Awaitable<IWebRequestReponse> SendWebRequest(UnityWebRequest webRequest)
+    {
+        await webRequest.SendWebRequest();
+        if (webRequest.result == UnityWebRequest.Result.Success)
+        {
+            return new WebRequestData<string>(webRequest.downloadHandler.text);
+        }
+        else
+        {
+            return new WebRequestError(webRequest.error);
+        }
+    }
+
+    private void AddToken(UnityWebRequest webRequest)
+    {
+        if (!string.IsNullOrEmpty(token))
+        {
+            webRequest.SetRequestHeader("Authorization", "Bearer " + token);
+        }
+    }
 }
 
 [Serializable]
