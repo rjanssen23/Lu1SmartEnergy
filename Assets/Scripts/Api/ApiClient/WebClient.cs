@@ -38,7 +38,7 @@ public class WebClient : MonoBehaviour
     {
         Debug.Log("Creating " + type + " request to " + url + " with data: " + data);
 
-        data = RemoveIdFromJson(data); // Backend throws error if it receiving empty strings as a GUID value.
+        data = RemoveIdFromJson(data); // Backend throws error if it receives empty strings as a GUID value.
         var webRequest = new UnityWebRequest(url, type);
         byte[] dataInBytes = new UTF8Encoding().GetBytes(data);
         webRequest.uploadHandler = new UploadHandlerRaw(dataInBytes);
@@ -47,10 +47,12 @@ public class WebClient : MonoBehaviour
         AddToken(webRequest);
         return webRequest;
     }
+
     private string RemoveIdFromJson(string json)
     {
         return json.Replace("\"id\":\"\",", "");
     }
+
     //private UnityWebRequest CreateWebRequest(string type, string url, string data)
     //{
     //    UnityWebRequest webRequest = new UnityWebRequest(url, type);

@@ -74,6 +74,8 @@ public class ProfielManagerScript : MonoBehaviour
             knop.onClick.AddListener(ProfielGeselecteerd);
         }
 
+        // Fetch profiles when the script starts
+        FetchProfiles();
     }
 
     public void Reset()
@@ -131,6 +133,7 @@ public class ProfielManagerScript : MonoBehaviour
     {
         ProfielSelectieScherm.SetActive(true);
         ProfielAanmakenScherm.SetActive(false);
+        FetchProfiles(); // Fetch profiles when navigating to profile selection
     }
 
     public async void MaakProfiel()
@@ -161,7 +164,7 @@ public class ProfielManagerScript : MonoBehaviour
         switch (webRequestResponse)
         {
             case WebRequestData<ProfielKeuze> dataResponse:
-                Debug.Log("Profiel Aangemaakt: " + dataResponse.Data.id);
+                //Debug.Log("Profiel Aangemaakt: " + dataResponse.Data.id);
                 break;
             case WebRequestError errorResponse:
                 Debug.LogError("Create profielKeuze error: " + errorResponse.ErrorMessage);
@@ -174,6 +177,7 @@ public class ProfielManagerScript : MonoBehaviour
 
         ProfielSelectieScherm.SetActive(true);
         ProfielAanmakenScherm.SetActive(false);
+        FetchProfiles(); // Refresh profiles after creating a new one
     }
 
     public void JongenGekozen()
@@ -238,7 +242,68 @@ public class ProfielManagerScript : MonoBehaviour
         spawnIndex = (spawnIndex + 1) % gekozenObjecten.Length;
         aantalProfielenAangemaakt++;
     }
+
+    public async void FetchProfiles()
+    {
+        Debug.Log("Fetching profiles...");
+
+        IWebRequestReponse webRequestResponse = await profielkeuzeApiClient.ReadProfielKeuzes();
+
+        switch (webRequestResponse)
+        {
+            case WebRequestData<List<ProfielKeuze>> dataResponse:
+                List<ProfielKeuze> profielKeuzes = dataResponse.Data;
+                DisplayProfiles(profielKeuzes);
+                break;
+            case WebRequestError errorResponse:
+                Debug.LogError("Read profielKeuzes error: " + errorResponse.ErrorMessage);
+                break;
+            default:
+                throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
+        }
+    }
+
+    private void DisplayProfiles(List<ProfielKeuze> profielKeuzes)
+    {
+        // Clear existing profile buttons
+        foreach (Transform child in ProfilePrison.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Create a button for each profile
+        foreach (ProfielKeuze profiel in profielKeuzes)
+        {
+            GameObject newButton = Instantiate(textPrefab, ProfilePrison.transform);
+            TMP_Text textComponent = newButton.GetComponent<TMP_Text>();
+            if (textComponent != null)
+            {
+                textComponent.text = profiel.name;
+            }
+            else
+            {
+                Debug.LogWarning("Text prefab has no TMP_Text component!");
+            }
+
+            Button buttonComponent = newButton.GetComponent<Button>();
+            if (buttonComponent != null)
+            {
+                buttonComponent.onClick.AddListener(() => SelectProfile(profiel));
+            }
+            else
+            {
+                Debug.LogWarning("Text prefab has no Button component!");
+            }
+        }
+    }
+
+    private void SelectProfile(ProfielKeuze profiel)
+    {
+        Debug.Log("Selected profile: " + profiel.name);
+        // Handle profile selection logic here
+    }
 }
+
 
 
 

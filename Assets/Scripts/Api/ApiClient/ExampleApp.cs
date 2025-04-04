@@ -70,7 +70,6 @@ public class ExampleApp : MonoBehaviour
             case WebRequestData<List<ProfielKeuze>> dataResponse:
                 List<ProfielKeuze> profielKeuzes = dataResponse.Data;
                 Debug.Log("List of profielKeuzes: ");
-                profielKeuzes.ForEach(profielKeuze => Debug.Log(profielKeuze.id));
                 // TODO: Handle succes scenario.
                 break;
             case WebRequestError errorResponse:
@@ -91,7 +90,7 @@ public class ExampleApp : MonoBehaviour
         switch (webRequestResponse)
         {
             case WebRequestData<ProfielKeuze> dataResponse:
-                profielKeuze.id = dataResponse.Data.id;
+                //profielKeuze.id = dataResponse.Data.id;
                 // TODO: Handle succes scenario.
                 break;
             case WebRequestError errorResponse:
@@ -104,26 +103,26 @@ public class ExampleApp : MonoBehaviour
         }
     }
 
-    [ContextMenu("ProfielKeuze/Delete")]
-    public async void DeleteProfielKeuze()
-    {
-        IWebRequestReponse webRequestResponse = await profielkeuzeApiClient.DeleteProfielKeuze(profielKeuze.id);
+    //[ContextMenu("ProfielKeuze/Delete")]
+    //public async void DeleteProfielKeuze()
+    //{
+    //    //IWebRequestReponse webRequestResponse = await profielkeuzeApiClient.DeleteProfielKeuze(profielKeuze.id);
 
-        switch (webRequestResponse)
-        {
-            case WebRequestData<string> dataResponse:
-                string responseData = dataResponse.Data;
-                // TODO: Handle succes scenario.
-                break;
-            case WebRequestError errorResponse:
-                string errorMessage = errorResponse.ErrorMessage;
-                Debug.Log("Delete profielKeuze error: " + errorMessage);
-                // TODO: Handle error scenario. Show the errormessage to the user.
-                break;
-            default:
-                throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
-        }
-    }
+    //    switch (webRequestResponse)
+    //    {
+    //        case WebRequestData<string> dataResponse:
+    //            string responseData = dataResponse.Data;
+    //            // TODO: Handle succes scenario.
+    //            break;
+    //        case WebRequestError errorResponse:
+    //            string errorMessage = errorResponse.ErrorMessage;
+    //            Debug.Log("Delete profielKeuze error: " + errorMessage);
+    //            // TODO: Handle error scenario. Show the errormessage to the user.
+    //            break;
+    //        default:
+    //            throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
+    //    }
+    //}
 
     #endregion ProfielKeuze
 }
