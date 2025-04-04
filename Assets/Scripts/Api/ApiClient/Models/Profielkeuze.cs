@@ -9,7 +9,7 @@ using UnityEngine;
 [Serializable]
 public class ProfielKeuze
 {
-    //public string id; // JSON veld, string in plaats van Guid
+    public string id; // JSON veld, string in plaats van Guid
 
     public string name; // JSON veld, kleine letters
 

@@ -63,7 +63,7 @@ public class ProfielManagerScript : MonoBehaviour
     void Start()
     {
         Reset();
-
+        FetchProfiles();
         ProfielToevoegenButton.onClick.AddListener(ProfielToevoegenScene);
         NaarProfielSelectieButton.onClick.AddListener(NaarProfielSelectie);
         MaakProfielButton.onClick.AddListener(MaakProfiel);
@@ -367,9 +367,13 @@ public class ProfielManagerScript : MonoBehaviour
         Debug.Log($"Name: {profiel.name}, Arts: {profiel.arts}, GeboorteDatum: {profiel.geboorteDatum}, Avatar: {profiel.avatar}");
     }
 
+    private string profielkeuzetoken;
     private void SelectProfile(ProfielKeuze profiel)
     {
         Debug.Log("Selected profile: " + profiel.name);
         // Handle profile selection logic here
+        // Store the profielkeuzetoken
+        profielkeuzetoken = profiel.id;
+        Debug.Log("Profielkeuze token: " + profielkeuzetoken);
     }
 }
