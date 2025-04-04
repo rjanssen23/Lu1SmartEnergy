@@ -13,10 +13,21 @@ public class ProfielManagerScript : MonoBehaviour
     public GameObject textPrefab;
     public GameObject ProfilePrison;
     public GameObject HoofdMenu;
+
+    //tijn
+    public GameObject Scene1;
+    public GameObject Scene2;
+    // 
+
     public int aantalProfielenAangemaakt = 0;
 
     public GameObject MeisjeButtonObject;
     public GameObject JongenButtonObject;
+
+    //tijn
+    public GameObject LoginPanel;
+    public GameObject MainMenuButtons;
+    //
 
     public GameObject[] JongenObjecten; // Array voor de jongen objecten
     public GameObject[] MeisjeObjecten; // Array voor de meisje objecten
@@ -38,6 +49,7 @@ public class ProfielManagerScript : MonoBehaviour
     public Button MeisjePrefab;
     public Button JongenPrefab;
     public Button TerugNaarMenu;
+    public Button BootBackButton;
 
     public Button[] KindKnoppen;
 
@@ -51,6 +63,7 @@ public class ProfielManagerScript : MonoBehaviour
     void Start()
     {
         Reset();
+
         ProfielToevoegenButton.onClick.AddListener(ProfielToevoegenScene);
         NaarProfielSelectieButton.onClick.AddListener(NaarProfielSelectie);
         MaakProfielButton.onClick.AddListener(MaakProfiel);
@@ -61,6 +74,7 @@ public class ProfielManagerScript : MonoBehaviour
         MeisjePrefab.onClick.AddListener(VolgendeSceneSwitch);
         JongenPrefab.onClick.AddListener(VolgendeSceneSwitch);
         TerugNaarMenu.onClick.AddListener(HoofdmenuSwitch);
+        BootBackButton.onClick.AddListener(BootBackNaarProfiel);
 
         dokterDropdown.onValueChanged.AddListener(delegate { DropdownItemSelected(dokterDropdown); });
 
@@ -105,6 +119,13 @@ public class ProfielManagerScript : MonoBehaviour
         ProfielAanmakenScherm.SetActive(false);
         VolgendeScene.SetActive(false);
         HoofdMenu.SetActive(true);
+        Scene1.SetActive(true);
+        Scene2.SetActive(false);
+        LoginPanel.SetActive(false);
+        MainMenuButtons.SetActive(true);
+
+
+
     }
 
     public void VolgendeSceneSwitch()
@@ -194,6 +215,14 @@ public class ProfielManagerScript : MonoBehaviour
         JongenButtonObject.SetActive(false);
         MeisjeButtonObject.SetActive(true);
         Debug.Log("Meisje is gekozen");
+    }
+
+    
+    public void BootBackNaarProfiel()
+    {
+        //tijn
+        ProfielSelectieScherm.SetActive(true);
+        ProfielAanmakenScherm.SetActive(false);
     }
 
     public void SpawnObject()

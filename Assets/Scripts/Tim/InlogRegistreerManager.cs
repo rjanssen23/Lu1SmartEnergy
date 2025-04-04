@@ -10,6 +10,7 @@ public class InlogRegistreerManager : MonoBehaviour
     public GameObject Scene2;
     public GameObject Scene2ProfielSelecteren;
     public GameObject scene2ProfielToevoegen;
+    public GameObject Scene4;
 
     // Input fields for registration
     public TMP_InputField registerEmailInputField;
@@ -34,6 +35,8 @@ public class InlogRegistreerManager : MonoBehaviour
     public Button switchToLoginButton;
     public Button switchToRegisterButton;
     public Button StartGame;
+
+    public Button BootBackButton;
 
     // Panels for login and registration
     public GameObject loginPanel;
@@ -68,6 +71,7 @@ public class InlogRegistreerManager : MonoBehaviour
         StartGame.onClick.AddListener(StartGameHandler);
         gaTerug.onClick.AddListener(HideNotLoggedInWarning);
         gaDoorZonderAccount.onClick.AddListener(ProceedWithoutAccount);
+        BootBackButton.onClick.AddListener(BootBackEvent);
 
         registerPasswordInputField.onValueChanged.AddListener(ValidateRegisterPassword);
         ValidateRegisterPassword(registerPasswordInputField.text); // Initial validation
@@ -77,11 +81,11 @@ public class InlogRegistreerManager : MonoBehaviour
         passwordWarningText.gameObject.SetActive(false);
 
         // Check if the user is already logged in
-        string token = PlayerPrefs.GetString("authToken", "");
-        if (!string.IsNullOrEmpty(token))
-        {
-            isLoggedIn = true;
-        }
+        //string token = PlayerPrefs.GetString("authToken", "");
+        //if (!string.IsNullOrEmpty(token))
+        //{
+        //    isLoggedIn = true;
+        //}
     }
 
     public async void Register()
@@ -158,12 +162,14 @@ public class InlogRegistreerManager : MonoBehaviour
         MainMenuButtons.SetActive(false);
     }
 
-    private void HideLoginPanel()
+    public void HideLoginPanel()
     {
         Debug.Log("Hiding login panel");
         loginPanel.SetActive(false);
         MainMenuButtons.SetActive(true);
     }
+
+
 
     private void HideRegisterPanel()
     {
@@ -188,10 +194,9 @@ public class InlogRegistreerManager : MonoBehaviour
     {
         Debug.Log("Proceeding without account");
         Scene1.SetActive(false);
-        Scene2.SetActive(true);
+        Scene4.SetActive(true);
 
-        Scene2ProfielSelecteren.SetActive(true);
-        scene2ProfielToevoegen.SetActive(false);
+
     }
 
     private void ProceedWithAccount()
@@ -209,10 +214,12 @@ public class InlogRegistreerManager : MonoBehaviour
         if (isLoggedIn)
         {
             ProceedWithAccount();
+
         }
         else
         {
             ShowNotLoggedInWarning();
+
         }
     }
 
@@ -240,6 +247,26 @@ public class InlogRegistreerManager : MonoBehaviour
             passwordWarningImage.gameObject.SetActive(false);
             passwordWarningText.gameObject.SetActive(false);
         }
+    }
+    private void BootBackEvent()
+    {
+        if (isLoggedIn)
+        {
+            Scene4.SetActive(false);
+            Scene1.SetActive(true);
+            Scene2ProfielSelecteren.SetActive(true);
+            scene2ProfielToevoegen.SetActive(true);
+
+        }
+        else
+        {
+            NotLoggedInWarning.SetActive(false);
+            Scene4.SetActive(false);
+            Scene1.SetActive(true);
+
+        }
+
+
     }
 }
 
