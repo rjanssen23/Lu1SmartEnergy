@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class agendascript : MonoBehaviour
 {
-    public GameObject agenda;
+    public GameObject agendaboek;
 
     //Buttons
     public Button agendaButton;
@@ -35,7 +35,7 @@ public class agendascript : MonoBehaviour
     void Start()
     {
         // Hide the agenda at the start
-        agenda.SetActive(false);
+        agendaboek.SetActive(false);
         terugButton.onClick.AddListener(Sluiten);
         agendaButton.onClick.AddListener(Agendabutton);
         FirstSaveButton.onClick.AddListener(FirstSaveButtonClicked);
@@ -44,18 +44,18 @@ public class agendascript : MonoBehaviour
 
     public async void Agendabutton()
     {
-        agenda.SetActive(true);
+        agendaboek.SetActive(true);
         await LoadAgendaData();
     }
 
     public void Sluiten()
     {
-        agenda.SetActive(false);
+        agendaboek.SetActive(false);
     }
 
     public void ResetDagboek()
     {
-        agenda.SetActive(false);
+        agendaboek.SetActive(false);
     }
 
     private void FirstSaveButtonClicked()
@@ -72,7 +72,7 @@ public class agendascript : MonoBehaviour
         };
 
         // Save the new agenda
-        agendaApiClient.CreateAgenda(newAgenda);
+        Awaitable<IWebRequestReponse> awaitable = agendaApiClient.CreateAgenda(newAgenda);
         Debug.Log("Agenda created: " + newAgenda.ToString());
         FirstSaveButton.gameObject.SetActive(false); // Fix: Use gameObject.SetActive(false) instead of SetActive(false)
     }
