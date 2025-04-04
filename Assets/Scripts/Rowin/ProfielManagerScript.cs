@@ -271,18 +271,46 @@ public class ProfielManagerScript : MonoBehaviour
             Destroy(child.gameObject);
         }
 
+        // Reset the counter before adding new profiles
+        aantalProfielenAangemaakt = 0;
+
         // Create a button for each profile
         foreach (ProfielKeuze profiel in profielKeuzes)
         {
-            GameObject newButton = Instantiate(textPrefab, ProfilePrison.transform);
-            TMP_Text textComponent = newButton.GetComponent<TMP_Text>();
+            GameObject prefabToUse = profiel.avatar == "Jongen" ? JongenPrefab.gameObject : MeisjePrefab.gameObject;
+            Transform spawnPosition = SpawnPosities[aantalProfielenAangemaakt % SpawnPosities.Length];
+            GameObject newButton = Instantiate(prefabToUse, spawnPosition.position, Quaternion.identity, ProfilePrison.transform);
+
+            TMP_Text textComponent = newButton.GetComponentInChildren<TMP_Text>();
             if (textComponent != null)
             {
                 textComponent.text = profiel.name;
             }
             else
             {
-                Debug.LogWarning("Text prefab has no TMP_Text component!");
+                Debug.LogWarning("Prefab has no TMP_Text component!");
+            }
+
+            if (textPrefab != null)
+            {
+                GameObject newText = Instantiate(textPrefab, spawnPosition.position, Quaternion.identity);
+                newText.transform.SetParent(newButton.transform, false);
+
+                TMP_Text textPrefabComponent = newText.GetComponent<TMP_Text>();
+                if (textPrefabComponent != null)
+                {
+                    textPrefabComponent.text = profiel.name;
+                    newText.transform.localPosition = new Vector3(0, -73, 0);
+                    textPrefabComponent.fontSize = 50;
+                }
+                else
+                {
+                    Debug.LogWarning("Text prefab has no TMP_Text component!");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Text prefab is not assigned!");
             }
 
             Button buttonComponent = newButton.GetComponent<Button>();
@@ -292,9 +320,22 @@ public class ProfielManagerScript : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Text prefab has no Button component!");
+                Debug.LogWarning("Prefab has no Button component!");
             }
+
+            // Increment the counter for each profile added
+            aantalProfielenAangemaakt++;
+
+            // Display profile data in Unity UI elements
+            DisplayProfileData(profiel);
         }
+    }
+
+    private void DisplayProfileData(ProfielKeuze profiel)
+    {
+        // Example of displaying profile data in Unity UI elements
+        // You can customize this method to display the data as needed
+        Debug.Log($"Name: {profiel.name}, Arts: {profiel.arts}, GeboorteDatum: {profiel.geboorteDatum}, Avatar: {profiel.avatar}");
     }
 
     private void SelectProfile(ProfielKeuze profiel)
@@ -303,8 +344,3 @@ public class ProfielManagerScript : MonoBehaviour
         // Handle profile selection logic here
     }
 }
-
-
-
-
-
