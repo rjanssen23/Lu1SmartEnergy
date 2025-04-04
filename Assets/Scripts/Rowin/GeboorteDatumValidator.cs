@@ -3,18 +3,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GeboorteDatumValidator : MonoBehaviour
+public class LeeftijdValidator : MonoBehaviour
 {
-    public TMP_InputField geboortedatumInput; // UI Input Field
+    public TMP_InputField leeftijdInput; // UI Input Field
     public TMP_Text foutmelding; // Optioneel: een UI-element om fouten te tonen
 
-    public void ValideerGeboortedatum()
+    public void ValideerLeeftijd()
     {
-        if (DateTime.TryParse(geboortedatumInput.text, out DateTime geboortedatum))
+        if (int.TryParse(leeftijdInput.text, out int leeftijd))
         {
-            int huidigeJaar = DateTime.Now.Year;
-            int leeftijd = huidigeJaar - geboortedatum.Year;
-
             // Controleer of de leeftijd binnen de geldige grenzen valt
             if (leeftijd < 4 || leeftijd > 12)
             {
@@ -23,14 +20,14 @@ public class GeboorteDatumValidator : MonoBehaviour
                 return;
             }
 
-            // Datum is correct en de leeftijd is binnen de limieten
+            // Leeftijd is binnen de limieten
             foutmelding.text = ""; // Verwijder foutmelding als alles goed is
-            Debug.Log($"Geldige geboortedatum: {geboortedatum.ToShortDateString()}");
+            Debug.Log($"Geldige leeftijd: {leeftijd}");
         }
         else
         {
-            foutmelding.text = "Ongeldige datum! Gebruik formaat: dd-MM-yyyy";
-            Debug.LogError("Ongeldige datum! Gebruik formaat: dd-MM-yyyy");
+            foutmelding.text = "Ongeldige leeftijd! Voer een geldig getal in.";
+            Debug.LogError("Ongeldige leeftijd! Voer een geldig getal in.");
         }
     }
 }
