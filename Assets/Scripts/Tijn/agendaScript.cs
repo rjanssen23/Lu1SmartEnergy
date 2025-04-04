@@ -6,23 +6,51 @@ using System.Collections.Generic;
 public class agendascript : MonoBehaviour
 {
     public GameObject agenda;
+
+    //Buttons
     public Button agendaButton;
     public Button terugButton;
+    public Button FirstSaveButton;
+    public Button SaveButton;
 
-    public TMP_InputField Afspraak1Locatie;
-    public TMP_InputField Afspraak1datum;
-    public TMP_InputField Afspraak2Locatie;
-    public TMP_InputField Afspraak2datum;
-    public TMP_InputField Afspraak3Locatie;
-    public TMP_InputField Afspraak3datum;
+    //Input fields
+    public TMP_InputField Afspraak1LocatieInput;
+    public TMP_InputField Afspraak1datumInput;
+    public TMP_InputField Afspraak2LocatieInput;
+    public TMP_InputField Afspraak2datumInput;
+    public TMP_InputField Afspraak3LocatieInput;
+    public TMP_InputField Afspraak3datumInput;
 
+    //Text fields
+    public TMP_Text Afspraak1LocatieText;
+    public TMP_Text Afspraak1datumText;
+    public TMP_Text Afspraak2LocatieText;
+    public TMP_Text Afspraak2datumText;
+    public TMP_Text Afspraak3LocatieText;
+    public TMP_Text Afspraak3datumText;
+
+    //Api client
     public AgendaApiClient agendaApiClient;
 
     void Start()
     {
-        ResetDagboek();
-        terugButton.onClick.AddListener(terugButtonClicked);
-        agendaButton.onClick.AddListener(dagboekbutton);
+        // Hide the agenda at the start
+        agenda.SetActive(false);
+        terugButton.onClick.AddListener(Sluiten);
+        agendaButton.onClick.AddListener(Agendabutton);
+        FirstSaveButton.onClick.AddListener(FirstSaveButtonClicked);
+        SaveButton.onClick.AddListener(SaveButtonClicked);
+    }
+
+    public async void Agendabutton()
+    {
+        agenda.SetActive(true);
+        await LoadAgendaData();
+    }
+
+    public void Sluiten()
+    {
+        agenda.SetActive(false);
     }
 
     public void ResetDagboek()
@@ -30,16 +58,32 @@ public class agendascript : MonoBehaviour
         agenda.SetActive(false);
     }
 
-    public async void dagboekbutton()
+    private void FirstSaveButtonClicked()
     {
-        agenda.SetActive(true);
-        await LoadAgendaData();
+        // Create a new agenda object
+        Agenda newAgenda = new Agenda
+        {
+            date1 = Afspraak1datumInput.text,
+            location1 = Afspraak1LocatieInput.text,
+            date2 = Afspraak2datumInput.text,
+            location2 = Afspraak2LocatieInput.text,
+            date3 = Afspraak3datumInput.text,
+            location3 = Afspraak3LocatieInput.text
+        };
+
+        // Save the new agenda
+        agendaApiClient.CreateAgenda(newAgenda);
+        Debug.Log("Agenda created: " + newAgenda.ToString());
+        FirstSaveButton.gameObject.SetActive(false); // Fix: Use gameObject.SetActive(false) instead of SetActive(false)
     }
 
-    public void terugButtonClicked()
+    private void SaveButtonClicked()
     {
-        ResetDagboek();
+        // update agenda object button logic here
     }
+
+
+
 
     private async System.Threading.Tasks.Task LoadAgendaData()
     {
@@ -50,12 +94,28 @@ public class agendascript : MonoBehaviour
             if (agendas.Count > 0)
             {
                 Agenda agenda = agendas[0];
-                Afspraak1Locatie.text = agenda.location1;
-                Afspraak1datum.text = agenda.date1;
-                Afspraak2Locatie.text = agenda.location2;
-                Afspraak2datum.text = agenda.date2;
-                Afspraak3Locatie.text = agenda.location3;
-                Afspraak3datum.text = agenda.date3;
+                Afspraak1LocatieText.text = agenda.location1;
+                Afspraak1datumText.text = agenda.date1;
+                Afspraak2LocatieText.text = agenda.location2;
+                Afspraak2datumText.text = agenda.date2;
+                Afspraak3LocatieText.text = agenda.location3;
+                Afspraak3datumText.text = agenda.date3;
+
+                // Show text fields
+                Afspraak1LocatieText.gameObject.SetActive(true);
+                Afspraak1datumText.gameObject.SetActive(true);
+                Afspraak2LocatieText.gameObject.SetActive(true);
+                Afspraak2datumText.gameObject.SetActive(true);
+                Afspraak3LocatieText.gameObject.SetActive(true);
+                Afspraak3datumText.gameObject.SetActive(true);
+
+                // Hide input fields
+                Afspraak1LocatieInput.gameObject.SetActive(false);
+                Afspraak1datumInput.gameObject.SetActive(false);
+                Afspraak2LocatieInput.gameObject.SetActive(false);
+                Afspraak2datumInput.gameObject.SetActive(false);
+                Afspraak3LocatieInput.gameObject.SetActive(false);
+                Afspraak3datumInput.gameObject.SetActive(false);
             }
         }
         else
@@ -63,4 +123,5 @@ public class agendascript : MonoBehaviour
             Debug.LogError("Failed to retrieve agendas.");
         }
     }
+
 }

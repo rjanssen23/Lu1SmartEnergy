@@ -27,6 +27,14 @@ public class AgendaApiClient : MonoBehaviour
         return await webClient.SendDeleteRequest(route);
     }
 
+    public async Awaitable<IWebRequestReponse> UpdateAgenda(string agendaId, Agenda agenda)
+    {
+        string route = "/api/agenda/" + agendaId; // Correct route
+        string data = JsonUtility.ToJson(agenda);
+        IWebRequestReponse webRequestResponse = await webClient.SendPostRequest(route, data);
+        return ParseAgendaResponse(webRequestResponse);
+    }
+
     private IWebRequestReponse ParseAgendaResponse(IWebRequestReponse webRequestResponse)
     {
         switch (webRequestResponse)
