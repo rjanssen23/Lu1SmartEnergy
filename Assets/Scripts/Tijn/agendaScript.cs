@@ -6,14 +6,22 @@ using System.Collections.Generic;
 public class agendascript : MonoBehaviour
 {
     public GameObject agendaboek;
+    public GameObject inputfield1datum;
+    public GameObject inputfield1locatie;
+    public GameObject inputfield2datum;
+    public GameObject inputfield2locatie;
+    public GameObject inputfield3datum;
+    public GameObject inputfield3locatie;
 
-    //Buttons
+
+
+
     public Button agendaButton;
     public Button terugButton;
     public Button FirstSaveButton;
     public Button SaveButton;
 
-    //Input fields
+    
     public TMP_InputField Afspraak1LocatieInput;
     public TMP_InputField Afspraak1datumInput;
     public TMP_InputField Afspraak2LocatieInput;
@@ -21,7 +29,7 @@ public class agendascript : MonoBehaviour
     public TMP_InputField Afspraak3LocatieInput;
     public TMP_InputField Afspraak3datumInput;
 
-    //Text fields
+ 
     public TMP_Text Afspraak1LocatieText;
     public TMP_Text Afspraak1datumText;
     public TMP_Text Afspraak2LocatieText;
@@ -29,7 +37,6 @@ public class agendascript : MonoBehaviour
     public TMP_Text Afspraak3LocatieText;
     public TMP_Text Afspraak3datumText;
 
-    //Api client
     public AgendaApiClient agendaApiClient;
 
     void Start()
