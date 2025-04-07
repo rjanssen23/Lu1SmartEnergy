@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-
-
 public class DagboekScript : MonoBehaviour
 {
     public GameObject bladzijdes;
@@ -26,10 +24,13 @@ public class DagboekScript : MonoBehaviour
     public TMP_InputField inputField3;
     public TMP_InputField inputField4;
 
+    private const string InputField1Key = "InputField1";
+    private const string InputField2Key = "InputField2";
+    private const string InputField3Key = "InputField3";
+    private const string InputField4Key = "InputField4";
 
     void Start()
     {
-
         // Zet de UI naar de startstaat
         Reset();
 
@@ -42,6 +43,9 @@ public class DagboekScript : MonoBehaviour
         terugButton2.onClick.AddListener(TerugButton2Clicked);
         terugButton3.onClick.AddListener(TerugButton3Clicked);
         terugButton4.onClick.AddListener(TerugButton4Clicked);
+
+        // Load saved data
+        LoadData();
     }
 
     public void Reset()
@@ -92,4 +96,39 @@ public class DagboekScript : MonoBehaviour
     {
         bladzijde3.SetActive(true);
     }
+
+    private void OnApplicationQuit()
+    {
+        SaveData();
+    }
+
+    private void SaveData()
+    {
+        PlayerPrefs.SetString(InputField1Key, inputField1.text);
+        PlayerPrefs.SetString(InputField2Key, inputField2.text);
+        PlayerPrefs.SetString(InputField3Key, inputField3.text);
+        PlayerPrefs.SetString(InputField4Key, inputField4.text);
+        PlayerPrefs.Save();
+    }
+
+    private void LoadData()
+    {
+        if (PlayerPrefs.HasKey(InputField1Key))
+        {
+            inputField1.text = PlayerPrefs.GetString(InputField1Key);
+        }
+        if (PlayerPrefs.HasKey(InputField2Key))
+        {
+            inputField2.text = PlayerPrefs.GetString(InputField2Key);
+        }
+        if (PlayerPrefs.HasKey(InputField3Key))
+        {
+            inputField3.text = PlayerPrefs.GetString(InputField3Key);
+        }
+        if (PlayerPrefs.HasKey(InputField4Key))
+        {
+            inputField4.text = PlayerPrefs.GetString(InputField4Key);
+        }
+    }
 }
+
