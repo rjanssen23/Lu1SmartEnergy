@@ -56,12 +56,24 @@ public class AgendaApiClient : MonoBehaviour
             case WebRequestData<string> data:
                 Debug.Log("Response data raw: " + data.Data);
                 List<Agenda> agendas = JsonHelper.ParseJsonArray<Agenda>(data.Data);
+                if (agendas != null)
+                {
+                    foreach (var agenda in agendas)
+                    {
+                        Debug.Log($"Parsed Agenda - Date1: {agenda.date1}, Location1: {agenda.location1}, Date2: {agenda.date2}, Location2: {agenda.location2}, Date3: {agenda.date3}, Location3: {agenda.location3}");
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Parsed agendas list is null.");
+                }
                 WebRequestData<List<Agenda>> parsedWebRequestData = new WebRequestData<List<Agenda>>(agendas);
                 return parsedWebRequestData;
             default:
                 return webRequestResponse;
         }
     }
+
 
     public async void GetAllAgendaInfo()
     {

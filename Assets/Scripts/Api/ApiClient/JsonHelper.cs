@@ -8,6 +8,14 @@ public static class JsonHelper
     {
         string extendedJson = "{\"list\":" + jsonArray + "}";
         JsonList<T> parsedList = JsonUtility.FromJson<JsonList<T>>(extendedJson);
+        if (parsedList != null && parsedList.list != null)
+        {
+            Debug.Log($"Parsed list count: {parsedList.list.Count}");
+        }
+        else
+        {
+            Debug.LogError("Failed to parse JSON array.");
+        }
         return parsedList.list;
     }
 
