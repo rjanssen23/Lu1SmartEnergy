@@ -13,6 +13,14 @@ public class agendascript : MonoBehaviour
     public Button FirstSaveButton;
     public Button SaveButton;
 
+    //Delete buttons
+    public Button DeleteLocatie1;
+    public Button DeleteDatum1;
+    public Button DeleteLocatie2;
+    public Button DeleteDatum2;
+    public Button DeleteLocatie3;
+    public Button DeleteDatum3;
+
     //Input fields
     public TMP_InputField Afspraak1LocatieInput;
     public TMP_InputField Afspraak1datumInput;
@@ -35,6 +43,9 @@ public class agendascript : MonoBehaviour
     // Reference to ProfielManagerScript
     public ProfielManagerScript profielManagerScript;
 
+    // Class-level variable to store the agendaId
+    private string agendaId;
+
     void Start()
     {
         // Hide the agenda at the start
@@ -43,6 +54,14 @@ public class agendascript : MonoBehaviour
         agendaButton.onClick.AddListener(Agendabutton);
         FirstSaveButton.onClick.AddListener(FirstSaveButtonClicked);
         SaveButton.onClick.AddListener(SaveButtonClicked);
+
+        // Add listeners for delete buttons
+        DeleteLocatie1.onClick.AddListener(ActivateLocatie1Input);
+        DeleteDatum1.onClick.AddListener(ActivateDatum1Input);
+        DeleteLocatie2.onClick.AddListener(ActivateLocatie2Input);
+        DeleteDatum2.onClick.AddListener(ActivateDatum2Input);
+        DeleteLocatie3.onClick.AddListener(ActivateLocatie3Input);
+        DeleteDatum3.onClick.AddListener(ActivateDatum3Input);
     }
 
     public async void Agendabutton()
@@ -55,6 +74,12 @@ public class agendascript : MonoBehaviour
             Debug.LogError("Profielkeuze ID is not set.");
             return;
         }
+        Afspraak1datumInput.gameObject.SetActive(true);
+        Afspraak1LocatieInput.gameObject.SetActive(true);
+        Afspraak2datumInput.gameObject.SetActive(true);
+        Afspraak2LocatieInput.gameObject.SetActive(true);
+        Afspraak3datumInput.gameObject.SetActive(true);
+        Afspraak3LocatieInput.gameObject.SetActive(true);
 
         // Load the data from the API
         Debug.Log($"Requesting agendas for profielkeuzeId: {profielkeuzeId}");
@@ -73,6 +98,9 @@ public class agendascript : MonoBehaviour
                 Debug.Log(agenda.date3);
                 Debug.Log(agenda.location3);
 
+                // Store the agendaId
+                agendaId = agenda.id;
+
                 Afspraak1LocatieText.text = agenda.location1;
                 Afspraak1datumText.text = agenda.date1;
                 Afspraak2LocatieText.text = agenda.location2;
@@ -87,6 +115,7 @@ public class agendascript : MonoBehaviour
                 Afspraak2datumInput.gameObject.SetActive(false);
                 Afspraak3LocatieInput.gameObject.SetActive(false);
                 Afspraak3datumInput.gameObject.SetActive(false);
+                FirstSaveButton.gameObject.SetActive(false);
             }
             else
             {
@@ -112,17 +141,14 @@ public class agendascript : MonoBehaviour
         Afspraak3datumText.text = string.Empty;
 
         // Set input fields to active
-        Afspraak1LocatieInput.gameObject.SetActive(true);
-        Afspraak1datumInput.gameObject.SetActive(true);
-        Afspraak2LocatieInput.gameObject.SetActive(true);
-        Afspraak2datumInput.gameObject.SetActive(true);
-        Afspraak3LocatieInput.gameObject.SetActive(true);
-        Afspraak3datumInput.gameObject.SetActive(true);
-    }
+        Afspraak1LocatieInput.gameObject.SetActive(false);
+        Afspraak1datumInput.gameObject.SetActive(false);
+        Afspraak2LocatieInput.gameObject.SetActive(false);
+        Afspraak2datumInput.gameObject.SetActive(false);
+        Afspraak3LocatieInput.gameObject.SetActive(false);
+        Afspraak3datumInput.gameObject.SetActive(false);
 
-    public void ResetDagboek()
-    {
-        agenda.SetActive(false);
+
     }
 
     private async void FirstSaveButtonClicked()
@@ -173,6 +199,13 @@ public class agendascript : MonoBehaviour
             return;
         }
 
+        // Ensure the agendaId is set
+        if (string.IsNullOrEmpty(agendaId))
+        {
+            Debug.LogError("Agenda ID is not set.");
+            return;
+        }
+
         // Get the values from the input fields
         Agenda updatedAgenda = new Agenda
         {
@@ -186,7 +219,6 @@ public class agendascript : MonoBehaviour
         };
 
         // Put method for updating existing agenda
-        string agendaId = "some-agenda-id"; // Replace with actual agenda ID
         Debug.Log($"Updating agenda for profielkeuzeId: {profielkeuzeId} with agendaId: {agendaId} and data: {JsonUtility.ToJson(updatedAgenda)}");
         IWebRequestReponse response = await agendaApiClient.UpdateAgenda(profielkeuzeId, agendaId, updatedAgenda);
         Debug.Log($"Received response: {response}");
@@ -198,5 +230,62 @@ public class agendascript : MonoBehaviour
         {
             Debug.LogError("Failed to update agenda.");
         }
+        // Set input fields to not active
+        Afspraak1LocatieInput.gameObject.SetActive(false);
+        Afspraak1datumInput.gameObject.SetActive(false);
+        Afspraak2LocatieInput.gameObject.SetActive(false);
+        Afspraak2datumInput.gameObject.SetActive(false);
+        Afspraak3LocatieInput.gameObject.SetActive(false);
+        Afspraak3datumInput.gameObject.SetActive(false);
+        // Set text fields to the updated values
+        Afspraak1LocatieText.text = updatedAgenda.location1;
+        Afspraak1datumText.text = updatedAgenda.date1;
+        Afspraak2LocatieText.text = updatedAgenda.location2;
+        Afspraak2datumText.text = updatedAgenda.date2;
+        Afspraak3datumText.text = updatedAgenda.date3;
+        Afspraak3LocatieText.text = updatedAgenda.location3;
+        // Set the text active
+        Afspraak1LocatieText.gameObject.SetActive(true);
+        Afspraak1datumText.gameObject.SetActive(true);
+        Afspraak2LocatieText.gameObject.SetActive(true);
+        Afspraak2datumText.gameObject.SetActive(true);
+        Afspraak3LocatieText.gameObject.SetActive(true);
+        Afspraak3datumText.gameObject.SetActive(true);
+    }
+
+    private void ActivateLocatie1Input()
+    {
+        Afspraak1LocatieInput.gameObject.SetActive(true);
+        Afspraak1LocatieText.gameObject.SetActive(false);
+    }
+
+    private void ActivateDatum1Input()
+    {
+        Afspraak1datumInput.gameObject.SetActive(true);
+        Afspraak1datumText.gameObject.SetActive(false);
+    }
+
+    private void ActivateLocatie2Input()
+    {
+        Afspraak2LocatieInput.gameObject.SetActive(true);
+        Afspraak2LocatieText.gameObject.SetActive(false);
+    }   
+
+    private void ActivateDatum2Input()
+    {
+        Afspraak2datumInput.gameObject.SetActive(true);
+        Afspraak2datumText.gameObject.SetActive(false);
+    }
+
+    private void ActivateLocatie3Input()
+    {
+        Afspraak3LocatieInput.gameObject.SetActive(true);
+        Afspraak3LocatieText.gameObject.SetActive(false);
+    }
+
+    private void ActivateDatum3Input()
+    {
+        Afspraak3datumInput.gameObject.SetActive(true);
+        Afspraak3datumText.gameObject.SetActive(false);
     }
 }

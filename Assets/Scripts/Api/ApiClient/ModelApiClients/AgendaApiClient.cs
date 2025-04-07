@@ -36,10 +36,11 @@ public class AgendaApiClient : MonoBehaviour
         string route = $"/api/agenda/{agendaId}"; // Use the base route for updating an agenda
         string data = JsonUtility.ToJson(agenda);
         Debug.Log($"Sending PUT request to: {route} with data: {data}");
-        IWebRequestReponse webRequestResponse = await webClient.SendPostRequest(route, data);
+        IWebRequestReponse webRequestResponse = await webClient.SendPutRequest(route, data); // Use SendPutRequest instead of SendPostRequest
         Debug.Log($"Received response: {webRequestResponse}");
         return ParseAgendaResponse(webRequestResponse);
     }
+
 
     private IWebRequestReponse ParseAgendaResponse(IWebRequestReponse webRequestResponse)
     {

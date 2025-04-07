@@ -3,6 +3,7 @@ using System;
 [Serializable]
 public class Agenda
 {
+    public string id;
     public string date1;
     public string location1;
     public string date2;
