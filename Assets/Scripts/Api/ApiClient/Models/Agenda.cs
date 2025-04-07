@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 [Serializable]
 public class Agenda
@@ -10,4 +9,5 @@ public class Agenda
     public string location2;
     public string date3;
     public string location3;
+    public string ProfielKeuzeId; // Add this property
 }

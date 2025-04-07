@@ -1,8 +1,7 @@
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System.Collections.Generic;
-using static UnityEditor.FilePathAttribute;
 
 public class agendascript : MonoBehaviour
 {
@@ -33,6 +32,9 @@ public class agendascript : MonoBehaviour
     //Api client
     public AgendaApiClient agendaApiClient;
 
+    // Reference to ProfielManagerScript
+    public ProfielManagerScript profielManagerScript;
+
     void Start()
     {
         // Hide the agenda at the start
@@ -46,8 +48,18 @@ public class agendascript : MonoBehaviour
     public async void Agendabutton()
     {
         agenda.SetActive(true);
+        // Get the profielkeuzeId from ProfielManagerScript
+        string profielkeuzeId = profielManagerScript.SelectedProfielKeuzeId;
+        if (string.IsNullOrEmpty(profielkeuzeId))
+        {
+            Debug.LogError("Profielkeuze ID is not set.");
+            return;
+        }
+
         // Load the data from the API
-        IWebRequestReponse response = await agendaApiClient.ReadAgendas(); // #file: 'AgendaApiClient.cs'
+        Debug.Log($"Requesting agendas for profielkeuzeId: {profielkeuzeId}");
+        IWebRequestReponse response = await agendaApiClient.ReadAgendas(profielkeuzeId);
+        Debug.Log($"Received response: {response}");
         if (response is WebRequestData<List<Agenda>> agendasData)
         {
             List<Agenda> agendas = agendasData.Data;
@@ -87,11 +99,25 @@ public class agendascript : MonoBehaviour
         }
     }
 
-
-
     public void Sluiten()
     {
         agenda.SetActive(false);
+
+        // Clear text fields
+        Afspraak1LocatieText.text = string.Empty;
+        Afspraak1datumText.text = string.Empty;
+        Afspraak2LocatieText.text = string.Empty;
+        Afspraak2datumText.text = string.Empty;
+        Afspraak3LocatieText.text = string.Empty;
+        Afspraak3datumText.text = string.Empty;
+
+        // Set input fields to active
+        Afspraak1LocatieInput.gameObject.SetActive(true);
+        Afspraak1datumInput.gameObject.SetActive(true);
+        Afspraak2LocatieInput.gameObject.SetActive(true);
+        Afspraak2datumInput.gameObject.SetActive(true);
+        Afspraak3LocatieInput.gameObject.SetActive(true);
+        Afspraak3datumInput.gameObject.SetActive(true);
     }
 
     public void ResetDagboek()
@@ -101,6 +127,14 @@ public class agendascript : MonoBehaviour
 
     private async void FirstSaveButtonClicked()
     {
+        // Get the profielkeuzeId from ProfielManagerScript
+        string profielkeuzeId = profielManagerScript.SelectedProfielKeuzeId;
+        if (string.IsNullOrEmpty(profielkeuzeId))
+        {
+            Debug.LogError("Profielkeuze ID is not set.");
+            return;
+        }
+
         // Get the values from the input fields
         Agenda newAgenda = new Agenda
         {
@@ -109,11 +143,14 @@ public class agendascript : MonoBehaviour
             date2 = Afspraak2datumInput.text,
             location2 = Afspraak2LocatieInput.text,
             date3 = Afspraak3datumInput.text,
-            location3 = Afspraak3LocatieInput.text
+            location3 = Afspraak3LocatieInput.text,
+            ProfielKeuzeId = profielkeuzeId // Ensure the ProfielKeuzeId is set
         };
 
         // Post method for creating a new agenda
-        IWebRequestReponse response = await agendaApiClient.CreateAgenda(newAgenda); // #file: 'AgendaApiClient.cs'
+        Debug.Log($"Creating new agenda for profielkeuzeId: {profielkeuzeId} with data: {JsonUtility.ToJson(newAgenda)}");
+        IWebRequestReponse response = await agendaApiClient.CreateAgenda(profielkeuzeId, newAgenda);
+        Debug.Log($"Received response: {response}");
         if (response is WebRequestData<Agenda> createdAgenda)
         {
             Debug.Log("Agenda created successfully.");
@@ -128,6 +165,14 @@ public class agendascript : MonoBehaviour
 
     private async void SaveButtonClicked()
     {
+        // Get the profielkeuzeId from ProfielManagerScript
+        string profielkeuzeId = profielManagerScript.SelectedProfielKeuzeId;
+        if (string.IsNullOrEmpty(profielkeuzeId))
+        {
+            Debug.LogError("Profielkeuze ID is not set.");
+            return;
+        }
+
         // Get the values from the input fields
         Agenda updatedAgenda = new Agenda
         {
@@ -136,12 +181,15 @@ public class agendascript : MonoBehaviour
             date2 = Afspraak2datumInput.text,
             location2 = Afspraak2LocatieInput.text,
             date3 = Afspraak3datumInput.text,
-            location3 = Afspraak3LocatieInput.text
+            location3 = Afspraak3LocatieInput.text,
+            ProfielKeuzeId = profielkeuzeId // Ensure the ProfielKeuzeId is set
         };
 
         // Put method for updating existing agenda
         string agendaId = "some-agenda-id"; // Replace with actual agenda ID
-        IWebRequestReponse response = await agendaApiClient.UpdateAgenda(agendaId, updatedAgenda); // #file: 'AgendaApiClient.cs'
+        Debug.Log($"Updating agenda for profielkeuzeId: {profielkeuzeId} with agendaId: {agendaId} and data: {JsonUtility.ToJson(updatedAgenda)}");
+        IWebRequestReponse response = await agendaApiClient.UpdateAgenda(profielkeuzeId, agendaId, updatedAgenda);
+        Debug.Log($"Received response: {response}");
         if (response is WebRequestData<Agenda> updatedAgendaData)
         {
             Debug.Log("Agenda updated successfully.");
