@@ -80,6 +80,7 @@ public class Progressie1ApiClient : MonoBehaviour
             Debug.LogError("Failed to retrieve progressies.");
         }
     }
+
 }
 
 

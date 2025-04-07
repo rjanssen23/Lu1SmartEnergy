@@ -61,6 +61,8 @@ public class ProfielManagerScript : MonoBehaviour
     private int spawnIndex = 0;
     private bool isJongenGekozen = true; // Default to jongen
 
+    private string progressie1Id; // Store the ID of the created Progressie1
+
     void Start()
     {
         Reset();
@@ -205,6 +207,7 @@ public class ProfielManagerScript : MonoBehaviour
                 {
                     case WebRequestData<Progressie1> progressieDataResponse:
                         Debug.Log("Progressie1 Aangemaakt: " + progressieDataResponse.Data.id);
+                        progressie1Id = progressieDataResponse.Data.id; // Store the ID of the created Progressie1
                         break;
                     case WebRequestError progressieErrorResponse:
                         Debug.LogError("Create Progressie1 error: " + progressieErrorResponse.ErrorMessage);
@@ -394,6 +397,7 @@ public class ProfielManagerScript : MonoBehaviour
     }
 
     private string profielkeuzetoken;
+
     private void SelectProfile(ProfielKeuze profiel)
     {
         Debug.Log("Selected profile: " + profiel.name);
@@ -401,8 +405,46 @@ public class ProfielManagerScript : MonoBehaviour
         // Store the profielkeuzetoken
         profielkeuzetoken = profiel.id;
         Debug.Log("Profielkeuze token: " + profielkeuzetoken);
+
+        // Fetch the corresponding Progressie1 ID for the selected profile
+        FetchProgressie1Id(profielkeuzetoken);
     }
+
+    private async void FetchProgressie1Id(string profielKeuzeId)
+    {
+        IWebRequestReponse webRequestResponse = await progressie1ApiClient.ReadProgressies();
+
+        switch (webRequestResponse)
+        {
+            case WebRequestData<List<Progressie1>> dataResponse:
+                Progressie1 progressie = dataResponse.Data.Find(p => p.profielKeuzeId == profielKeuzeId);
+                if (progressie != null)
+                {
+                    progressie1Id = progressie.id;
+                    // Zorg ervoor dat de profielKeuzeId en progressie1Id worden doorgegeven aan InformatieVakje1
+                    InformatieVakje1 informatieVakje1 = FindObjectOfType<InformatieVakje1>();
+                    if (informatieVakje1 != null)
+                    {
+                        informatieVakje1.SetProfielKeuzeId(profielKeuzeId);
+                        informatieVakje1.SetProgressie1Id(progressie1Id); // Pass the Progressie1 ID to InformatieVakje1
+                    }
+                    else
+                    {
+                        Debug.LogError("InformatieVakje1 not found in the scene.");
+                    }
+                }
+                else
+                {
+                    Debug.LogError("No progressie found for profielKeuzeId: " + profielKeuzeId);
+                }
+                break;
+            case WebRequestError errorResponse:
+                Debug.LogError("Failed to read progressies: " + errorResponse.ErrorMessage);
+                break;
+            default:
+                throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
+        }
+    }
+
+
 }
-
-
-
