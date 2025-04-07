@@ -7,10 +7,12 @@ public class ExampleApp : MonoBehaviour
     [Header("Test data")]
     public User user;
     public ProfielKeuze profielKeuze;
+    public Progressie1 progressie1;
 
     [Header("Dependencies")]
     public UserApiClient userApiClient;
     public ProfielkeuzeApiClient profielkeuzeApiClient;
+    public Progressie1ApiClient progressie1ApiClient;
 
     #region Login
 
@@ -70,6 +72,7 @@ public class ExampleApp : MonoBehaviour
             case WebRequestData<List<ProfielKeuze>> dataResponse:
                 List<ProfielKeuze> profielKeuzes = dataResponse.Data;
                 Debug.Log("List of profielKeuzes: ");
+                profielKeuzes.ForEach(pk => Debug.Log(pk.name));
                 // TODO: Handle succes scenario.
                 break;
             case WebRequestError errorResponse:
@@ -90,7 +93,8 @@ public class ExampleApp : MonoBehaviour
         switch (webRequestResponse)
         {
             case WebRequestData<ProfielKeuze> dataResponse:
-                //profielKeuze.id = dataResponse.Data.id;
+                profielKeuze.id = dataResponse.Data.id;
+                Debug.Log("ProfielKeuze created with ID: " + profielKeuze.id);
                 // TODO: Handle succes scenario.
                 break;
             case WebRequestError errorResponse:
@@ -103,95 +107,98 @@ public class ExampleApp : MonoBehaviour
         }
     }
 
-    //[ContextMenu("ProfielKeuze/Delete")]
-    //public async void DeleteProfielKeuze()
-    //{
-    //    //IWebRequestReponse webRequestResponse = await profielkeuzeApiClient.DeleteProfielKeuze(profielKeuze.id);
+    [ContextMenu("ProfielKeuze/Delete")]
+    public async void DeleteProfielKeuze()
+    {
+        IWebRequestReponse webRequestResponse = await profielkeuzeApiClient.DeleteProfielKeuze(profielKeuze.id);
 
-    //    switch (webRequestResponse)
-    //    {
-    //        case WebRequestData<string> dataResponse:
-    //            string responseData = dataResponse.Data;
-    //            // TODO: Handle succes scenario.
-    //            break;
-    //        case WebRequestError errorResponse:
-    //            string errorMessage = errorResponse.ErrorMessage;
-    //            Debug.Log("Delete profielKeuze error: " + errorMessage);
-    //            // TODO: Handle error scenario. Show the errormessage to the user.
-    //            break;
-    //        default:
-    //            throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
-    //    }
-    //}
+        switch (webRequestResponse)
+        {
+            case WebRequestData<string> dataResponse:
+                string responseData = dataResponse.Data;
+                Debug.Log("ProfielKeuze deleted: " + responseData);
+                // TODO: Handle succes scenario.
+                break;
+            case WebRequestError errorResponse:
+                string errorMessage = errorResponse.ErrorMessage;
+                Debug.Log("Delete profielKeuze error: " + errorMessage);
+                // TODO: Handle error scenario. Show the errormessage to the user.
+                break;
+            default:
+                throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
+        }
+    }
 
     #endregion ProfielKeuze
+
+    #region Progressie1
+
+    [ContextMenu("Progressie1/Read all")]
+    public async void ReadProgressies()
+    {
+        IWebRequestReponse webRequestResponse = await progressie1ApiClient.ReadProgressies();
+
+        switch (webRequestResponse)
+        {
+            case WebRequestData<List<Progressie1>> dataResponse:
+                List<Progressie1> progressies = dataResponse.Data;
+                Debug.Log("List of progressies: ");
+                progressies.ForEach(p => Debug.Log(p.id));
+                // TODO: Handle succes scenario.
+                break;
+            case WebRequestError errorResponse:
+                string errorMessage = errorResponse.ErrorMessage;
+                Debug.Log("Read progressies error: " + errorMessage);
+                // TODO: Handle error scenario. Show the errormessage to the user.
+                break;
+            default:
+                throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
+        }
+    }
+
+    [ContextMenu("Progressie1/Create")]
+    public async void CreateProgressie()
+    {
+        IWebRequestReponse webRequestResponse = await progressie1ApiClient.CreateProgressie(progressie1);
+
+        switch (webRequestResponse)
+        {
+            case WebRequestData<Progressie1> dataResponse:
+                progressie1.id = dataResponse.Data.id;
+                Debug.Log("Progressie1 created with ID: " + progressie1.id);
+                // TODO: Handle succes scenario.
+                break;
+            case WebRequestError errorResponse:
+                string errorMessage = errorResponse.ErrorMessage;
+                Debug.Log("Create progressie1 error: " + errorMessage);
+                // TODO: Handle error scenario. Show the errormessage to the user.
+                break;
+            default:
+                throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
+        }
+    }
+
+    [ContextMenu("Progressie1/Delete")]
+    public async void DeleteProgressie()
+    {
+        IWebRequestReponse webRequestResponse = await progressie1ApiClient.DeleteProgressie(progressie1.id);
+
+        switch (webRequestResponse)
+        {
+            case WebRequestData<string> dataResponse:
+                string responseData = dataResponse.Data;
+                Debug.Log("Progressie1 deleted: " + responseData);
+                // TODO: Handle succes scenario.
+                break;
+            case WebRequestError errorResponse:
+                string errorMessage = errorResponse.ErrorMessage;
+                Debug.Log("Delete progressie1 error: " + errorMessage);
+                // TODO: Handle error scenario. Show the errormessage to the user.
+                break;
+            default:
+                throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
+        }
+    }
+
+    #endregion Progressie1
 }
-
-    #region Object2D
-
-    //[ContextMenu("Object2D/Read all")]
-    //public async void ReadObject2Ds()
-    //{
-    //    IWebRequestReponse webRequestResponse = await object2DApiClient.ReadObject2Ds(object2D.environmentId);
-
-    //    switch (webRequestResponse)
-    //    {
-    //        case WebRequestData<List<Object2D>> dataResponse:
-    //            List<Object2D> object2Ds = dataResponse.Data;
-    //            Debug.Log("List of object2Ds: " + object2Ds);
-    //            object2Ds.ForEach(object2D => Debug.Log(object2D.id));
-    //            // TODO: Succes scenario. Show the enviroments in the UI
-    //            break;
-    //        case WebRequestError errorResponse:
-    //            string errorMessage = errorResponse.ErrorMessage;
-    //            Debug.Log("Read object2Ds error: " + errorMessage);
-    //            // TODO: Error scenario. Show the errormessage to the user.
-    //            break;
-    //        default:
-    //            throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
-    //    }
-    //}
-
-    //[ContextMenu("Object2D/Create")]
-    //public async void CreateObject2D()
-    //{
-    //    IWebRequestReponse webRequestResponse = await object2DApiClient.CreateObject2D(object2D);
-
-    //    switch (webRequestResponse)
-    //    {
-    //        case WebRequestData<Object2D> dataResponse:
-    //            object2D.id = dataResponse.Data.id;
-    //            // TODO: Handle succes scenario.
-    //            break;
-    //        case WebRequestError errorResponse:
-    //            string errorMessage = errorResponse.ErrorMessage;
-    //            Debug.Log("Create Object2D error: " + errorMessage);
-    //            // TODO: Handle error scenario. Show the errormessage to the user.
-    //            break;
-    //        default:
-    //            throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
-    //    }
-    //}
-
-    //[ContextMenu("Object2D/Update")]
-    //public async void UpdateObject2D()
-    //{
-    //    IWebRequestReponse webRequestResponse = await object2DApiClient.UpdateObject2D(object2D);
-
-    //    switch (webRequestResponse)
-    //    {
-    //        case WebRequestData<string> dataResponse:
-    //            string responseData = dataResponse.Data;
-    //            // TODO: Handle succes scenario.
-    //            break;
-    //        case WebRequestError errorResponse:
-    //            string errorMessage = errorResponse.ErrorMessage;
-    //            Debug.Log("Update object2D error: " + errorMessage);
-    //            // TODO: Handle error scenario. Show the errormessage to the user.
-    //            break;
-    //        default:
-    //            throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
-    //    }
-    //}
-
-    #endregion

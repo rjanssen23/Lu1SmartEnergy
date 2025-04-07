@@ -56,6 +56,7 @@ public class ProfielManagerScript : MonoBehaviour
     public TMP_Dropdown dokterDropdown; // Assign this in Unity Inspector
 
     public ProfielkeuzeApiClient profielkeuzeApiClient; // Inject the API client
+    public Progressie1ApiClient progressie1ApiClient; // Inject the API client
 
     private int spawnIndex = 0;
     private bool isJongenGekozen = true; // Default to jongen
@@ -123,9 +124,6 @@ public class ProfielManagerScript : MonoBehaviour
         Scene2.SetActive(false);
         LoginPanel.SetActive(false);
         MainMenuButtons.SetActive(true);
-
-
-
     }
 
     public void VolgendeSceneSwitch()
@@ -171,6 +169,7 @@ public class ProfielManagerScript : MonoBehaviour
             return;
         }
         if (profielkeuzeApiClient == null) { Debug.LogError("profielkeuzeApiClient is NULL!"); return; }
+        if (progressie1ApiClient == null) { Debug.LogError("progressie1ApiClient is NULL!"); return; }
 
         ProfielKeuze newProfielKeuze = new ProfielKeuze
         {
@@ -185,7 +184,34 @@ public class ProfielManagerScript : MonoBehaviour
         switch (webRequestResponse)
         {
             case WebRequestData<ProfielKeuze> dataResponse:
-                //Debug.Log("Profiel Aangemaakt: " + dataResponse.Data.id);
+                // Create a new Progressie1 object for the created profile
+                Progressie1 newProgressie = new Progressie1
+                {
+                    //id = dataResponse.Data.id,
+                    numberCompleet = 0,
+                    vakje1 = false,
+                    vakje2 = false,
+                    vakje3 = false,
+                    vakje4 = false,
+                    vakje5 = false,
+                    vakje6 = false,
+                    profielKeuzeId = dataResponse.Data.id,
+                };
+
+                // Post the new Progressie1 object
+                IWebRequestReponse progressieResponse = await progressie1ApiClient.CreateProgressie(newProgressie);
+
+                switch (progressieResponse)
+                {
+                    case WebRequestData<Progressie1> progressieDataResponse:
+                        Debug.Log("Progressie1 Aangemaakt: " + progressieDataResponse.Data.id);
+                        break;
+                    case WebRequestError progressieErrorResponse:
+                        Debug.LogError("Create Progressie1 error: " + progressieErrorResponse.ErrorMessage);
+                        break;
+                    default:
+                        throw new NotImplementedException("No implementation for webRequestResponse of class: " + progressieResponse.GetType());
+                }
                 break;
             case WebRequestError errorResponse:
                 Debug.LogError("Create profielKeuze error: " + errorResponse.ErrorMessage);
@@ -200,6 +226,7 @@ public class ProfielManagerScript : MonoBehaviour
         ProfielAanmakenScherm.SetActive(false);
         FetchProfiles(); // Refresh profiles after creating a new one
     }
+
 
     public void JongenGekozen()
     {
@@ -217,7 +244,6 @@ public class ProfielManagerScript : MonoBehaviour
         Debug.Log("Meisje is gekozen");
     }
 
-    
     public void BootBackNaarProfiel()
     {
         //tijn
@@ -377,3 +403,6 @@ public class ProfielManagerScript : MonoBehaviour
         Debug.Log("Profielkeuze token: " + profielkeuzetoken);
     }
 }
+
+
+
