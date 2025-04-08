@@ -61,8 +61,6 @@ public class ProfielManagerScript : MonoBehaviour
     private int spawnIndex = 0;
     private bool isJongenGekozen = true; // Default to jongen
 
-    private string progressie1Id; // Store the ID of the created Progressie1
-
     void Start()
     {
         Reset();
@@ -410,41 +408,62 @@ public class ProfielManagerScript : MonoBehaviour
         FetchProgressie1Id(profielkeuzetoken);
     }
 
-    private async void FetchProgressie1Id(string profielKeuzeId)
+    private string progressie1Id; // Store the ID of the created Progressie1
+
+    public async void FetchProgressie1Id(string profielKeuzeId)
     {
+        Debug.Log("Fetching Progressie...");
+
         IWebRequestReponse webRequestResponse = await progressie1ApiClient.ReadProgressies();
 
         switch (webRequestResponse)
         {
             case WebRequestData<List<Progressie1>> dataResponse:
-                Progressie1 progressie = dataResponse.Data.Find(p => p.profielKeuzeId == profielKeuzeId);
-                if (progressie != null)
-                {
-                    progressie1Id = progressie.id;
-                    // Zorg ervoor dat de profielKeuzeId en progressie1Id worden doorgegeven aan InformatieVakje1
-                    InformatieVakje1 informatieVakje1 = FindObjectOfType<InformatieVakje1>();
-                    if (informatieVakje1 != null)
-                    {
-                        informatieVakje1.SetProfielKeuzeId(profielKeuzeId);
-                        informatieVakje1.SetProgressie1Id(progressie1Id); // Pass the Progressie1 ID to InformatieVakje1
-                    }
-                    else
-                    {
-                        Debug.LogError("InformatieVakje1 not found in the scene.");
-                    }
-                }
-                else
-                {
-                    Debug.LogError("No progressie found for profielKeuzeId: " + profielKeuzeId);
-                }
+                List<Progressie1> progressies = dataResponse.Data;
                 break;
             case WebRequestError errorResponse:
-                Debug.LogError("Failed to read progressies: " + errorResponse.ErrorMessage);
+                Debug.LogError("Read profielKeuzes error: " + errorResponse.ErrorMessage);
                 break;
             default:
                 throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
         }
     }
+
+    //private async void FetchProgressie1Id(string profielKeuzeId)
+    //{
+    //    IWebRequestReponse webRequestResponse = await progressie1ApiClient.ReadProgressies();
+
+    //    switch (webRequestResponse)
+    //    {
+    //        case WebRequestData<List<Progressie1>> dataResponse:
+    //            Progressie1 progressie = dataResponse.Data.Find(p => p.profielKeuzeId == profielKeuzeId);
+    //            if (progressie != null)
+    //            {
+    //                progressie1Id = progressie.id;
+    //                // Zorg ervoor dat de profielKeuzeId en progressie1Id worden doorgegeven aan InformatieVakje1
+    //                InformatieVakje1 informatieVakje1 = FindObjectOfType<InformatieVakje1>();
+    //                if (informatieVakje1 != null)
+    //                {
+    //                    informatieVakje1.SetProfielKeuzeId(profielKeuzeId);
+    //                    informatieVakje1.SetProgressie1Id(progressie1Id); // Pass the Progressie1 ID to InformatieVakje1
+    //                }
+    //                else
+    //                {
+    //                    Debug.LogError("InformatieVakje1 not found in the scene.");
+    //                }
+    //            }
+    //            else
+    //            {
+    //                Debug.LogError("No progressie found for profielKeuzeId: " + profielKeuzeId);
+    //            }
+    //            break;
+    //        case WebRequestError errorResponse:
+    //            Debug.LogError("Failed to read progressies: " + errorResponse.ErrorMessage);
+    //            break;
+    //        default:
+    //            throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
+    //    }
+    //}
 
 
 }
