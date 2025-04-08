@@ -5,9 +5,9 @@ using UnityEngine;
 public class Dagboek
 {
     public string id;
-    public string Dagboekbladzijde1;
-    public string Dagboekbladzijde2;
-    public string Dagboekbladzijde3;
-    public string Dagboekbladzijde4;
-    public string ProfielKeuzeId;
+    public string dagboekBladzijde1;
+    public string dagboekBladzijde2;
+    public string dagboekBladzijde3;
+    public string dagboekBladzijde4;
+    public string profielKeuzeId;
 }

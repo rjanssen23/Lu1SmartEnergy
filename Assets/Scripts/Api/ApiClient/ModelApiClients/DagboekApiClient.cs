@@ -78,7 +78,7 @@ public class DagboekApiClient : MonoBehaviour
             List<Dagboek> dagboeken = dagboekenData.Data;
             foreach (var dagboek in dagboeken)
             {
-                Debug.Log($"Dagboekbladzijde1: {dagboek.Dagboekbladzijde1}, Dagboekbladzijde2: {dagboek.Dagboekbladzijde2}, Dagboekbladzijde3: {dagboek.Dagboekbladzijde3}, Dagboekbladzijde4: {dagboek.Dagboekbladzijde4}");
+                Debug.Log($"Dagboekbladzijde1: {dagboek.dagboekBladzijde1}, Dagboekbladzijde2: {dagboek.dagboekBladzijde2}, Dagboekbladzijde3: {dagboek.dagboekBladzijde3}, Dagboekbladzijde4: {dagboek.dagboekBladzijde4}");
             }
         }
         else

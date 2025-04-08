@@ -19,7 +19,6 @@ public class DagboekScript : MonoBehaviour
     [Header("PaginaInhoud")]
     public TextMeshProUGUI[] PaginaInhoud;
     public TMP_InputField[] PaginaInvoer;
-    public Button[] ChangeInput;
 
     // Api client
     [Header("Api zooi")]
@@ -67,25 +66,33 @@ public class DagboekScript : MonoBehaviour
         Debug.Log($"Requesting dagboeken for profielkeuzeId: {profielkeuzeId}");
         IWebRequestReponse response = await DagboekApiClient.ReadDagboeken(profielkeuzeId);
         Debug.Log($"Received response: {response}");
+
         if (response is WebRequestData<List<Dagboek>> dagboekenData)
         {
             List<Dagboek> dagboeken = dagboekenData.Data;
             if (dagboeken != null && dagboeken.Count > 0)
             {
                 Dagboek dagboek = dagboeken[0];
-                Debug.Log(dagboek.Dagboekbladzijde1);
-                Debug.Log(dagboek.Dagboekbladzijde2);
-                Debug.Log(dagboek.Dagboekbladzijde3);
-                Debug.Log(dagboek.Dagboekbladzijde4);
+                Debug.Log($"Loaded Dagboek: {JsonUtility.ToJson(dagboek)}");
 
                 // Store the dagboekId
                 dagboekId = dagboek.id;
 
-                // Set text fields
-                PaginaInhoud[0].text = dagboek.Dagboekbladzijde1;
-                PaginaInhoud[1].text = dagboek.Dagboekbladzijde2;
-                PaginaInhoud[2].text = dagboek.Dagboekbladzijde3;
-                PaginaInhoud[3].text = dagboek.Dagboekbladzijde4;
+                // Ensure PaginaInhoud array has enough elements
+                if (PaginaInhoud.Length >= 4)
+                {
+                    // Set text fields
+                    PaginaInhoud[0].text = dagboek.dagboekBladzijde1 ?? string.Empty;
+                    PaginaInhoud[1].text = dagboek.dagboekBladzijde2 ?? string.Empty;
+                    PaginaInhoud[2].text = dagboek.dagboekBladzijde3 ?? string.Empty;
+                    PaginaInhoud[3].text = dagboek.dagboekBladzijde4 ?? string.Empty;
+
+                    Debug.Log("Text fields updated successfully.");
+                }
+                else
+                {
+                    Debug.LogError("PaginaInhoud array does not have enough elements to display all pages.");
+                }
 
                 // Hide input fields
                 foreach (var inputField in PaginaInvoer)
@@ -93,16 +100,26 @@ public class DagboekScript : MonoBehaviour
                     inputField.gameObject.SetActive(false);
                 }
 
+                // Show the Save button and hide the First Save button
+                SaveButton.gameObject.SetActive(true);
                 FirstSaveButton.gameObject.SetActive(false);
             }
             else
             {
                 Debug.LogError("No dagboeken found or dagboeken list is null.");
+
+                // Show the First Save button and hide the Save button
+                FirstSaveButton.gameObject.SetActive(true);
+                SaveButton.gameObject.SetActive(false);
             }
         }
         else
         {
-            Debug.LogError("Failed to retrieve dagboeken.");
+            Debug.LogError("Failed to retrieve dagboeken. Response is not of expected type.");
+
+            // Show the First Save button and hide the Save button
+            FirstSaveButton.gameObject.SetActive(true);
+            SaveButton.gameObject.SetActive(false);
         }
     }
 
@@ -110,17 +127,17 @@ public class DagboekScript : MonoBehaviour
     {
         Dagboek.SetActive(false);
 
-        // Clear text fields
-        foreach (var textField in PaginaInhoud)
-        {
-            textField.text = string.Empty;
-        }
-
         // Hide input fields
         foreach (var inputField in PaginaInvoer)
         {
             inputField.gameObject.SetActive(false);
         }
+
+        // Hide both Save and First Save buttons
+        SaveButton.gameObject.SetActive(false);
+        FirstSaveButton.gameObject.SetActive(false);
+
+        // Note: Do not clear the text fields here to ensure data is reloaded when reopened
     }
 
     private async void FirstSaveButtonClicked()
@@ -136,11 +153,11 @@ public class DagboekScript : MonoBehaviour
         // Get the values from the input fields
         Dagboek newDagboek = new Dagboek
         {
-            Dagboekbladzijde1 = PaginaInvoer[0].text,
-            Dagboekbladzijde2 = PaginaInvoer[1].text,
-            Dagboekbladzijde3 = PaginaInvoer[2].text,
-            Dagboekbladzijde4 = PaginaInvoer[3].text,
-            ProfielKeuzeId = profielkeuzeId // Ensure the ProfielKeuzeId is set
+            dagboekBladzijde1 = PaginaInvoer[0].text,
+            dagboekBladzijde2 = PaginaInvoer[1].text,
+            dagboekBladzijde3 = PaginaInvoer[2].text,
+            dagboekBladzijde4 = PaginaInvoer[3].text,
+            profielKeuzeId = profielkeuzeId // Ensure the ProfielKeuzeId is set
         };
 
         // Post method for creating a new dagboek
@@ -179,11 +196,11 @@ public class DagboekScript : MonoBehaviour
         // Get the values from the input fields
         Dagboek updatedDagboek = new Dagboek
         {
-            Dagboekbladzijde1 = PaginaInvoer[0].text,
-            Dagboekbladzijde2 = PaginaInvoer[1].text,
-            Dagboekbladzijde3 = PaginaInvoer[2].text,
-            Dagboekbladzijde4 = PaginaInvoer[3].text,
-            ProfielKeuzeId = profielkeuzeId // Ensure the ProfielKeuzeId is set
+            dagboekBladzijde1 = PaginaInvoer[0].text,
+            dagboekBladzijde2 = PaginaInvoer[1].text,
+            dagboekBladzijde3 = PaginaInvoer[2].text,
+            dagboekBladzijde4 = PaginaInvoer[3].text,
+            profielKeuzeId = profielkeuzeId // Ensure the ProfielKeuzeId is set
         };
 
         // Put method for updating existing dagboek
@@ -206,10 +223,10 @@ public class DagboekScript : MonoBehaviour
         }
 
         // Set text fields to the updated values
-        PaginaInhoud[0].text = updatedDagboek.Dagboekbladzijde1;
-        PaginaInhoud[1].text = updatedDagboek.Dagboekbladzijde2;
-        PaginaInhoud[2].text = updatedDagboek.Dagboekbladzijde3;
-        PaginaInhoud[3].text = updatedDagboek.Dagboekbladzijde4;
+        PaginaInhoud[0].text = updatedDagboek.dagboekBladzijde1;
+        PaginaInhoud[1].text = updatedDagboek.dagboekBladzijde2;
+        PaginaInhoud[2].text = updatedDagboek.dagboekBladzijde3;
+        PaginaInhoud[3].text = updatedDagboek.dagboekBladzijde4;
 
         // Show text fields
         foreach (var textField in PaginaInhoud)
@@ -222,11 +239,20 @@ public class DagboekScript : MonoBehaviour
     {
         if (index < Paginas.Length - 1)
         {
-            Paginas[index].SetActive(false);
+            // Deactivate all pages
+            for (int i = 0; i < Paginas.Length; i++)
+            {
+                Paginas[i].SetActive(false);
+            }
+
+            // Activate the next page
             Paginas[index + 1].SetActive(true);
 
             // Update TerugButtons visibility
-            TerugButtons[index].gameObject.SetActive(false);
+            for (int i = 0; i < TerugButtons.Length; i++)
+            {
+                TerugButtons[i].gameObject.SetActive(false);
+            }
             TerugButtons[index + 1].gameObject.SetActive(true);
         }
     }
@@ -235,11 +261,20 @@ public class DagboekScript : MonoBehaviour
     {
         if (index > 0)
         {
-            Paginas[index].SetActive(false);
+            // Deactivate all pages
+            for (int i = 0; i < Paginas.Length; i++)
+            {
+                Paginas[i].SetActive(false);
+            }
+
+            // Activate the previous page
             Paginas[index - 1].SetActive(true);
 
             // Update TerugButtons visibility
-            TerugButtons[index].gameObject.SetActive(false);
+            for (int i = 0; i < TerugButtons.Length; i++)
+            {
+                TerugButtons[i].gameObject.SetActive(false);
+            }
             TerugButtons[index - 1].gameObject.SetActive(true);
         }
     }
