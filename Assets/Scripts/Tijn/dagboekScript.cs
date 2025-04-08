@@ -19,6 +19,7 @@ public class DagboekScript : MonoBehaviour
     [Header("PaginaInhoud")]
     public TextMeshProUGUI[] PaginaInhoud;
     public TMP_InputField[] PaginaInvoer;
+    public Button[] ChangeInput;
 
     // Api client
     [Header("Api zooi")]
