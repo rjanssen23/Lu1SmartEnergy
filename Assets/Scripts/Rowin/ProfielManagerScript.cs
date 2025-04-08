@@ -60,6 +60,9 @@ public class ProfielManagerScript : MonoBehaviour
     private int spawnIndex = 0;
     private bool isJongenGekozen = true; // Default to jongen
 
+    // Add this property to store the selected profielkeuzeId
+    public string SelectedProfielKeuzeId { get; private set; }
+
     void Start()
     {
         Reset();
@@ -123,9 +126,6 @@ public class ProfielManagerScript : MonoBehaviour
         Scene2.SetActive(false);
         LoginPanel.SetActive(false);
         MainMenuButtons.SetActive(true);
-
-
-
     }
 
     public void VolgendeSceneSwitch()
@@ -217,7 +217,6 @@ public class ProfielManagerScript : MonoBehaviour
         Debug.Log("Meisje is gekozen");
     }
 
-    
     public void BootBackNaarProfiel()
     {
         //tijn
@@ -375,5 +374,8 @@ public class ProfielManagerScript : MonoBehaviour
         // Store the profielkeuzetoken
         profielkeuzetoken = profiel.id;
         Debug.Log("Profielkeuze token: " + profielkeuzetoken);
+
+        // Store the selected profielkeuzeId
+        SelectedProfielKeuzeId = profiel.id;
     }
 }
