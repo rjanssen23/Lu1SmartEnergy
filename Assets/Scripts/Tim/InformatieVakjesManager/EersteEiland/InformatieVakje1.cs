@@ -1,9 +1,6 @@
 using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System;
+using UnityEngine;
 
 public class InformatieVakje1 : MonoBehaviour
 {
@@ -119,7 +116,7 @@ public class InformatieVakje1 : MonoBehaviour
                 profielKeuzeId = profielKeuzeId
             };
 
-            IWebRequestReponse updateResponse = await progressie1ApiClient.UpdateProgressie(progressie1Id, progressie);
+            IWebRequestReponse updateResponse = await progressie1ApiClient.UpdateProgressiePut(progressie1Id, progressie);
 
             if (updateResponse is WebRequestError errorResponse)
             {
@@ -140,7 +137,6 @@ public class InformatieVakje1 : MonoBehaviour
         Objectfaq.SetActive(allVakjesClosed);
     }
 }
-
 
 
 

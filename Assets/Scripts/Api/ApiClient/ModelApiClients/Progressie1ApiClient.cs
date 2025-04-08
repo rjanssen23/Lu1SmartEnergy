@@ -13,6 +13,7 @@ public class Progressie1ApiClient : MonoBehaviour
         return ParseProgressieListResponse(webRequestResponse);
     }
 
+
     public async Awaitable<IWebRequestReponse> CreateProgressie(Progressie1 progressie)
     {
         string route = "/api/progressie1"; // Correct route
@@ -27,11 +28,11 @@ public class Progressie1ApiClient : MonoBehaviour
         return await webClient.SendDeleteRequest(route);
     }
 
-    public async Awaitable<IWebRequestReponse> UpdateProgressie(string progressieId, Progressie1 progressie)
+    public async Awaitable<IWebRequestReponse> UpdateProgressiePut(string progressieId, Progressie1 progressie)
     {
         string route = "/api/progressie1/" + progressieId; // Correct route
         string data = JsonUtility.ToJson(progressie);
-        IWebRequestReponse webRequestResponse = await webClient.SendPostRequest(route, data);
+        IWebRequestReponse webRequestResponse = await webClient.SendPutRequest(route, data);
         return ParseProgressieResponse(webRequestResponse);
     }
 
