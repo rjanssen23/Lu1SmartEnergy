@@ -1,95 +1,245 @@
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-
-
 
 public class DagboekScript : MonoBehaviour
 {
-    public GameObject bladzijdes;
-    public GameObject bladzijde1;
-    public GameObject bladzijde2;
-    public GameObject bladzijde3;
-    public GameObject bladzijde4;
+    public Button DagboekOpen;
+    public Button DagboekClose;
 
-    public Button dagboekButton;
-    public Button volgende1Button;
-    public Button volgende2Button;
-    public Button volgende3Button;
-    public Button terugButton1;
-    public Button terugButton2;
-    public Button terugButton3;
-    public Button terugButton4;
+    // Dagboek
+    [Header("Dagboek")]
+    public GameObject Dagboek;
+    [SerializeField] private GameObject[] Paginas;
+    [SerializeField] private Button[] VolgendeButtons;
+    [SerializeField] private Button[] TerugButtons;
 
-    public TMP_InputField inputField1;
-    public TMP_InputField inputField2;
-    public TMP_InputField inputField3;
-    public TMP_InputField inputField4;
+    // Dagboek
+    [Header("PaginaInhoud")]
+    public TextMeshProUGUI[] PaginaInhoud;
+    public TMP_InputField[] PaginaInvoer;
 
+    // Api client
+    [Header("Api zooi")]
+    public DagboekApiClient DagboekApiClient;
+    public ProfielManagerScript profielManagerScript;
+    public Button FirstSaveButton;
+    public Button SaveButton;
 
-    void Start()
+    // Class-level variable to store the dagboekId
+    private string dagboekId;
+
+    private void Start()
     {
+        DagboekOpen.onClick.AddListener(OpenDagboek);
+        DagboekClose.onClick.AddListener(CloseDagboek);
+        FirstSaveButton.onClick.AddListener(FirstSaveButtonClicked);
+        SaveButton.onClick.AddListener(SaveButtonClicked);
 
-        // Zet de UI naar de startstaat
-        Reset();
-
-        // Voeg listeners toe aan de knoppen
-        dagboekButton.onClick.AddListener(DagboekButtonClicked);
-        volgende1Button.onClick.AddListener(ButtonVolgende1Clicked);
-        volgende2Button.onClick.AddListener(ButtonVolgende2Clicked);
-        volgende3Button.onClick.AddListener(ButtonVolgende3Clicked);
-        terugButton1.onClick.AddListener(TerugButton1Clicked);
-        terugButton2.onClick.AddListener(TerugButton2Clicked);
-        terugButton3.onClick.AddListener(TerugButton3Clicked);
-        terugButton4.onClick.AddListener(TerugButton4Clicked);
+        // Add listeners to the buttons
+        for (int i = 0; i < VolgendeButtons.Length; i++)
+        {
+            int index = i; // Capture the current index
+            VolgendeButtons[index].onClick.AddListener(() => NextPage(index));
+        }
+        for (int i = 0; i < TerugButtons.Length; i++)
+        {
+            int index = i; // Capture the current index
+            TerugButtons[index].onClick.AddListener(() => PreviousPage(index));
+        }
     }
 
-    public void Reset()
+    private async void OpenDagboek()
     {
-        bladzijdes.SetActive(false);
-        bladzijde1.SetActive(true);
-        bladzijde2.SetActive(true);
-        bladzijde3.SetActive(true);
-        bladzijde4.SetActive(true);
+        Dagboek.SetActive(true);
+
+        // Get the profielkeuzeId from ProfielManagerScript
+        string profielkeuzeId = profielManagerScript.SelectedProfielKeuzeId;
+        if (string.IsNullOrEmpty(profielkeuzeId))
+        {
+            Debug.LogError("Profielkeuze ID is not set.");
+            return;
+        }
+
+        // Load the data from the API
+        Debug.Log($"Requesting dagboeken for profielkeuzeId: {profielkeuzeId}");
+        IWebRequestReponse response = await DagboekApiClient.ReadDagboeken(profielkeuzeId);
+        Debug.Log($"Received response: {response}");
+        if (response is WebRequestData<List<Dagboek>> dagboekenData)
+        {
+            List<Dagboek> dagboeken = dagboekenData.Data;
+            if (dagboeken != null && dagboeken.Count > 0)
+            {
+                Dagboek dagboek = dagboeken[0];
+                Debug.Log(dagboek.Dagboekbladzijde1);
+                Debug.Log(dagboek.Dagboekbladzijde2);
+                Debug.Log(dagboek.Dagboekbladzijde3);
+                Debug.Log(dagboek.Dagboekbladzijde4);
+
+                // Store the dagboekId
+                dagboekId = dagboek.id;
+
+                // Set text fields
+                PaginaInhoud[0].text = dagboek.Dagboekbladzijde1;
+                PaginaInhoud[1].text = dagboek.Dagboekbladzijde2;
+                PaginaInhoud[2].text = dagboek.Dagboekbladzijde3;
+                PaginaInhoud[3].text = dagboek.Dagboekbladzijde4;
+
+                // Hide input fields
+                foreach (var inputField in PaginaInvoer)
+                {
+                    inputField.gameObject.SetActive(false);
+                }
+
+                FirstSaveButton.gameObject.SetActive(false);
+            }
+            else
+            {
+                Debug.LogError("No dagboeken found or dagboeken list is null.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Failed to retrieve dagboeken.");
+        }
     }
 
-    public void DagboekButtonClicked()
+    private void CloseDagboek()
     {
-        bladzijdes.SetActive(true);
+        Dagboek.SetActive(false);
+
+        // Clear text fields
+        foreach (var textField in PaginaInhoud)
+        {
+            textField.text = string.Empty;
+        }
+
+        // Hide input fields
+        foreach (var inputField in PaginaInvoer)
+        {
+            inputField.gameObject.SetActive(false);
+        }
     }
 
-    public void ButtonVolgende1Clicked()
+    private async void FirstSaveButtonClicked()
     {
-        bladzijde1.SetActive(false);
+        // Get the profielkeuzeId from ProfielManagerScript
+        string profielkeuzeId = profielManagerScript.SelectedProfielKeuzeId;
+        if (string.IsNullOrEmpty(profielkeuzeId))
+        {
+            Debug.LogError("Profielkeuze ID is not set.");
+            return;
+        }
+
+        // Get the values from the input fields
+        Dagboek newDagboek = new Dagboek
+        {
+            Dagboekbladzijde1 = PaginaInvoer[0].text,
+            Dagboekbladzijde2 = PaginaInvoer[1].text,
+            Dagboekbladzijde3 = PaginaInvoer[2].text,
+            Dagboekbladzijde4 = PaginaInvoer[3].text,
+            ProfielKeuzeId = profielkeuzeId // Ensure the ProfielKeuzeId is set
+        };
+
+        // Post method for creating a new dagboek
+        Debug.Log($"Creating new dagboek for profielkeuzeId: {profielkeuzeId} with data: {JsonUtility.ToJson(newDagboek)}");
+        IWebRequestReponse response = await DagboekApiClient.CreateDagboek(profielkeuzeId, newDagboek);
+        Debug.Log($"Received response: {response}");
+        if (response is WebRequestData<Dagboek> createdDagboek)
+        {
+            Debug.Log("Dagboek created successfully.");
+        }
+        else
+        {
+            Debug.LogError("Failed to create dagboek.");
+        }
+
+        FirstSaveButton.gameObject.SetActive(false);
     }
 
-    public void ButtonVolgende2Clicked()
+    private async void SaveButtonClicked()
     {
-        bladzijde2.SetActive(false);
+        // Get the profielkeuzeId from ProfielManagerScript
+        string profielkeuzeId = profielManagerScript.SelectedProfielKeuzeId;
+        if (string.IsNullOrEmpty(profielkeuzeId))
+        {
+            Debug.LogError("Profielkeuze ID is not set.");
+            return;
+        }
+
+        // Ensure the dagboekId is set
+        if (string.IsNullOrEmpty(dagboekId))
+        {
+            Debug.LogError("Dagboek ID is not set.");
+            return;
+        }
+
+        // Get the values from the input fields
+        Dagboek updatedDagboek = new Dagboek
+        {
+            Dagboekbladzijde1 = PaginaInvoer[0].text,
+            Dagboekbladzijde2 = PaginaInvoer[1].text,
+            Dagboekbladzijde3 = PaginaInvoer[2].text,
+            Dagboekbladzijde4 = PaginaInvoer[3].text,
+            ProfielKeuzeId = profielkeuzeId // Ensure the ProfielKeuzeId is set
+        };
+
+        // Put method for updating existing dagboek
+        Debug.Log($"Updating dagboek for profielkeuzeId: {profielkeuzeId} with dagboekId: {dagboekId} and data: {JsonUtility.ToJson(updatedDagboek)}");
+        IWebRequestReponse response = await DagboekApiClient.UpdateDagboek(dagboekId, updatedDagboek);
+        Debug.Log($"Received response: {response}");
+        if (response is WebRequestData<Dagboek> updatedDagboekData)
+        {
+            Debug.Log("Dagboek updated successfully.");
+        }
+        else
+        {
+            Debug.LogError("Failed to update dagboek.");
+        }
+
+        // Hide input fields
+        foreach (var inputField in PaginaInvoer)
+        {
+            inputField.gameObject.SetActive(false);
+        }
+
+        // Set text fields to the updated values
+        PaginaInhoud[0].text = updatedDagboek.Dagboekbladzijde1;
+        PaginaInhoud[1].text = updatedDagboek.Dagboekbladzijde2;
+        PaginaInhoud[2].text = updatedDagboek.Dagboekbladzijde3;
+        PaginaInhoud[3].text = updatedDagboek.Dagboekbladzijde4;
+
+        // Show text fields
+        foreach (var textField in PaginaInhoud)
+        {
+            textField.gameObject.SetActive(true);
+        }
     }
 
-    public void ButtonVolgende3Clicked()
+    private void NextPage(int index)
     {
-        bladzijde3.SetActive(false);
+        if (index < Paginas.Length - 1)
+        {
+            Paginas[index].SetActive(false);
+            Paginas[index + 1].SetActive(true);
+
+            // Update TerugButtons visibility
+            TerugButtons[index].gameObject.SetActive(false);
+            TerugButtons[index + 1].gameObject.SetActive(true);
+        }
     }
 
-    public void TerugButton1Clicked()
+    private void PreviousPage(int index)
     {
-        bladzijdes.SetActive(false);
-    }
+        if (index > 0)
+        {
+            Paginas[index].SetActive(false);
+            Paginas[index - 1].SetActive(true);
 
-    public void TerugButton2Clicked()
-    {
-        bladzijde1.SetActive(true);
-    }
-
-    public void TerugButton3Clicked()
-    {
-        bladzijde2.SetActive(true);
-    }
-
-    public void TerugButton4Clicked()
-    {
-        bladzijde3.SetActive(true);
+            // Update TerugButtons visibility
+            TerugButtons[index].gameObject.SetActive(false);
+            TerugButtons[index - 1].gameObject.SetActive(true);
+        }
     }
 }

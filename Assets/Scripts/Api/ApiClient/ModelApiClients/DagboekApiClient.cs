@@ -5,18 +5,18 @@ public class DagboekApiClient : MonoBehaviour
 {
     public WebClient webClient;
 
-    public async Awaitable<IWebRequestReponse> ReadDagboeken(string profielkeuzeid)
+    public async Awaitable<IWebRequestReponse> ReadDagboeken(string profielKeuzeId)
     {
-        string route = $"/api/dagboek/profielkeuze/{profielkeuzeid}"; // Use profielkeuzeid in the route
+        string route = $"/api/dagboeken/profielkeuze/{profielKeuzeId}"; // Use profielKeuzeId in the route
         Debug.Log($"Sending GET request to: {route}");
         IWebRequestReponse webRequestResponse = await webClient.SendGetRequest(route);
         Debug.Log($"Received response: {webRequestResponse}");
         return ParseDagboekListResponse(webRequestResponse);
     }
 
-    public async Awaitable<IWebRequestReponse> CreateDagboek(string profielkeuzeid, Dagboek dagboek)
+    public async Awaitable<IWebRequestReponse> CreateDagboek(string profielKeuzeId, Dagboek dagboek)
     {
-        string route = $"/api/dagboek"; // Use the base route for creating a new dagboek
+        string route = $"/api/dagboeken"; // Use the base route for creating a new dagboek
         string data = JsonUtility.ToJson(dagboek);
         Debug.Log($"Sending POST request to: {route} with data: {data}");
         IWebRequestReponse webRequestResponse = await webClient.SendPostRequest(route, data);
@@ -24,16 +24,16 @@ public class DagboekApiClient : MonoBehaviour
         return ParseDagboekResponse(webRequestResponse);
     }
 
-    public async Awaitable<IWebRequestReponse> DeleteDagboek(string profielkeuzeid, string dagboekId)
+    public async Awaitable<IWebRequestReponse> DeleteDagboek(string dagboekId)
     {
-        string route = $"/api/dagboek/{dagboekId}"; // Use the base route for deleting a dagboek
+        string route = $"/api/dagboeken/{dagboekId}"; // Use the base route for deleting a dagboek
         Debug.Log($"Sending DELETE request to: {route}");
         return await webClient.SendDeleteRequest(route);
     }
 
-    public async Awaitable<IWebRequestReponse> UpdateDagboek(string profielkeuzeid, string dagboekId, Dagboek dagboek)
+    public async Awaitable<IWebRequestReponse> UpdateDagboek(string dagboekId, Dagboek dagboek)
     {
-        string route = $"/api/dagboek/{dagboekId}"; // Use the base route for updating a dagboek
+        string route = $"/api/dagboeken/{dagboekId}"; // Use the base route for updating a dagboek
         string data = JsonUtility.ToJson(dagboek);
         Debug.Log($"Sending PUT request to: {route} with data: {data}");
         IWebRequestReponse webRequestResponse = await webClient.SendPutRequest(route, data); // Use SendPutRequest instead of SendPostRequest
@@ -69,10 +69,10 @@ public class DagboekApiClient : MonoBehaviour
         }
     }
 
-    public async void GetAllDagboekInfo(string profielkeuzeid)
+    public async void GetAllDagboekInfo(string profielKeuzeId)
     {
         Debug.LogError("Dagboeken are being loaded");
-        IWebRequestReponse response = await ReadDagboeken(profielkeuzeid);
+        IWebRequestReponse response = await ReadDagboeken(profielKeuzeId);
         if (response is WebRequestData<List<Dagboek>> dagboekenData)
         {
             List<Dagboek> dagboeken = dagboekenData.Data;
