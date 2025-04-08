@@ -1,6 +1,6 @@
 using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 public class InformatieVakje1 : MonoBehaviour
 {
@@ -32,6 +32,15 @@ public class InformatieVakje1 : MonoBehaviour
     // Boolean om bij te houden of het vakje al is afgerond
     private bool isVakjeAfgerond = false;
 
+    // Progressie1ApiClient
+    public Progressie1ApiClient progressie1ApiClient;
+
+    // Profielkeuze ID
+    public string profielKeuzeId;
+
+    // Progressie1 ID
+    private string progressie1Id;
+
     void Start()
     {
         // Voeg event listeners toe aan de knoppen
@@ -44,6 +53,16 @@ public class InformatieVakje1 : MonoBehaviour
 
         // Initialiseer de vakjes en informatie
         ResetVakjes();
+    }
+
+    public void SetProfielKeuzeId(string id)
+    {
+        profielKeuzeId = id;
+    }
+
+    public void SetProgressie1Id(string id)
+    {
+        progressie1Id = id;
     }
 
     void ResetVakjes()
@@ -82,12 +101,31 @@ public class InformatieVakje1 : MonoBehaviour
         VideoInformatieVakje1.gameObject.SetActive(false);
     }
 
-    void AfrondenVakje1Handler()
+    async void AfrondenVakje1Handler()
     {
         if (!isVakjeAfgerond)
         {
             isVakjeAfgerond = true;
             progressBarManager.VakjeAfronden(0); // 0 is de index voor Vakje1
+
+            // Update vakje1 status in the database
+            Progressie1 progressie = new Progressie1
+            {
+                id = progressie1Id,
+                vakje1 = true,
+                profielKeuzeId = profielKeuzeId
+            };
+
+            IWebRequestReponse updateResponse = await progressie1ApiClient.UpdateProgressiePut(progressie1Id, progressie);
+
+            if (updateResponse is WebRequestError errorResponse)
+            {
+                Debug.LogError("Failed to update vakje1 status: " + errorResponse.ErrorMessage);
+            }
+            else
+            {
+                Debug.Log("Vakje1 status updated successfully.");
+            }
         }
     }
 
@@ -99,3 +137,11 @@ public class InformatieVakje1 : MonoBehaviour
         Objectfaq.SetActive(allVakjesClosed);
     }
 }
+
+
+
+
+
+
+
+

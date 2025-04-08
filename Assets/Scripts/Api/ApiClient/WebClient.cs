@@ -12,6 +12,12 @@ public class WebClient : MonoBehaviour
     {
         this.token = token;
     }
+    public async Awaitable<IWebRequestReponse> SendPutRequest(string route, string data)
+    {
+        string url = baseUrl + route;
+        UnityWebRequest webRequest = CreateWebRequest("PUT", url, data);
+        return await SendWebRequest(webRequest);
+    }
 
     public async Awaitable<IWebRequestReponse> SendGetRequest(string route)
     {
