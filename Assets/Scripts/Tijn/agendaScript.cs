@@ -81,9 +81,35 @@ public class agendascript : MonoBehaviour
         Afspraak3datumInput.gameObject.SetActive(true);
         Afspraak3LocatieInput.gameObject.SetActive(true);
 
+        // Create a new agenda
+        Agenda newAgenda = new Agenda
+        {
+            date1 = Afspraak1datumInput.text,
+            location1 = Afspraak1LocatieInput.text,
+            date2 = Afspraak2datumInput.text,
+            location2 = Afspraak2LocatieInput.text,
+            date3 = Afspraak3datumInput.text,
+            location3 = Afspraak3LocatieInput.text,
+            ProfielKeuzeId = profielkeuzeId // Ensure the ProfielKeuzeId is set
+        };
+
+        // Post method for creating a new agenda
+        Debug.Log($"Creating new agenda for profielkeuzeId: {profielkeuzeId} with data: {JsonUtility.ToJson(newAgenda)}");
+        IWebRequestReponse response = await agendaApiClient.CreateAgenda(profielkeuzeId, newAgenda);
+        Debug.Log($"Received response: {response}");
+        if (response is WebRequestData<Agenda> createdAgenda)
+        {
+            Debug.Log("Agenda created successfully.");
+            agendaId = createdAgenda.Data.id;
+        }
+        else
+        {
+            Debug.LogError("Failed to create agenda.");
+        }
+
         // Load the data from the API
         Debug.Log($"Requesting agendas for profielkeuzeId: {profielkeuzeId}");
-        IWebRequestReponse response = await agendaApiClient.ReadAgendas(profielkeuzeId);
+        response = await agendaApiClient.ReadAgendas(profielkeuzeId);
         Debug.Log($"Received response: {response}");
         if (response is WebRequestData<List<Agenda>> agendasData)
         {
@@ -147,46 +173,11 @@ public class agendascript : MonoBehaviour
         Afspraak2datumInput.gameObject.SetActive(false);
         Afspraak3LocatieInput.gameObject.SetActive(false);
         Afspraak3datumInput.gameObject.SetActive(false);
-
-
     }
 
     private async void FirstSaveButtonClicked()
     {
-        // Get the profielkeuzeId from ProfielManagerScript
-        string profielkeuzeId = profielManagerScript.SelectedProfielKeuzeId;
-        if (string.IsNullOrEmpty(profielkeuzeId))
-        {
-            Debug.LogError("Profielkeuze ID is not set.");
-            return;
-        }
-
-        // Get the values from the input fields
-        Agenda newAgenda = new Agenda
-        {
-            date1 = Afspraak1datumInput.text,
-            location1 = Afspraak1LocatieInput.text,
-            date2 = Afspraak2datumInput.text,
-            location2 = Afspraak2LocatieInput.text,
-            date3 = Afspraak3datumInput.text,
-            location3 = Afspraak3LocatieInput.text,
-            ProfielKeuzeId = profielkeuzeId // Ensure the ProfielKeuzeId is set
-        };
-
-        // Post method for creating a new agenda
-        Debug.Log($"Creating new agenda for profielkeuzeId: {profielkeuzeId} with data: {JsonUtility.ToJson(newAgenda)}");
-        IWebRequestReponse response = await agendaApiClient.CreateAgenda(profielkeuzeId, newAgenda);
-        Debug.Log($"Received response: {response}");
-        if (response is WebRequestData<Agenda> createdAgenda)
-        {
-            Debug.Log("Agenda created successfully.");
-        }
-        else
-        {
-            Debug.LogError("Failed to create agenda.");
-        }
-
-        FirstSaveButton.gameObject.SetActive(false); // Fix: Use gameObject.SetActive(false) instead of SetActive(false)
+        // This method is no longer needed for creating a new agenda
     }
 
     private async void SaveButtonClicked()
@@ -269,7 +260,7 @@ public class agendascript : MonoBehaviour
     {
         Afspraak2LocatieInput.gameObject.SetActive(true);
         Afspraak2LocatieText.gameObject.SetActive(false);
-    }   
+    }
 
     private void ActivateDatum2Input()
     {
