@@ -4,6 +4,7 @@ using System;
 public class Progressie0
 {
     public string id;
+    public int NumberCompleet { get; set; }
     public bool vakje1;
     public bool vakje2;
     public bool vakje3;
